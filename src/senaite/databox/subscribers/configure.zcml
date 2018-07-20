@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="senaite.databox">
+
+  <subscriber
+      for="senaite.databox.interfaces.IAutoGenerateID
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler="senaite.databox.subscribers.on_object_added.auto_generate_id"
+      />
+
+</configure>

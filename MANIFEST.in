@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+recursive-include docs *
+recursive-include src/senaite/databox *
+recursive-exclude src/senaite/databox *.pyc
+recursive-exclude src/senaite/databox/tests *
+recursive-exclude src/senaite/databox/docs *

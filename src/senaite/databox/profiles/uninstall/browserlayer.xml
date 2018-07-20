@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layers>
+
+  <!-- Remove Browser Layer -->
+  <layer name="senaite.databox"
+         interface="senaite.databox.interfaces.IDataBoxLayer"
+         remove="True" />
+</layers>

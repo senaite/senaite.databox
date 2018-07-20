@@ -1,0 +1,11 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="senaite.databox">
+
+  <browser:resourceDirectory
+      name="senaite.databox.static"
+      directory="static"
+      layer="senaite.databox.interfaces.IDataBoxLayer" />
+
+</configure>

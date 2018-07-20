@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="senaite.databox">
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <!-- Package includes -->
+  <include package=".browser" />
+  <include package=".subscribers" />
+
+  <plone:behavior
+      title="Auto-Generate ID Beahvior for Dexterity Contents"
+      description="Generates an ID with the IDServer"
+      provides="senaite.databox.interfaces.IAutoGenerateID"
+      />
+
+  <!-- Generic Setup *INSTALL* Profile -->
+  <genericsetup:registerProfile
+      name="default"
+      title="SENAITE DATABOX"
+      directory="profiles/default"
+      description="Installs SENAITE DATABOX"
+      post_handler="senaite.databox.setuphandlers.post_install"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- Generic Setup *UNINSTALL* Profile -->
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="SENAITE DATABOX"
+      directory="profiles/uninstall"
+      description="Uninstalls SENAITE DATABOX"
+      post_handler="senaite.databox.setuphandlers.post_uninstall"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
