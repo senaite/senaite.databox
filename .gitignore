@@ -1,5 +1,6 @@
 .installed.cfg
 .mr.developer.cfg
+.projectile
 bin
 parts
 var
