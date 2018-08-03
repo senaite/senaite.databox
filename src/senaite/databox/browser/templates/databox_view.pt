@@ -15,16 +15,16 @@
 
         <table class="table table-sm table-conensed">
           <thead>
-            <tal:column tal:repeat="column view/header">
-              <th tal:content="column"></th>
-            </tal:column>
+            <tal:key tal:repeat="key view/keys">
+              <th tal:content="key"></th>
+            </tal:key>
           </thead>
           <tbody>
             <tal:model tal:repeat="model view/collection">
               <tr>
-                <tal:column tal:repeat="column view/columns">
-                  <td tal:content="python:view.get(model, column[1])"></td>
-                </tal:column>
+                <tal:value tal:repeat="value view/values">
+                  <td tal:content="python:view.get(model, value)"></td>
+                </tal:value>
               </tr>
             </tal:model>
           </tbody>
