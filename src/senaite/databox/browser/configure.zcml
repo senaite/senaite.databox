@@ -3,6 +3,27 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="senaite.databox">
 
+  <browser:page
+      name="view"
+      for="senaite.databox.content.databoxfolder.IDataBoxFolder"
+      class="senaite.databox.browser.views.DataBoxFolderView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="view"
+      for="senaite.databox.content.databox.IDataBox"
+      class="senaite.databox.browser.views.DataBoxView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="edit"
+      for="senaite.databox.content.databox.IDataBox"
+      class="senaite.databox.browser.views.DataBoxEdit"
+      permission="zope2.View"
+      />
+
   <browser:resourceDirectory
       name="senaite.databox.static"
       directory="static"

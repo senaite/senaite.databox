@@ -17,6 +17,13 @@
       provides="senaite.databox.interfaces.IAutoGenerateID"
       />
 
+  <!-- Vocaularies -->
+  <utility
+      name="senaite.databox.vocabularies.addable_types"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="senaite.databox.vocabularies.addable_types_vocabulary"
+      />
+
   <!-- Generic Setup *INSTALL* Profile -->
   <genericsetup:registerProfile
       name="default"

@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="senaite.databox">
+  <body>
+
+    <metal:content-core fill-slot="content-core">
+
+      <a href="++add++DataBox"
+         tal:attributes="href python:context.absolute_url() + '/++add++DataBox'"
+         i18n:translate=""
+         class="btn btn-default">
+        Add new Databox
+      </a>
+
+      <hr/>
+
+      <metal:listing metal:use-macro="here/folder_listing/macros/listing">
+        <metal:empty metal:fill-slot="no_items_in_listing"></metal:empty>
+      </metal:listing>
+    </metal:content-core>
+
+
+  </body>
+</html>

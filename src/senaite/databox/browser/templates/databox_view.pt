@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="senaite.databox">
+  <body>
+
+    <metal:main fill-slot="content-core">
+
+      <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+
+        <table class="table table-sm table-conensed">
+          <thead>
+          <tal:column tal:repeat="column view/columns">
+            <th tal:content="column"></th>
+          </tal:column>
+          </thead>
+          <tal:model tal:repeat="model view/collection">
+          <tr>
+            <tal:column tal:repeat="column view/columns">
+              <td tal:content="python:model.get(column, 'Column \'%s\' does not exist' % column)"></td>
+            </tal:column>
+          </tr>
+          </tal:model>
+        </table>
+
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+
+      </tal:main-macro>
+    </metal:main>
+
+  </body>
+</html>
