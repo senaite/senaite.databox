@@ -4,7 +4,7 @@
     <img src="static/logo.png" alt="senaite.databox" height="128" />
   </a>
 
-  <p>A beautiful content wrapper for SENAITE that you will love</p>
+  <p>Provides data from a configured catalog search and column configuration</p>
   
   <div>
     <a href="https://pypi.python.org/pypi/senaite.databox">
