@@ -37,7 +37,6 @@ def addable_types_vocabulary(context):
     terms = []
     addable_types = get_addable_types()
     for name, title in addable_types:
-        print name
         term = SimpleTerm(value=name, title=title)
         terms.append(term)
     return SimpleVocabulary(terms)
