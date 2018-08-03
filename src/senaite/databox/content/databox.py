@@ -21,9 +21,10 @@ class IDataBox(model.Schema):
         required=True,
     )
 
-    portal_type = schema.Choice(
-        title=_(u"Portal Type"),
-        description=_(u"The portal type to query"),
+    # N.B. do not name this field `portal_type`;)
+    content_type = schema.Choice(
+        title=_(u"Content Type"),
+        description=_(u"The content type to query"),
         source="senaite.databox.vocabularies.addable_types",
         required=True,
     )

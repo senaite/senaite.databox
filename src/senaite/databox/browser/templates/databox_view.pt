@@ -15,17 +15,19 @@
 
         <table class="table table-sm table-conensed">
           <thead>
-          <tal:column tal:repeat="column view/columns">
-            <th tal:content="column"></th>
-          </tal:column>
-          </thead>
-          <tal:model tal:repeat="model view/collection">
-          <tr>
-            <tal:column tal:repeat="column view/columns">
-              <td tal:content="python:model.get(column, 'Column \'%s\' does not exist' % column)"></td>
+            <tal:column tal:repeat="column view/header">
+              <th tal:content="column"></th>
             </tal:column>
-          </tr>
-          </tal:model>
+          </thead>
+          <tbody>
+            <tal:model tal:repeat="model view/collection">
+              <tr>
+                <tal:column tal:repeat="column view/columns">
+                  <td tal:content="python:view.get(model, column[1])"></td>
+                </tal:column>
+              </tr>
+            </tal:model>
+          </tbody>
         </table>
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
