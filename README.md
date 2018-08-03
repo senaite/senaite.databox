@@ -27,3 +27,6 @@
 
 
 ## About
+
+SENAITE.DATABOX behaves like an intelligent folder which searches the database
+according based on a given query and column configuration.

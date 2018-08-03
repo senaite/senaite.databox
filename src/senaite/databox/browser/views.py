@@ -117,6 +117,9 @@ class DataBoxView(BrowserView):
         The columns need to get stored on the databox as configuration.
         The UI need to provide these columns as select options through a
         lookup of the selected portal_type.
+
+        TODO: We need also provide a converter function to process e.g. date
+              values or other fields that need conversion of their raw value
         """
         return [
             ("Title", "Title"),
