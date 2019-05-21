@@ -124,9 +124,10 @@ class DataBoxView(BrowserView):
         return [
             ("Title", "Title"),
             ("Description", "Description"),
-            ("Sample Type", "Sample.SampleType.Title"),
+            ("Sample Type", "SampleTypeTitle"),
             ("Contact", "Contact.Fullname"),
             ("Date Received", "DateReceived"),
+            ("Date Sampled", "DateSampled"),
         ]
 
     @property

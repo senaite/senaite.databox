@@ -3,6 +3,8 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="senaite.databox">
 
+  <include file="add.zcml"/>
+
   <browser:page
       name="view"
       for="senaite.databox.content.databoxfolder.IDataBoxFolder"
