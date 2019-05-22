@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
-#
-# This file is part of SENAITE.DATABOX
-#
-# Copyright 2018 by it's authors.
 
 import inspect
 
-from plone.dexterity.browser import edit
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -195,21 +190,3 @@ class DataBoxView(BrowserView):
         """
         return map(lambda m: self.pick(m, *self.values),
                    self.collection)
-
-
-class DataBoxEdit(edit.DefaultEditForm):
-    """Custom DataBox Edit View
-
-    Probably best to do a plain browser view and all the magic in JS?
-    """
-    template = ViewPageTemplateFile("templates/databox_edit.pt")
-
-    # def __init__(self, context, request):
-    #     logger.info("DataBoxEdit::init")
-    #     super(DataBoxEdit, self).__init__(context, request)
-    #     self.context = context
-    #     self.request = request
-
-    # def __call__(self):
-    #     logger.info("DataBoxEdit::call")
-    #     return self.template()

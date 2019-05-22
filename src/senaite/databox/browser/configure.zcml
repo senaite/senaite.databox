@@ -22,7 +22,7 @@
   <browser:page
       name="edit"
       for="senaite.databox.content.databox.IDataBox"
-      class="senaite.databox.browser.views.DataBoxEdit"
+      class="senaite.databox.browser.edit.DataBoxEdit"
       permission="zope2.View"
       />
 
