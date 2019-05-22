@@ -9,7 +9,7 @@
       name="view"
       for="senaite.databox.content.databoxfolder.IDataBoxFolder"
       class="senaite.databox.browser.folder_view.DataBoxFolderView"
-      permission="zope2.View
+      permission="zope2.View"
       />
 
   <browser:page

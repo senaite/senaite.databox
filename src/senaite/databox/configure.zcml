@@ -44,4 +44,11 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <!-- Generic Setup *IMPORT STEP* -->
+  <genericsetup:importStep
+      name="senaite.databox.setupHandler"
+      title="SENAITE DATABOX: Run Setup Handler"
+      description="Run various configuration actions"
+      handler="senaite.databox.setuphandlers.setup_handler"/>
+
 </configure>

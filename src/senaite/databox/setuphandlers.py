@@ -7,6 +7,27 @@
 from senaite.databox import logger
 
 
+def setup_handler(context):
+    """Generic setup handler
+    """
+
+    if context.readDataFile("senaite.databox.txt") is None:
+        return
+
+    logger.info("SENAITE.DATABOX setup handler [BEGIN]")
+    portal = context.getSite()  # noqa
+    add_databoxes_folder(portal)
+    logger.info("SENAITE.DATABOX setup handler [DONE]")
+
+
+def add_databoxes_folder(portal):
+    """Adds the initial Databox folder
+    """
+    if portal.get("databoxes") is None:
+        logger.info("Adding DataBox Folder")
+        portal.invokeFactory("DataBoxFolder", "databoxes")
+
+
 def post_install(portal_setup):
     """Runs after the last import step of the *default* profile
 
