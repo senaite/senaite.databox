@@ -202,7 +202,7 @@ class DataBoxEdit(edit.DefaultEditForm):
 
     Probably best to do a plain browser view and all the magic in JS?
     """
-    # template = ViewPageTemplateFile("templates/databox_edit.pt")
+    template = ViewPageTemplateFile("templates/databox_edit.pt")
 
     # def __init__(self, context, request):
     #     logger.info("DataBoxEdit::init")

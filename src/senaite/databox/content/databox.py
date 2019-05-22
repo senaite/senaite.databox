@@ -21,16 +21,8 @@ class IDataBox(model.Schema):
         required=True,
     )
 
-    # N.B. do not name this field `portal_type`;)
-    content_type = schema.Choice(
-        title=_(u"Content Type"),
-        description=_(u"The content type to query"),
-        source="senaite.databox.vocabularies.addable_types",
-        required=True,
-    )
-
 
 class DataBox(Container):
-    """A configurable data container
+    """Intelligent Query Folder
     """
     implements(IDataBox)

@@ -1,0 +1,40 @@
+{
+  "name": "senaite.databox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "senaite.databox.js",
+  "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack -d --watch",
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "author": "SENAITE Foundation",
+  "license": "GPLv2",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.5.0",
+    "babel-loader": "^8.0.5",
+    "coffee-loader": "^0.9.0",
+    "coffeescript": "^2.3.2",
+    "css-loader": "^2.1.1",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.0",
+    "jest": "^24.5.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}

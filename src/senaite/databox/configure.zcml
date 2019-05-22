@@ -17,7 +17,7 @@
       provides="senaite.databox.interfaces.IAutoGenerateID"
       />
 
-  <!-- Vocaularies -->
+  <!-- Vocabularies -->
   <utility
       name="senaite.databox.vocabularies.addable_types"
       provides="zope.schema.interfaces.IVocabularyFactory"

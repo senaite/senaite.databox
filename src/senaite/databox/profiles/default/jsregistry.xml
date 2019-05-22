@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+
+  <!-- DataBox ReactJS -->
+  <javascript
+    authenticated="False"
+    id="++resource++senaite.databox.static/js/senaite.databox.main.js"
+    cacheable="True"
+    compression="safe"
+    conditionalcomment=""
+    cookable="True"
+    enabled="on"
+    expression=""
+    inline="False"
+    insert-after="*"/>
+
+</object>

@@ -12,7 +12,11 @@
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-        DATA BOX EDIT
+        <div class="databox"
+             tal:attributes="data-databox_id here/getId;
+                             data-databox_uid here/UID">
+          <!-- REACT CONTROLLED COMPONENT -->
+        </div>
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
 

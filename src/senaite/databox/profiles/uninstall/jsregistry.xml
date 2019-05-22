@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+
+  <!-- DataBox ReactJS -->
+  <javascript
+    remove="True"
+    id="++resource++senaite.databox.static/js/senaite.databox.main.js"/>
+
+</object>

@@ -1,3 +1,4 @@
+.dir-locals
 .installed.cfg
 .mr.developer.cfg
 .projectile
@@ -6,7 +7,7 @@ build
 develop-eggs
 dist
 eggs
+node_modules
 parts
 src/senaite.*
 var
-.dir-locals

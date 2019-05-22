@@ -17,7 +17,7 @@ class IDataBoxFolder(model.Schema):
 
     title = schema.TextLine(
         title=_(u"Title"),
-        description=_(u""),
+        description=_(u"Title of the Folder"),
         required=True,
     )
 
