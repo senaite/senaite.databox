@@ -14,22 +14,6 @@ from zope.publisher.interfaces import IPublishTraverse
 from plone.app.layout.globals.interfaces import IViewView
 
 
-class DataBoxFolderView(BrowserView):
-    """The DataBox Folder View
-    """
-    template = ViewPageTemplateFile("templates/databox_folder_view.pt")
-
-    def __init__(self, context, request):
-        logger.info("DataBoxFolderView::init")
-        super(DataBoxFolderView, self).__init__(context, request)
-        self.context = context
-        self.request = request
-
-    def __call__(self):
-        logger.info("DataBoxFolderView::call")
-        return self.template()
-
-
 class DataBoxView(BrowserView):
     """The default DataBox view
     """

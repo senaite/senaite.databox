@@ -8,14 +8,14 @@
   <browser:page
       name="view"
       for="senaite.databox.content.databoxfolder.IDataBoxFolder"
-      class="senaite.databox.browser.views.DataBoxFolderView"
-      permission="zope2.View"
+      class="senaite.databox.browser.folder_view.DataBoxFolderView"
+      permission="zope2.View
       />
 
   <browser:page
       name="view"
       for="senaite.databox.content.databox.IDataBox"
-      class="senaite.databox.browser.views.DataBoxView"
+      class="senaite.databox.browser.view.DataBoxView"
       permission="zope2.View"
       />
 
