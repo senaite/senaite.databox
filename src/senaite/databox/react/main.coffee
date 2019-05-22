@@ -11,11 +11,14 @@ document.addEventListener "DOMContentLoaded", ->
     console.debug("*** SENAITE.DATABOX::DOMContentLoaded: -->
       Loading ReactJS Controller")
 
+  ###*
+   * Initialize the edit view of the databoxe
+  ###
   window.databoxes ?= {}
   for databox in databoxes
     databox_id = databox.dataset.databox_id
     controller = ReactDOM.render <DataBoxController root_el={databox}/>, databox
-    # Keep a reference to the listing
+    # Keep a reference to the databox
     window.databoxes[databox_id] = controller
 
 
