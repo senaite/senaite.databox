@@ -4,7 +4,7 @@
 #
 # Copyright 2018 by it's authors.
 
-from plone.dexterity.content import Container
+from plone.dexterity.content import Item
 from plone.supermodel import model
 from senaite.databox import senaiteMessageFactory as _
 from zope import schema
@@ -22,7 +22,7 @@ class IDataBox(model.Schema):
     )
 
 
-class DataBox(Container):
+class DataBox(Item):
     """Intelligent Query Folder
     """
     implements(IDataBox)
