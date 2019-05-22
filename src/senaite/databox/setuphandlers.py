@@ -4,6 +4,7 @@
 #
 # Copyright 2018 by it's authors.
 
+from bika.lims import api
 from senaite.databox import logger
 
 
@@ -17,6 +18,7 @@ def setup_handler(context):
     logger.info("SENAITE.DATABOX setup handler [BEGIN]")
     portal = context.getSite()  # noqa
     add_databoxes_folder(portal)
+    add_databoxes_to_uid_catalog(portal)
     logger.info("SENAITE.DATABOX setup handler [DONE]")
 
 
@@ -26,6 +28,22 @@ def add_databoxes_folder(portal):
     if portal.get("databoxes") is None:
         logger.info("Adding DataBox Folder")
         portal.invokeFactory("DataBoxFolder", "databoxes")
+
+
+def add_databoxes_to_uid_catalog(portal):
+    """Add the databoxes to the UID Catalog
+    """
+
+    catalog = "uid_catalog"
+    portal_type = "DataBox"
+
+    at = api.get_tool("archetype_tool")
+    catalogs = at.getCatalogsByType(portal_type)
+
+    if catalog not in catalogs:
+        logger.info("Adding DataBox to UID Catalog")
+        new_catalogs = map(lambda c: c.getId(), catalogs) + [catalog]
+        at.setCatalogsByType(portal_type, new_catalogs)
 
 
 def post_install(portal_setup):

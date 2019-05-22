@@ -52,5 +52,3 @@ class DataBoxView(ListingView):
         """Before template render hook
         """
         super(DataBoxView, self).before_render()
-        # # Don't allow any context actions
-        # self.request.set("disable_border", 1)
