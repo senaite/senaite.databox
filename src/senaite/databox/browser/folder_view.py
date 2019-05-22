@@ -18,7 +18,7 @@ class DataBoxFolderView(ListingView):
         self.contentFilter = {
             "portal_type": "DataBox",
             "sort_on": "created",
-            "sort_order": "ascending",
+            "sort_order": "descending",
         }
 
         self.context_actions = {
@@ -36,7 +36,7 @@ class DataBoxFolderView(ListingView):
 
         self.title = self.context.Title()
         self.description = self.context.Description()
-        self.show_select_column = True
+        self.show_select_column = False
         self.pagesize = 25
 
         self.columns = collections.OrderedDict((
