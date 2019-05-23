@@ -3,7 +3,8 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="senaite.databox">
 
-  <include file="add.zcml"/>
+   <!-- Needed for cmf.AddPortalContent permission -->
+   <include package="Products.CMFCore" file="permissions.zcml" />
 
   <browser:page
       name="view"
@@ -25,6 +26,21 @@
       class="senaite.databox.browser.edit.DataBoxEdit"
       permission="zope2.View"
       />
+
+  <!-- Add view and form - invoked from ++add++ traverser -->
+  <adapter
+      for="Products.CMFCore.interfaces.IFolderish
+           zope.publisher.interfaces.browser.IDefaultBrowserLayer
+           plone.dexterity.interfaces.IDexterityFTI"
+      provides="zope.publisher.interfaces.browser.IBrowserPage"
+      factory=".add.AddView"
+      name="DataBox"/>
+
+  <class class=".add.AddView">
+    <require
+        permission="cmf.AddPortalContent"
+        interface="zope.publisher.interfaces.browser.IBrowserPage"/>
+  </class>
 
   <browser:resourceDirectory
       name="senaite.databox.static"
