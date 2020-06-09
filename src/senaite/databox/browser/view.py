@@ -4,6 +4,7 @@ import collections
 
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
+from bika.lims.utils import get_link
 from bika.lims.utils import tmpID
 from Products.CMFPlone.utils import _createObjectByType
 from senaite.core.listing.view import ListingView
@@ -102,3 +103,10 @@ class DataBoxView(ListingView):
         ))
 
         return columns
+
+    def folderitem(self, obj, item, index):
+        url = api.get_url(obj)
+        title = api.get_title(obj)
+        item["replace"]["Title"] = get_link(
+            url, value=title)
+        return item

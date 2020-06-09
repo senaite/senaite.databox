@@ -2,7 +2,9 @@
 
 import collections
 
-from bika.lims import bikaMessageFactory as _
+from bika.lims import api
+from bika.lims import senaiteMessageFactory as _
+from bika.lims.utils import get_link
 from senaite.core.listing.view import ListingView
 
 
@@ -28,11 +30,8 @@ class DataBoxFolderView(ListingView):
                 "icon": "++resource++bika.lims.images/add.png"}
             }
 
-        self.icon = "{}/{}/{}".format(
-            self.portal_url,
-            "/++resource++senaite.databox.static",
-            "images/databoxfolder_icon_64x64.png"
-        )
+        self.icon = "{}/{}".format(
+            self.portal_url, "senaite_theme/icon/databoxfolder")
 
         self.title = self.context.Title()
         self.description = self.context.Description()
@@ -42,7 +41,6 @@ class DataBoxFolderView(ListingView):
         self.columns = collections.OrderedDict((
             ("Title", {
                 "title": _("Title"),
-                "replace_url": "absolute_url",
                 "index": "sortable_title"}),
             ("Description", {
                 "title": _("Description"),
@@ -69,5 +67,10 @@ class DataBoxFolderView(ListingView):
         """Before template render hook
         """
         super(DataBoxFolderView, self).before_render()
-        # Don't allow any context actions
-        self.request.set("disable_border", 1)
+
+    def folderitem(self, obj, item, index):
+        url = api.get_url(obj)
+        title = api.get_title(obj)
+        item["replace"]["Title"] = get_link(
+            url, value=title)
+        return item
