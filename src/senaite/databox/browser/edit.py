@@ -18,6 +18,10 @@ class DataBoxEdit(edit.DefaultEditForm):
         self.context = context
         self.request = request
 
-    def __call__(self):
-        logger.info("DataBoxEdit::call")
-        return self.template()
+    def update(self):
+        """super class updateWidgets
+
+        self.widgets.keys()
+        ['IBasic.title', 'IBasic.description', 'query_type']
+        """
+        super(DataBoxEdit, self).update()

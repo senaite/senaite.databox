@@ -1,10 +1,15 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="senaite.databox">
 
-   <!-- Needed for cmf.AddPortalContent permission -->
-   <include package="Products.CMFCore" file="permissions.zcml" />
+  <!-- Needed for cmf.AddPortalContent permission -->
+  <include package="Products.CMFCore" file="permissions.zcml" />
+
+  <!-- Package includes -->
+  <include package=".theme"/>
+  <include package=".viewlets"/>
 
   <browser:page
       name="view"
@@ -42,9 +47,11 @@
         interface="zope.publisher.interfaces.browser.IBrowserPage"/>
   </class>
 
-  <browser:resourceDirectory
-      name="senaite.databox.static"
+  <!-- Static directory for js, css and image resources -->
+  <plone:static
       directory="static"
-      layer="senaite.databox.interfaces.IDataBoxLayer" />
+      type="plone"
+      name="senaite.databox.static"
+      />
 
 </configure>

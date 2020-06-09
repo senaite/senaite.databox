@@ -9,13 +9,6 @@
 
   <!-- Package includes -->
   <include package=".browser" />
-  <include package=".subscribers" />
-
-  <plone:behavior
-      title="Auto-Generate ID Beahvior for Dexterity Contents"
-      description="Generates an ID with the IDServer"
-      provides="senaite.databox.interfaces.IAutoGenerateID"
-      />
 
   <!-- Vocabularies -->
   <utility

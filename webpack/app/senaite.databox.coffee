@@ -32,14 +32,11 @@ class DataBoxController extends React.Component
     console.debug "DataBoxController::constructor"
 
   render: ->
-    <div className="col-sm-12">
-      <form name="editform" >
-        <div className="form-group">
-          <div className="input-group">
-
-            <PortalTypeSelection className="form-control" name="portal_type" />
-
-          </div>
-        </div>
-      </form>
+    <div className="form-group">
+      <div className="input-group">
+        <PortalTypeSelection
+          name="form.widgets.query_type:list"
+          className="form-control"
+          name="portal_type" />
+      </div>
     </div>

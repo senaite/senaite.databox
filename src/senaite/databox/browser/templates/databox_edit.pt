@@ -11,12 +11,65 @@
       <tal:main-macro metal:define-macro="main">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
-
-        <div class="databox"
-             tal:attributes="data-databox_id here/getId;
-                             data-databox_uid here/UID">
-          <!-- REACT CONTROLLED COMPONENT -->
+        <div class="alert alert-info" tal:condition="view/status">
+          <p class="mb-0">
+            <div tal:replace="view/status"></div>
+          </p>
         </div>
+
+        <!-- Form tempalte taken from plone.app.dexterity.browser.behaviors -->
+        <form action="."
+              class="form"
+              method="post"
+              name="edit_form"
+              tal:attributes="action request/getURL; enctype view/enctype">
+
+          <tal:widgets repeat="widget view/widgets/values|nothing">
+            <div tal:condition="python: widget.name not in ['form.widgets.query_type1']"
+                 tal:define="error widget/error;
+                             hidden python:widget.mode == 'hidden'"
+                 tal:attributes="class python:'form-group ' + (error and ' error' or '')">
+
+              <label for=""
+                     tal:attributes="for widget/id"
+                     tal:condition="not:hidden">
+                <span i18n:translate=""
+                      tal:content="widget/label">label</span>
+                <span class="required horizontal" title="Required"
+                      tal:condition="python:widget.required and not hidden"
+                      i18n:attributes="title title_required;">&nbsp;</span>
+              </label>
+
+              <!-- Widget -->
+              <div class="widget">
+                <input type="text" tal:replace="structure widget/render" />
+              </div>
+
+              <div class="form-text small text-danger"
+                   tal:condition="error"
+                   tal:content="structure error/render">
+                Error
+              </div>
+
+              <div class="form-text text-muted"
+                   tal:define="description widget/field/description"
+                   i18n:translate=""
+                   tal:content="description"
+                   tal:condition="python:description and not hidden" >
+                field description
+              </div>
+
+            </div>
+
+          </tal:widgets>
+
+          <div class="databox"
+               tal:attributes="data-databox_id here/getId;
+                               data-databox_uid here/UID">
+          </div>
+
+          <metal:actions metal:use-macro="context/@@ploneform-macros/actions"/>
+        </form>
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
 

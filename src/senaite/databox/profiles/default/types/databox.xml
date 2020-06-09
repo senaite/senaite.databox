@@ -10,7 +10,7 @@
             i18n:translate=""></property>
 
   <!-- content-type icon -->
-  <property name="icon_expr">string:${portal_url}/++resource++senaite.databox.static/images/databox_icon_16x16.png</property>
+  <property name="icon_expr">string:${portal_url}/senaite_theme/icon/databox</property>
 
   <!-- factory name; usually the same as type name -->
   <property name="factory">DataBox</property>
@@ -49,8 +49,10 @@
 
   <!-- Dexterity behaviours for this type -->
   <property name="behaviors">
-    <element value="senaite.databox.interfaces.IAutoGenerateID"/>
+    <element value="bika.lims.interfaces.IAutoGenerateID"/>
+    <element value="bika.lims.interfaces.IMultiCatalogBehavior"/>
     <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
+    <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
   </property>
 
   <!-- Action aliases -->
