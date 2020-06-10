@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-#
-# This file is part of SENAITE.DATABOX
-#
-# Copyright 2018 by it's authors.
 
-from senaite import api
+from bika.lims import api
 from senaite.databox.config import ADDABLE_TYPES
 from zope.interface import directlyProvides
 from zope.schema.interfaces import IContextSourceBinder
