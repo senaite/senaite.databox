@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-version = "1.0.0"
+version = "2.0.0"
 
 with open("docs/About.rst", "r") as fh:
     long_description = fh.read()
@@ -29,8 +29,8 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
     keywords="",
-    author="SENAITE Foundation",
-    author_email="hello@senaite.com",
+    author="RIDING BYTES & NARALABS",
+    author_email="psp@senaite.com",
     url="https://github.com/senaite/senaite.databox",
     license="GPLv2",
     packages=find_packages("src", exclude=["ez_setup"]),
@@ -40,9 +40,7 @@ setup(
     zip_safe=False,
     install_requires=[
         "plone.app.dexterity",
-        "senaite.api",
         "senaite.core",
-        "senaite.core.supermodel",
         "setuptools",
     ],
     extras_require={
