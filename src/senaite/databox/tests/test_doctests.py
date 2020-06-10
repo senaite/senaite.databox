@@ -6,8 +6,8 @@ from os.path import join
 from pkg_resources import resource_listdir
 
 import unittest2 as unittest
-from senaite.health.config import PROJECTNAME
-from senaite.health.tests.base import BaseTestCase
+from senaite.databox.config import PROJECTNAME
+from senaite.databox.tests.base import BaseTestCase
 from Testing import ZopeTestCase as ztc
 
 # Option flags for doctests

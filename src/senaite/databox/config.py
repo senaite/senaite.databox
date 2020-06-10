@@ -4,6 +4,7 @@
 #
 # Copyright 2018 by it's authors.
 
+PROJECTNAME = "senaite.databox"
 
 ADDABLE_TYPES = [
     "AnalysisRequest",

@@ -7,7 +7,7 @@ from plone.app.testing import setRoles
 from plone.app.testing.bbb_at import PloneTestCase
 from plone.protect.authenticator import createToken
 from plone.testing.zope import Browser
-from senaite.health.tests.layers import BASE_TESTING
+from senaite.databox.tests.layers import BASE_TESTING
 
 
 class BaseTestCase(PloneTestCase):
