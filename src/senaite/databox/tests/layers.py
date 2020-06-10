@@ -26,9 +26,9 @@ class BaseLayer(PloneSandboxLayer):
         import senaite.core
         import senaite.core.listing
         import senaite.core.spotlight
+        import senaite.databox
         import senaite.impress
         import senaite.lims
-        import senaite.databox
 
         # XXX Hack to avoid this bug:
         # IOError: [Errno 2] No such file or directory:
@@ -46,6 +46,7 @@ class BaseLayer(PloneSandboxLayer):
         self.loadZCML(package=senaite.core)
         self.loadZCML(package=senaite.core.listing)
         self.loadZCML(package=senaite.core.spotlight)
+        self.loadZCML(package=senaite.databox)
         self.loadZCML(package=senaite.impress)
         self.loadZCML(package=senaite.lims)
 
@@ -55,9 +56,9 @@ class BaseLayer(PloneSandboxLayer):
         zope.installProduct(app, "senaite.core")
         zope.installProduct(app, "senaite.core.listing")
         zope.installProduct(app, "senaite.core.spotlight")
+        zope.installProduct(app, "senaite.databox")
         zope.installProduct(app, "senaite.impress")
         zope.installProduct(app, "senaite.lims")
-        zope.installProduct(app, "senaite.databox")
 
     def setUpPloneSite(self, portal):
         # Install into Plone site using portal_setup
