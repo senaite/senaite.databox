@@ -112,25 +112,3 @@ Create some samples:
     >>> ar21 = new_ar(client2, contact2, sampletype1, [Cu, Fe, Au])
     >>> ar22 = new_ar(client2, contact2, sampletype1, [Cu, Fe])
     >>> ar23 = new_ar(client2, contact2, sampletype1, [Cu])
-
-
-Query
------
-
-    >>> from Products.CMFPlone.utils import _createObjectByType
-    >>> from zope.component import getUtility
-    >>> from zope.component.interfaces import IFactory
-
-    >>> portal_types = api.get_tool("portal_types")
-    >>> portal_factory = api.get_tool("portal_factory")
-    >>> catalog = api.get_tool("bika_catalog_analysisrequest_listing")
-
-    >>> portal_type = "AnalysisRequest"
-    >>> query = {"portal_type": portal_type}
-    >>> brains = catalog(query)
-    >>> fti = types_tool.getTypeInfo(portal_type)
-
-    >>> temp_folder = portal_types._getTempFolder("senaite.databox.temp")
-
-    >>> import pdb; pdb.set_trace()
-
