@@ -16,10 +16,11 @@ class DataBoxView(ListingView):
         adapted = IDataBoxBehavior(context)
 
         self.catalog = adapted.get_query_catalog()
+        sort_order = "descending" if adapted.sort_reversed else "ascending"
         self.contentFilter = {
             "portal_type": adapted.query_type,
             "sort_on": adapted.sort_on,
-            "sort_order": "ascending",
+            "sort_order": sort_order
         }
         self.pagesize = adapted.limit
         self.context_actions = {}

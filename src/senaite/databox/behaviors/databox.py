@@ -20,7 +20,7 @@ class IDataBoxBehavior(model.Schema):
     query_type = schema.Choice(
         title=_(u"Query Type"),
         description=_(u"The type to query"),
-        source="senaite.databox.vocabularies.addable_types",
+        source="senaite.databox.vocabularies.query_types",
         required=False,
     )
 
@@ -44,6 +44,12 @@ class IDataBoxBehavior(model.Schema):
     sort_on = schema.TextLine(
         title=_(u"label_sort_on", default=u"Sort on"),
         description=_(u"Sort the databox on this index"),
+        required=False,
+    )
+
+    sort_reversed = schema.Bool(
+        title=_(u"label_sort_reversed", default=u"Reversed order"),
+        description=_(u"Sort the results in reversed order"),
         required=False,
     )
 
@@ -127,3 +133,11 @@ class DataBox(object):
         return getattr(self.context, "sort_on", default)
 
     sort_on = property(_get_sort_on, _set_sort_on)
+
+    def _set_sort_reversed(self, value):
+        self.context.sort_reversed = value
+
+    def _get_sort_reversed(self):
+        return getattr(self.context, "sort_reversed", None)
+
+    sort_reversed = property(_get_sort_reversed, _set_sort_reversed)

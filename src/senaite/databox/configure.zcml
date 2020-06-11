@@ -11,13 +11,12 @@
   <include package=".behaviors" />
   <include package=".browser" />
 
-  <!-- Vocabularies -->
+  <!-- Query Types Vocabularies -->
   <utility
-      name="senaite.databox.vocabularies.addable_types"
-      provides="zope.schema.interfaces.IVocabularyFactory"
-      component="senaite.databox.vocabularies.addable_types_vocabulary"
-      />
+      component="senaite.databox.vocabularies.QueryTypesVocabularyFactory"
+      name="senaite.databox.vocabularies.query_types" />
 
+  <!-- Display Columns Vocabulary -->
   <utility
       component="senaite.databox.vocabularies.DisplayColumnsVocabularyFactory"
       name="senaite.databox.vocabularies.display_columns" />
