@@ -3,17 +3,24 @@
 import collections
 
 from bika.lims import bikaMessageFactory as _
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from senaite.core.listing.decorators import returns_safe_json
+from senaite.core.listing.decorators import set_application_json_header
 from senaite.core.listing.view import ListingView
 from senaite.core.supermodel.model import SuperModel
 from senaite.databox.behaviors.databox import IDataBoxBehavior
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
 
 
 class DataBoxView(ListingView):
     """The default DataBox view
     """
+    template = ViewPageTemplateFile("templates/databox_view.pt")
+
     def __init__(self, context, request):
         super(DataBoxView, self).__init__(context, request)
-        adapted = IDataBoxBehavior(context)
+        self.adapted = adapted = IDataBoxBehavior(context)
 
         self.catalog = adapted.get_query_catalog()
         sort_order = "descending" if adapted.sort_reversed else "ascending"
@@ -70,3 +77,13 @@ class DataBoxView(ListingView):
                 value = value.get("title")
             item[column] = value
         return item
+
+    @set_application_json_header
+    @returns_safe_json
+    def ajax_query_types(self):
+        """Returns the `query_types` list of the context as JSON
+        """
+        factory = getUtility(
+            IVocabularyFactory, "senaite.databox.vocabularies.query_types")
+        vocabulary = factory(self.context)
+        return sorted(vocabulary.by_value.keys())
