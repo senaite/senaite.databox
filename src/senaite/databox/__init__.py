@@ -5,7 +5,7 @@ import logging
 from zope.i18nmessageid import MessageFactory
 
 # Defining a Message Factory for when this product is internationalized.
-senaiteMessageFactory = MessageFactory("senaite.databox")
+senaiteMessageFactory = _ = MessageFactory("senaite.databox")
 
 logger = logging.getLogger("senaite.databox")
 

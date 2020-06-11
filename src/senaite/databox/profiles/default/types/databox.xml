@@ -53,6 +53,9 @@
     <element value="bika.lims.interfaces.IMultiCatalogBehavior"/>
     <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
     <element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />
+    <!-- Adds the databox fields and logic to the type,
+         so that basically any DX content can become a databox -->
+    <element value="senaite.databox" />
   </property>
 
   <!-- Action aliases -->

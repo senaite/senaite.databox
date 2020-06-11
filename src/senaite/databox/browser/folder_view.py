@@ -45,6 +45,9 @@ class DataBoxFolderView(ListingView):
             ("Description", {
                 "title": _("Description"),
                 "index": "Description"}),
+            ("query_type", {
+                "title": _("Type"),
+                "index": "query_type"}),
         ))
 
         self.review_states = [
@@ -69,8 +72,10 @@ class DataBoxFolderView(ListingView):
         super(DataBoxFolderView, self).before_render()
 
     def folderitem(self, obj, item, index):
+        obj = api.get_object(obj)
         url = api.get_url(obj)
         title = api.get_title(obj)
         item["replace"]["Title"] = get_link(
             url, value=title)
+        item["query_type"] = getattr(obj, "query_type", None)
         return item

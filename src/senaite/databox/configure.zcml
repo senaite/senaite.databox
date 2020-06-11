@@ -8,6 +8,7 @@
   <five:registerPackage package="." initialize=".initialize" />
 
   <!-- Package includes -->
+  <include package=".behaviors" />
   <include package=".browser" />
 
   <!-- Vocabularies -->
@@ -16,6 +17,10 @@
       provides="zope.schema.interfaces.IVocabularyFactory"
       component="senaite.databox.vocabularies.addable_types_vocabulary"
       />
+
+  <utility
+      component="senaite.databox.vocabularies.DisplayColumnsVocabularyFactory"
+      name="senaite.databox.vocabularies.display_columns" />
 
   <!-- Generic Setup *INSTALL* Profile -->
   <genericsetup:registerProfile

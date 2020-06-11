@@ -25,7 +25,7 @@
               tal:attributes="action request/getURL; enctype view/enctype">
 
           <tal:widgets repeat="widget view/widgets/values|nothing">
-            <div tal:condition="python: widget.name not in ['form.widgets.query_type1']"
+            <div tal:condition="python:1"
                  tal:define="error widget/error;
                              hidden python:widget.mode == 'hidden'"
                  tal:attributes="class python:'form-group ' + (error and ' error' or '')">
@@ -64,6 +64,7 @@
           </tal:widgets>
 
           <div class="databox"
+               tal:condition="python:False"
                tal:attributes="data-databox_id here/getId;
                                data-databox_uid here/UID">
           </div>

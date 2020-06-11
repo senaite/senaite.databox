@@ -5,24 +5,11 @@
 # Copyright 2018 by it's authors.
 
 from plone.dexterity.content import Container
-from plone.supermodel import model
-from senaite.databox import senaiteMessageFactory as _
-from zope import schema
-from zope.interface import implements
+from senaite.databox.interfaces import IDataBoxFolder
+from zope.interface import implementer
 
 
-class IDataBoxFolder(model.Schema):
-    """A Folder for DataBoxes
-    """
-
-    title = schema.TextLine(
-        title=_(u"Title"),
-        description=_(u"Title of the Folder"),
-        required=True,
-    )
-
-
+@implementer(IDataBoxFolder)
 class DataBoxFolder(Container):
     """A Folder for DataBoxes
     """
-    implements(IDataBoxFolder)
