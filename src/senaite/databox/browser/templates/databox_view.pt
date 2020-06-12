@@ -8,7 +8,7 @@
   <body>
 
     <metal:content-core fill-slot="content-core">
-      <form name="edit_form"
+      <form name="databox-form"
             method="post"
             i18n:domain="senaite.core"
             enctype="multipart/form-data"
@@ -21,9 +21,54 @@
         </div>
         <!-- /ReactJS managed component -->
 
+        <!-- Custom Edit View -->
+        <div class="form-row align-items-center">
+          <!-- sort on -->
+          <div class="col-auto">
+            <label class="sr-only" for="field-sort_on">Sort on</label>
+            <select class="form-control mb-2"
+                    id="field-sort_on"
+                    name="form.widgets.IDataBoxBehavior.sort_on">
+              <tal:indexes repeat="index view/get_catalog_indexes">
+                <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
+                  <span tal:replace="index"/>
+                </option>
+              </tal:indexes>
+            </select>
+          </div>
+          <!-- limit -->
+          <div class="col-auto">
+            <label class="sr-only" for="field-limit">Limit</label>
+            <div class="input-group mb-2">
+              <input type="number"
+                     class="form-control"
+                     id="field-limit"
+                     tal:attributes="value here/limit"
+                     min="1"
+                     name="form.widgets.IDataBoxBehavior.limit">
+            </div>
+          </div>
+          <!-- sort order -->
+          <div class="col-auto">
+            <div class="form-check mb-2">
+              <input type="checkbox"
+                     class="form-check-input"
+                     id="field-sort_reversed"
+                     tal:attributes="checked here/sort_reversed"
+                     value="selected"
+                     name="form.widgets.IDataBoxBehavior.sort_reversed:list">
+              <label class="form-check-label" for="field-sort_reversed" i18n:translate="">
+                Reversed order
+              </label>
+            </div>
+          </div>
+        </div>
+
         <!-- hidden fields -->
         <input type="hidden" name="form.widgets.IBasic.title" tal:attributes="value here/title" />
-        <input type="hidden" name="form.widgets.IDataBoxBehavior.limit" tal:attributes="value here/limit" />
+        <input type="hidden" name="form.widgets.IDataBoxBehavior.query_type" tal:attributes="value here/query_type" />
+        <input type="hidden" name="form.widgets.IDataBoxBehavior.display_columns.to" tal:attributes="value string:'${here/display_columns}'" />
+
         <!-- submit -->
         <input class="btn btn-sm btn-primary" type="submit" name="form.buttons.save" value="Update" />
       </form>

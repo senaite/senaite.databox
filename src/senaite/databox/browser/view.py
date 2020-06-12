@@ -89,6 +89,10 @@ class DataBoxView(ListingView):
         vocabulary = factory(self.context)
         return sorted(vocabulary.by_value.keys())
 
+    def get_catalog_indexes(self):
+        catalog = api.get_tool(self.catalog)
+        return sorted(catalog.indexes())
+
     def get_columns(self):
         """Calculate visible columns
         """
@@ -112,4 +116,3 @@ class DataBoxView(ListingView):
                 value = value.get("title")
             item[column] = value
         return item
-
