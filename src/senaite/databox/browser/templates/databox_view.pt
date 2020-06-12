@@ -25,22 +25,32 @@
         <div class="form-row align-items-center">
           <!-- sort on -->
           <div class="col-auto">
-            <label class="sr-only" for="field-sort_on">Sort on</label>
-            <select class="form-control mb-2"
-                    id="field-sort_on"
-                    name="form.widgets.IDataBoxBehavior.sort_on">
-              <tal:indexes repeat="index view/get_catalog_indexes">
-                <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
-                  <span tal:replace="index"/>
-                </option>
-              </tal:indexes>
-            </select>
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Sort on</span>
+                </div>
+              </div>
+              <select class="form-control"
+                      name="form.widgets.IDataBoxBehavior.sort_on">
+                <tal:indexes repeat="index view/get_catalog_indexes">
+                  <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
+                    <span tal:replace="index"/>
+                  </option>
+                </tal:indexes>
+              </select>
+            </div>
           </div>
           <!-- limit -->
           <div class="col-auto">
-            <label class="sr-only" for="field-limit">Limit</label>
-            <div class="input-group mb-2">
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Limit</span>
+                </div>
+              </div>
               <input type="number"
+                     style="width:75px"
                      class="form-control"
                      id="field-limit"
                      tal:attributes="value here/limit"
@@ -48,7 +58,7 @@
                      name="form.widgets.IDataBoxBehavior.limit">
             </div>
           </div>
-          <!-- sort order -->
+          <!-- Reversed order -->
           <div class="col-auto">
             <div class="form-check mb-2">
               <input type="checkbox"
@@ -61,6 +71,12 @@
                 Reversed order
               </label>
             </div>
+          </div>
+        </div>
+
+        <div class="form-row align-items-center">
+          <!-- Display Columns -->
+          <div class="col-auto">
           </div>
         </div>
 
