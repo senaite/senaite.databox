@@ -9,17 +9,11 @@
 
     <metal:content-core fill-slot="content-core">
       <form name="databox-form"
+            class="form"
             method="post"
             i18n:domain="senaite.core"
             enctype="multipart/form-data"
             tal:attributes="action string:${here/absolute_url}/@@edit">
-
-        <!-- ReactJS managed component -->
-        <div tal:condition="python:False"
-             class="databox"
-             tal:attributes="view/settings">
-        </div>
-        <!-- /ReactJS managed component -->
 
         <!-- Custom Edit View -->
         <div class="form-row align-items-center">
@@ -74,16 +68,53 @@
           </div>
         </div>
 
-        <div class="form-row align-items-center">
-          <!-- Display Columns -->
+        <div class="form-row align-items-center"
+             tal:repeat="column view/get_columns">
+          <!-- Column -->
           <div class="col-auto">
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Column</span>
+                </div>
+              </div>
+              <select class="form-control"
+                      name="form.widgets.IDataBoxBehavior.column_config">
+                <tal:indexes repeat="field view/get_schema_fields">
+                  <option tal:attributes="value field; selected python:field == column and 'selected' or ''">
+                    <span tal:replace="field"/>
+                  </option>
+                </tal:indexes>
+              </select>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <div class="col-auto">
+            <div class="input-group mb-2 mr-sm-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Title</span>
+                </div>
+              </div>
+              <input type="text"
+                     class="form-control"
+                     name="form.widgets.IDataBoxBehavior.column_config">
+            </div>
           </div>
         </div>
 
         <!-- hidden fields -->
         <input type="hidden" name="form.widgets.IBasic.title" tal:attributes="value here/title" />
         <input type="hidden" name="form.widgets.IDataBoxBehavior.query_type" tal:attributes="value here/query_type" />
-        <input type="hidden" name="form.widgets.IDataBoxBehavior.display_columns.to" tal:attributes="value string:'${here/display_columns}'" />
+
+        <!-- !TEMPORARY DEACTIVATED!
+             ReactJS managed component -->
+        <div tal:condition="python:False"
+             class="databox"
+             tal:attributes="view/settings">
+        </div>
+        <!-- /ReactJS managed component -->
 
         <!-- submit -->
         <input class="btn btn-sm btn-primary" type="submit" name="form.buttons.save" value="Update" />

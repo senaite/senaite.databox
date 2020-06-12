@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from bika.lims import api
-from plone.autoform import directives as form
+from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
 from senaite.databox.config import TMP_FOLDER_KEY
+from z3c.form.browser.textlines import TextLinesFieldWidget
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -34,12 +35,12 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
-    column_config = schema.List(
+    directives.widget("column_config", TextLinesFieldWidget)
+    column_config = schema.Tuple(
         title=_(u"Column Config"),
-        value_type=schema.Dict(
-            key_type=schema.TextLine(title=_(u"key")),
-            value_type=schema.TextLine(title=_(u"value"))
-        ),
+        value_type=schema.TextLine(),
+        missing_value=(),
+        default=(),
         required=False,
     )
 

@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 
-import json
 import collections
+import json
 
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
 from plone.memoize import view
+from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from senaite.core.listing.decorators import returns_safe_json
-from senaite.core.listing.decorators import set_application_json_header
 from senaite.core.listing.view import ListingView
 from senaite.core.supermodel.model import SuperModel
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from zope.component import getUtility
+from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 
 
@@ -89,22 +89,39 @@ class DataBoxView(ListingView):
         vocabulary = factory(self.context)
         return sorted(vocabulary.by_value.keys())
 
+    @view.memoize
     def get_catalog_indexes(self):
         catalog = api.get_tool(self.catalog)
         return sorted(catalog.indexes())
+
+    @view.memoize
+    def get_schema_fields(self):
+        # NOTE: we disable CSRF protection because the databox creates a
+        # temporary object to fetch the form fields (write on read)
+        alsoProvides(self.request, IDisableCSRFProtection)
+        fields = self.databox.get_fields()
+        return sorted(fields)
+
+    def get_column_config(self):
+        columns = []
+        column_config = self.databox.column_config or []
+        for column in column_config:
+            column = column.split(",")
+            if len(column) == 1:
+                columns.append((column[0], column[0], ))
+            else:
+                columns.append(column)
+        return columns
 
     def get_columns(self):
         """Calculate visible columns
         """
         columns = collections.OrderedDict()
 
-        display_columns = self.databox.display_columns
-        if display_columns is None:
-            display_columns = ["id", "title", "portal_type"]
-
-        for column in display_columns:
-            columns[column] = {
-                "title": column
+        for column in self.get_column_config():
+            key, title = column[:2]
+            columns[key] = {
+                "title": title
             }
         return columns
 
