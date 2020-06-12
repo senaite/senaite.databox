@@ -39,6 +39,13 @@ class DataBoxController extends React.Component
     @handleChange = @handleChange.bind(this)
     @on_api_error = @on_api_error.bind(this)
 
+    # root element
+    @root_el = @props.root_el
+
+    # get initial configuration data from the HTML attribute
+    @query_type = @root_el.dataset.query_type
+    @query_types = JSON.parse @root_el.dataset.query_types
+
     # Initialize the DataBox API
     @api = new DataBoxAPI
       on_api_error: @on_api_error
@@ -48,7 +55,9 @@ class DataBoxController extends React.Component
       # alert messages
       messages: []
       # the seleected query type
-      query_type: "AnalysisRequest"
+      query_type: @query_type
+      # the available query types
+      query_types: @query_types
 
   componentDidMount: ->
     console.debug "DataBoxController::componentDidMount"
@@ -128,6 +137,7 @@ class DataBoxController extends React.Component
           name="query_type"
           api={@api}
           value={@state.query_type}
+          query_types={@state.query_types}
           onChange={@handleChange}
           className="form-control"
           name="portal_type" />

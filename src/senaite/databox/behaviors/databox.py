@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bika.lims import api
+from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
 from plone.supermodel import model
@@ -47,6 +48,7 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
+    form.omitted("sort_reversed")
     sort_reversed = schema.Bool(
         title=_(u"label_sort_reversed", default=u"Reversed order"),
         description=_(u"Sort the results in reversed order"),
@@ -100,7 +102,15 @@ class DataBox(object):
         primary_catalog = catalogs[0]
         return primary_catalog.getId()
 
+    @property
+    def sort_order(self):
+        if self.sort_reversed is False:
+            return "descending"
+        return "ascending"
+
     # Getters and setters for our fields.
+
+    # QUERY TYPE
 
     def _set_query_type(self, value):
         self.context.query_type = value
@@ -110,6 +120,8 @@ class DataBox(object):
 
     query_type = property(_get_query_type, _set_query_type)
 
+    # DISPLAY COLUMNS
+
     def _set_display_columns(self, value):
         self.context.display_columns = value
 
@@ -117,6 +129,8 @@ class DataBox(object):
         return getattr(self.context, "display_columns", None)
 
     display_columns = property(_get_display_columns, _set_display_columns)
+
+    # LIMIT
 
     def _set_limit(self, value):
         self.context.limit = value
@@ -126,6 +140,8 @@ class DataBox(object):
 
     limit = property(_get_limit, _set_limit)
 
+    # SORT ON
+
     def _set_sort_on(self, value):
         self.context.sort_on = value
 
@@ -133,6 +149,8 @@ class DataBox(object):
         return getattr(self.context, "sort_on", default)
 
     sort_on = property(_get_sort_on, _set_sort_on)
+
+    # SORT REVERSED
 
     def _set_sort_reversed(self, value):
         self.context.sort_reversed = value

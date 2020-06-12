@@ -8,7 +8,8 @@ class DataBoxAPI
 
 
   get_base_url: ->
-    return document.URL.split("?")[0]
+    # get the base (object) URL from the body dataset
+    return document.body.dataset.baseUrl
 
 
   get_api_url: (endpoint) ->
@@ -17,20 +18,11 @@ class DataBoxAPI
      * @param {string} endpoint
      * @returns {string}
     ###
-    api_endpoint = "view"
     url = @get_base_url()
     # we also pass back eventual query parameters to the API
     params = location.search
-    return "#{url}/#{api_endpoint}/#{endpoint}#{params}"
-
-
-  fetch_querytypes: ->
-    ###
-     * Fetch querytypes from the server
-     * @returns {Promise}
-    ###
-    return @get_json "query_types",
-      method: "GET"
+    # N.B.: 'view' is the listing view which is capable to fetch ajax endpoints
+    return "#{url}/view/#{endpoint}#{params}"
 
 
   get_json: (endpoint, options) ->
@@ -47,6 +39,7 @@ class DataBoxAPI
     on_api_error = @on_api_error
 
     url = @get_api_url endpoint
+    console.log("------------------------- DATABOX AJAX URL = #{url}")
     init =
       method: method
       headers:

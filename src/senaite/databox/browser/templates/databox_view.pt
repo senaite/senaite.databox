@@ -8,10 +8,9 @@
   <body>
 
     <metal:content-core fill-slot="content-core">
+      <!-- ReactJS managed component -->
       <div class="databox"
-           tal:attributes="data-databox_id here/getId;
-                  data-databox_uid here/UID">
-        <!-- React Databox Controls -->
+           tal:attributes="view/settings">
       </div>
 
       <div id="viewlet-above-listing-table" tal:content="structure provider:senaite.abovelistingtable" />

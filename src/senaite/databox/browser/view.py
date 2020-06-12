@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import json
 import collections
 
+from bika.lims import api
 from bika.lims import bikaMessageFactory as _
+from plone.memoize import view
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.listing.decorators import returns_safe_json
 from senaite.core.listing.decorators import set_application_json_header
@@ -20,16 +23,13 @@ class DataBoxView(ListingView):
 
     def __init__(self, context, request):
         super(DataBoxView, self).__init__(context, request)
-        self.adapted = adapted = IDataBoxBehavior(context)
 
-        self.catalog = adapted.get_query_catalog()
-        sort_order = "descending" if adapted.sort_reversed else "ascending"
         self.contentFilter = {
-            "portal_type": adapted.query_type,
-            "sort_on": adapted.sort_on,
-            "sort_order": sort_order
+            "portal_type": self.context.query_type,
+            "sort_on": self.context.sort_on,
+            "sort_order": self.databox.sort_order
         }
-        self.pagesize = adapted.limit
+        self.pagesize = self.context.limit
         self.context_actions = {}
         self.title = self.context.Title()
         self.description = self.context.Description()
@@ -57,8 +57,40 @@ class DataBoxView(ListingView):
         """
         super(DataBoxView, self).before_render()
 
-    def get_columns(self):
+    @view.memoize
+    def settings(self):
+        return {
+            "data-databox_id":  api.get_id(self.context),
+            "data-databox_uid": api.get_uid(self.context),
+            "data-query_type": self.context.query_type,
+            "data-sort_on":  json.dumps(self.context.sort_on),
+            "data-sort_reversed": json.dumps(self.databox.sort_order),
+            "data-query_types": json.dumps(self.get_query_types()),
+        }
+
+    @property
+    @view.memoize
+    def databox(self):
+        """Returns the adapted databox context
         """
+        return IDataBoxBehavior(self.context)
+
+    @property
+    @view.memoize
+    def catalog(self):
+        return self.databox.get_query_catalog()
+
+    @view.memoize
+    def get_query_types(self):
+        """Returns the `query_types` list of the context as JSON
+        """
+        factory = getUtility(
+            IVocabularyFactory, "senaite.databox.vocabularies.query_types")
+        vocabulary = factory(self.context)
+        return sorted(vocabulary.by_value.keys())
+
+    def get_columns(self):
+        """Calculate visible columns
         """
         adapted = IDataBoxBehavior(self.context)
         columns = collections.OrderedDict()
@@ -78,12 +110,3 @@ class DataBoxView(ListingView):
             item[column] = value
         return item
 
-    @set_application_json_header
-    @returns_safe_json
-    def ajax_query_types(self):
-        """Returns the `query_types` list of the context as JSON
-        """
-        factory = getUtility(
-            IVocabularyFactory, "senaite.databox.vocabularies.query_types")
-        vocabulary = factory(self.context)
-        return sorted(vocabulary.by_value.keys())
