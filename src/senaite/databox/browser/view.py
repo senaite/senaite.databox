@@ -92,10 +92,13 @@ class DataBoxView(ListingView):
     def get_columns(self):
         """Calculate visible columns
         """
-        adapted = IDataBoxBehavior(self.context)
         columns = collections.OrderedDict()
 
-        for column in adapted.display_columns:
+        display_columns = self.databox.display_columns
+        if display_columns is None:
+            display_columns = ["id", "title", "portal_type"]
+
+        for column in display_columns:
             columns[column] = {
                 "title": column
             }

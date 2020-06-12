@@ -134,12 +134,11 @@ class DataBoxController extends React.Component
       <Messages on_dismiss_message={@dismissMessage} id="messages" className="messages" messages={@state.messages} />
       <div className="input-group">
         <QueryTypeSelection
-          name="query_type"
           api={@api}
           value={@state.query_type}
           query_types={@state.query_types}
           onChange={@handleChange}
           className="form-control"
-          name="portal_type" />
+          name="form.widgets.IDataBoxBehavior.query_type:list" />
       </div>
     </div>

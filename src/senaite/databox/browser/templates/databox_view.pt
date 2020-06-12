@@ -8,10 +8,23 @@
   <body>
 
     <metal:content-core fill-slot="content-core">
-      <!-- ReactJS managed component -->
-      <div class="databox"
-           tal:attributes="view/settings">
-      </div>
+      <form name="edit_form"
+            method="post"
+            i18n:domain="senaite.core"
+            enctype="multipart/form-data"
+            tal:attributes="action string:${here/absolute_url}/@@edit">
+
+        <!-- ReactJS managed component -->
+        <div class="databox"
+             tal:attributes="view/settings">
+        </div>
+        <metal:actions metal:use-macro="context/@@ploneform-macros/actions"/>
+        <!-- hidden fields -->
+        <input type="hidden" name="form.widgets.IBasic.title" tal:attributes="value here/title" />
+        <input type="hidden" name="form.widgets.IDataBoxBehavior.limit" tal:attributes="value here/limit" />
+        <!-- submit -->
+        <input class="btn btn-sm btn-primary" type="submit" name="form.buttons.save" value="Update" />
+      </form>
 
       <div id="viewlet-above-listing-table" tal:content="structure provider:senaite.abovelistingtable" />
       <div id="folderlisting-main-table"
