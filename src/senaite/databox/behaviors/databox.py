@@ -34,6 +34,15 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
+    column_config = schema.List(
+        title=_(u"Column Config"),
+        value_type=schema.Dict(
+            key_type=schema.TextLine(title=_(u"key")),
+            value_type=schema.TextLine(title=_(u"value"))
+        ),
+        required=False,
+    )
+
     limit = schema.Int(
         title=_(u"Limit"),
         description=_(u"Limit Search Results"),
@@ -48,7 +57,7 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
-    form.omitted("sort_reversed")
+    # form.omitted("sort_reversed")
     sort_reversed = schema.Bool(
         title=_(u"label_sort_reversed", default=u"Reversed order"),
         description=_(u"Sort the results in reversed order"),
@@ -159,3 +168,13 @@ class DataBox(object):
         return getattr(self.context, "sort_reversed", None)
 
     sort_reversed = property(_get_sort_reversed, _set_sort_reversed)
+
+    # COLUMN CONFIG
+
+    def _set_column_config(self, value):
+        self.context.column_config = value
+
+    def _get_column_config(self):
+        return getattr(self.context, "column_config", [])
+
+    column_config = property(_get_column_config, _set_column_config)
