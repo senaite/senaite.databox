@@ -15,10 +15,12 @@
             tal:attributes="action string:${here/absolute_url}/@@edit">
 
         <!-- ReactJS managed component -->
-        <div class="databox"
+        <div tal:condition="python:False"
+             class="databox"
              tal:attributes="view/settings">
         </div>
-        <metal:actions metal:use-macro="context/@@ploneform-macros/actions"/>
+        <!-- /ReactJS managed component -->
+
         <!-- hidden fields -->
         <input type="hidden" name="form.widgets.IBasic.title" tal:attributes="value here/title" />
         <input type="hidden" name="form.widgets.IDataBoxBehavior.limit" tal:attributes="value here/limit" />
