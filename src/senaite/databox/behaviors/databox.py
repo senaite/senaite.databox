@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bika.lims import api
+from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
@@ -41,6 +42,18 @@ class IDataBoxBehavior(model.Schema):
         value_type=schema.TextLine(),
         missing_value=(),
         default=(),
+        required=False,
+    )
+
+    directives.widget("date_from", DatetimeFieldWidget, klass=u"datepicker")
+    date_from = schema.Datetime(
+        title=_(u"Query from date"),
+        required=False,
+    )
+
+    directives.widget("date_to", DatetimeFieldWidget, klass=u"datepicker")
+    date_to = schema.Datetime(
+        title=_(u"Query to date"),
         required=False,
     )
 
@@ -139,6 +152,26 @@ class DataBox(object):
         return getattr(self.context, "display_columns", None)
 
     display_columns = property(_get_display_columns, _set_display_columns)
+
+    # FROM DATE
+
+    def _set_from_date(self, value):
+        self.context.from_date = value
+
+    def _get_from_date(self):
+        return getattr(self.context, "from_date", None)
+
+    from_date = property(_get_from_date, _set_from_date)
+
+    # TO DATE
+
+    def _set_to_date(self, value):
+        self.context.to_date = value
+
+    def _get_to_date(self):
+        return getattr(self.context, "to_date", None)
+
+    to_date = property(_get_to_date, _set_to_date)
 
     # LIMIT
 
