@@ -153,25 +153,25 @@ class DataBox(object):
 
     display_columns = property(_get_display_columns, _set_display_columns)
 
-    # FROM DATE
+    # DATE FROM
 
-    def _set_from_date(self, value):
-        self.context.from_date = value
+    def _set_date_from(self, value):
+        self.context.date_from = value
 
-    def _get_from_date(self):
-        return getattr(self.context, "from_date", None)
+    def _get_date_from(self):
+        return getattr(self.context, "date_from", None)
 
-    from_date = property(_get_from_date, _set_from_date)
+    date_from = property(_get_date_from, _set_date_from)
 
-    # TO DATE
+    # DATE TO
 
-    def _set_to_date(self, value):
-        self.context.to_date = value
+    def _set_date_to(self, value):
+        self.context.date_to = value
 
-    def _get_to_date(self):
-        return getattr(self.context, "to_date", None)
+    def _get_date_to(self):
+        return getattr(self.context, "date_to", None)
 
-    to_date = property(_get_to_date, _set_to_date)
+    date_to = property(_get_date_to, _set_date_to)
 
     # LIMIT
 
