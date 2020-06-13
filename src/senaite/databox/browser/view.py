@@ -20,6 +20,7 @@ class DataBoxView(ListingView):
     """The default DataBox view
     """
     template = ViewPageTemplateFile("templates/databox_view.pt")
+    controls = ViewPageTemplateFile("templates/databox_controls.pt")
 
     def __init__(self, context, request):
         super(DataBoxView, self).__init__(context, request)
