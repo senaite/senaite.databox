@@ -71,35 +71,29 @@
             </div>
           </div>
           <select class="form-control"
-                  name="form.widgets.IDataBoxBehavior.column_config">
+                  name="form.widgets.IDataBoxBehavior.columns.key.0:list">
             <tal:indexes repeat="field view/get_schema_fields">
-              <option tal:attributes="value field; selected python:field == column and 'selected' or ''">
-                <span tal:replace="field"/>
+              <option tal:define="fieldname field/getName"
+                      tal:attributes="value fieldname; selected python:fieldname == column and 'selected' or ''">
+                <span tal:replace="fieldname"/>
               </option>
             </tal:indexes>
           </select>
         </div>
       </div>
 
-      <!-- Title -->
-      <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Title</span>
-            </div>
-          </div>
-          <input type="text"
-                 class="form-control"
-                 name="form.widgets.IDataBoxBehavior.column_config">
-        </div>
-      </div>
     </div>
+
 
     <!-- hidden fields -->
     <input type="hidden" name="form.widgets.IBasic.title" tal:attributes="value here/title" />
     <input type="hidden" name="form.widgets.IDataBoxBehavior.query_type" tal:attributes="value here/query_type" />
 
+    <!-- <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.key.0:list" value="id" />
+         <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.0.key.0" value="title" />
+         <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.0.0" value="ID" />
+         <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.key.0-empty-marker" value="1" />
+    -->
     <!-- !TEMPORARY DEACTIVATED!
          ReactJS managed component -->
     <div tal:condition="python:False"

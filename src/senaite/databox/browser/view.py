@@ -92,38 +92,31 @@ class DataBoxView(ListingView):
 
     @view.memoize
     def get_catalog_indexes(self):
-        catalog = api.get_tool(self.catalog)
-        return sorted(catalog.indexes())
+        return self.databox.get_catalog_indexes()
 
     @view.memoize
     def get_schema_fields(self):
         # NOTE: we disable CSRF protection because the databox creates a
         # temporary object to fetch the form fields (write on read)
         alsoProvides(self.request, IDisableCSRFProtection)
-        fields = self.databox.get_fields()
-        return sorted(fields)
-
-    def get_column_config(self):
-        columns = []
-        column_config = self.databox.column_config or []
-        for column in column_config:
-            column = column.split(",")
-            if len(column) == 1:
-                columns.append((column[0], column[0], ))
-            else:
-                columns.append(column)
-        return columns
+        return self.databox.get_fields()
 
     def get_columns(self):
         """Calculate visible columns
         """
-        columns = collections.OrderedDict()
+        columns = self.databox.columns
+        if columns:
+            return columns
 
-        for column in self.get_column_config():
-            key, title = column[:2]
-            columns[key] = {
-                "title": title
-            }
+        # default columns
+        columns = collections.OrderedDict((
+            ("title", {
+                "title": _("Title")
+            }),
+            ("description", {
+                "title": _("Description"),
+            }),
+        ))
         return columns
 
     def folderitem(self, obj, item, index):

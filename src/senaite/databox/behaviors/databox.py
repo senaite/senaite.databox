@@ -9,7 +9,6 @@ from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
 from senaite.databox.config import TMP_FOLDER_KEY
-from z3c.form.browser.textlines import TextLinesFieldWidget
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -27,21 +26,15 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
-    display_columns = schema.List(
-        title=_(u"Display Columns"),
-        description=_(u"Choose display columns"),
-        default=["Title", "Description"],
-        value_type=schema.Choice(
-            vocabulary="senaite.databox.vocabularies.display_columns"),
-        required=False,
-    )
-
-    directives.widget("column_config", TextLinesFieldWidget)
-    column_config = schema.Tuple(
-        title=_(u"Column Config"),
-        value_type=schema.TextLine(),
-        missing_value=(),
-        default=(),
+    columns = schema.Dict(
+        title=_(u"Columns"),
+        key_type=schema.Choice(
+            title=_(u"Column"),
+            source="senaite.databox.vocabularies.display_columns"),
+        value_type=schema.Dict(
+            key_type=schema.TextLine(title=u"Key"),
+            value_type=schema.TextLine(title=u"Value"),
+        ),
         required=False,
     )
 
@@ -96,8 +89,20 @@ class DataBox(object):
         obj = self._create_temporary_object()
         if obj is None:
             return []
-        fields = api.get_fields(obj).keys()
+        fields = api.get_fields(obj).values()
         return fields
+
+    def get_catalog_indexes(self):
+        """Returns available catalog indexes for the selected query type
+        """
+        catalog = api.get_tool(self.get_query_catalog())
+        return sorted(catalog.indexes())
+
+    def get_catalog_columns(self):
+        """Returns available catalog schema columns for the selected query type
+        """
+        catalog = api.get_tool(self.get_query_catalog())
+        return sorted(catalog.schema())
 
     def _create_temporary_object(self):
         """Create a temporary object to fetch the fields from
@@ -143,15 +148,15 @@ class DataBox(object):
 
     query_type = property(_get_query_type, _set_query_type)
 
-    # DISPLAY COLUMNS
+    # COLUMNS
 
-    def _set_display_columns(self, value):
-        self.context.display_columns = value
+    def _set_columns(self, value):
+        self.context.columns = value
 
-    def _get_display_columns(self):
-        return getattr(self.context, "display_columns", None)
+    def _get_columns(self):
+        return getattr(self.context, "columns", {})
 
-    display_columns = property(_get_display_columns, _set_display_columns)
+    columns = property(_get_columns, _set_columns)
 
     # DATE FROM
 
@@ -202,13 +207,3 @@ class DataBox(object):
         return getattr(self.context, "sort_reversed", None)
 
     sort_reversed = property(_get_sort_reversed, _set_sort_reversed)
-
-    # COLUMN CONFIG
-
-    def _set_column_config(self, value):
-        self.context.column_config = value
-
-    def _get_column_config(self):
-        return getattr(self.context, "column_config", [])
-
-    column_config = property(_get_column_config, _set_column_config)

@@ -14,13 +14,19 @@ class DisplayColumnsVocabulary(object):
     """Returns all available fields of the selected type
     """
     def __call__(self, context):
+        # XXX Workaround for missing context in nested choice widget vocabulary
+        if context is None:
+            # fetch context from the request
+            request = api.get_request()
+            if request and request["PARENTS"]:
+                context = request["PARENTS"][0]
+        items = []
         adapted = IDataBoxBehavior(context, None)
         if adapted is None:
-            return SimpleVocabulary([])
-        items = [
-            SimpleTerm(field, field, field)
-            for field in adapted.get_fields()
-        ]
+            return SimpleVocabulary.fromValues([])
+        for field in adapted.get_fields():
+            name = field.getName()
+            items.append(SimpleTerm(name, token=name, title=name))
         return SimpleVocabulary(items)
 
 
