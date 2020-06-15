@@ -21,6 +21,11 @@
       component="senaite.databox.vocabularies.DisplayColumnsVocabularyFactory"
       name="senaite.databox.vocabularies.display_columns" />
 
+  <!-- Date Indexes Vocabulary -->
+  <utility
+      component="senaite.databox.vocabularies.DateIndexesVocabularyFactory"
+      name="senaite.databox.vocabularies.date_indexes" />
+
   <!-- Generic Setup *INSTALL* Profile -->
   <genericsetup:registerProfile
       name="default"

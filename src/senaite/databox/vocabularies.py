@@ -3,10 +3,34 @@
 from bika.lims import api
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.config import NON_QUERYABLE_TYPES
+from senaite.databox.config import DATE_INDEX_TYPES
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+
+@implementer(IVocabularyFactory)
+class DateIndexesVocabulary(object):
+    """Returns all available date indexes
+    """
+    def __call__(self, context):
+        items = []
+        adapted = IDataBoxBehavior(context, None)
+        if adapted is None:
+            return SimpleVocabulary.fromValues([])
+
+        catalog = adapted.get_catalog_tool()
+        indexes = catalog.getIndexObjects()
+        for index in indexes:
+            if index.meta_type not in DATE_INDEX_TYPES:
+                continue
+            name = index.getId()
+            items.append(SimpleTerm(name, token=name, title=name))
+        return SimpleVocabulary(items)
+
+
+DateIndexesVocabularyFactory = DateIndexesVocabulary()
 
 
 @implementer(IVocabularyFactory)

@@ -4,6 +4,8 @@ PROJECTNAME = "senaite.databox"
 
 TMP_FOLDER_KEY = "senaite.databox.tmp"
 
+DATE_INDEX_TYPES = ["DateIndex"]
+
 # NOTE; Visible types are commented
 NON_QUERYABLE_TYPES = [
     # "ARReport",

@@ -38,6 +38,14 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
+    date_index = schema.Choice(
+        title=_(u"Query date index"),
+        description=_(u"The date index to query"),
+        source="senaite.databox.vocabularies.date_indexes",
+        required=True,
+        default="created",
+    )
+
     directives.widget("date_from", DatetimeFieldWidget, klass=u"datepicker")
     date_from = schema.Datetime(
         title=_(u"Query from date"),
@@ -121,6 +129,8 @@ class DataBox(object):
 
     def get_query_catalog(self, default="portal_catalog"):
         """Returns the primary catalog for the selected query type
+
+        :returns: catalog ID
         """
         archetype_tool = api.get_tool("archetype_tool")
         portal_type = self.query_type
@@ -129,6 +139,11 @@ class DataBox(object):
             return default
         primary_catalog = catalogs[0]
         return primary_catalog.getId()
+
+    def get_catalog_tool(self):
+        """Returns the primary catalog tool for the selected query type
+        """
+        return api.get_tool(self.get_query_catalog())
 
     @property
     def sort_order(self):
