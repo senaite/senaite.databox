@@ -28,7 +28,7 @@
             <div tal:condition="python:1"
                  tal:define="error widget/error;
                              hidden python:widget.mode == 'hidden'"
-                 tal:attributes="class python:'form-group ' + (error and ' error' or '')">
+                 tal:attributes="class python:'field form-group' + (error and ' error' or '')">
 
               <label for=""
                      tal:attributes="for widget/id"

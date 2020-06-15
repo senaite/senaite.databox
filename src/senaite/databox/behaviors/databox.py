@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bika.lims import api
+from DateTime import DateTime
 from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
@@ -89,6 +90,26 @@ class DataBox(object):
         logger.info("IDataBoxBehavior::__init__:context={}"
                     .format(repr(context)))
 
+    @property
+    def query(self):
+        """Catalog query
+        """
+        query = {
+            "portal_type": self.query_type,
+            "limit": self.limit,
+            "sort_on": self.sort_on,
+            "sort_order": self.sort_order,
+        }
+        date_from = self.date_from or DateTime("2000-01-01")
+        date_to = self.date_to or DateTime()
+        # always make the to_date inclusive
+        query[self.date_index] = {
+            "query": (DateTime(date_from), DateTime(date_to) + 1),
+            "range": "minmax"
+        }
+        logger.info("DataBox Query: {}".format(query))
+        return query
+
     def get_fields(self):
         """Returns all schema fields of the selected query type
 
@@ -172,6 +193,16 @@ class DataBox(object):
         return getattr(self.context, "columns", {})
 
     columns = property(_get_columns, _set_columns)
+
+    # DATE INDEX
+
+    def _set_date_index(self, value):
+        self.context.date_index = value
+
+    def _get_date_index(self):
+        return getattr(self.context, "date_index", None)
+
+    date_index = property(_get_date_index, _set_date_index)
 
     # DATE FROM
 

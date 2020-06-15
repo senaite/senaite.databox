@@ -25,12 +25,9 @@ class DataBoxView(ListingView):
     def __init__(self, context, request):
         super(DataBoxView, self).__init__(context, request)
 
-        self.contentFilter = {
-            "portal_type": self.context.query_type,
-            "sort_on": self.context.sort_on,
-            "sort_order": self.databox.sort_order
-        }
-        self.pagesize = self.context.limit
+        self.contentFilter = self.databox.query
+
+        self.pagesize = self.databox.limit
         self.context_actions = {}
         self.title = self.context.Title()
         self.description = self.context.Description()
