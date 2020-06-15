@@ -16,3 +16,8 @@ class IDataBoxFolder(Interface):
 class IDataBox(Interface):
     """Explicit marker interface for DataBox
     """
+
+
+class IFieldConverter(Interface):
+    """Marker interface for field converter utilities
+    """

@@ -11,7 +11,9 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.listing.view import ListingView
 from senaite.core.supermodel.model import SuperModel
 from senaite.databox.behaviors.databox import IDataBoxBehavior
+from senaite.databox.interfaces import IFieldConverter
 from zope.component import getUtility
+from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -118,8 +120,13 @@ class DataBoxView(ListingView):
 
     def folderitem(self, obj, item, index):
         model = SuperModel(obj)
-        for column in self.columns:
+        for column, config in self.columns.items():
             value = model.get(column)
+            converter = config.get("converter")
+            if converter:
+                func = queryUtility(IFieldConverter, name=converter)
+                if callable(func):
+                    value = func(obj, column, value)
             if isinstance(value, SuperModel):
                 value = value.get("title")
             item[column] = value

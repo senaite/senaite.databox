@@ -11,6 +11,28 @@
   <include package=".behaviors" />
   <include package=".browser" />
 
+  <!-- Field Converters -->
+  <utility
+      provides="senaite.databox.interfaces.IFieldConverter"
+      component="senaite.databox.converters.to_string"
+      name="senaite.databox.to_string" />
+
+  <utility
+      provides="senaite.databox.interfaces.IFieldConverter"
+      component="senaite.databox.converters.to_link"
+      name="senaite.databox.to_link" />
+
+  <utility
+      provides="senaite.databox.interfaces.IFieldConverter"
+      component="senaite.databox.converters.to_date"
+      name="senaite.databox.to_date" />
+
+  <utility
+      provides="senaite.databox.interfaces.IFieldConverter"
+      component="senaite.databox.converters.to_long_date"
+      name="senaite.databox.to_long_date" />
+  <!-- /Field Converters -->
+
   <!-- Query Types Vocabularies -->
   <utility
       component="senaite.databox.vocabularies.QueryTypesVocabularyFactory"
