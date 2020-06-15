@@ -32,6 +32,13 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="update"
+      for="senaite.databox.content.databox.IDataBox"
+      class="senaite.databox.browser.form.FormController"
+      permission="cmf.ModifyPortalContent"
+      />
+
   <!-- Add view and form - invoked from ++add++ traverser -->
   <adapter
       for="Products.CMFCore.interfaces.IFolderish

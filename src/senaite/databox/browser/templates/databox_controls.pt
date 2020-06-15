@@ -5,9 +5,72 @@
         method="post"
         i18n:domain="senaite.core"
         enctype="multipart/form-data"
-        tal:attributes="action string:${here/absolute_url}/@@edit">
+        tal:attributes="action string:${here/absolute_url}/@@update">
 
     <!-- Custom Edit View -->
+
+    <div class="form-row align-items-center"
+         tal:define="columns view/columns"
+         tal:repeat="column columns">
+
+      <tal:row>
+      <!-- Column -->
+      <div class="col-auto">
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <span i18n:translate="">Column</span>
+            </div>
+          </div>
+          <select class="form-control"
+                  name="senaite.databox.columns.column:records">
+            <tal:indexes repeat="field view/get_schema_fields">
+              <option tal:define="fieldname field/getName"
+                      tal:attributes="value fieldname; selected python:fieldname == column and 'selected' or ''">
+                <span tal:replace="fieldname"/>
+              </option>
+            </tal:indexes>
+          </select>
+        </div>
+      </div>
+
+      <!-- Column Title -->
+      <div class="col-auto">
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <span i18n:translate="">Title</span>
+            </div>
+          </div>
+          <input type="text"
+                 class="form-control"
+                 tal:attributes="value column/title"
+                 name="senaite.databox.columns.title:records">
+        </div>
+      </div>
+
+      <!-- Column Converter -->
+      <div class="col-auto">
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <span i18n:translate="">Converter</span>
+            </div>
+          </div>
+          <select class="form-control"
+                  name="senaite.databox.columns.converter:records">
+            <tal:indexes repeat="converter view/get_converters">
+              <option tal:define="name converter/name; description converter/description"
+                      tal:attributes="value name;
+                                      selected python:name == columns[column].get('converter') and 'selected' or ''">
+                <span tal:replace="name"/>
+              </option>
+            </tal:indexes>
+          </select>
+        </div>
+      </div>
+    </div>
+
     <div class="form-row align-items-center">
       <!-- sort on -->
       <div class="col-auto">
@@ -18,7 +81,7 @@
             </div>
           </div>
           <select class="form-control"
-                  name="form.widgets.IDataBoxBehavior.sort_on">
+                  name="senaite.databox.sort_on">
             <tal:indexes repeat="index view/get_catalog_indexes">
               <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
                 <span tal:replace="index"/>
@@ -41,7 +104,7 @@
                  id="field-limit"
                  tal:attributes="value here/limit"
                  min="1"
-                 name="form.widgets.IDataBoxBehavior.limit">
+                 name="senaite.databox.limit:int">
         </div>
       </div>
       <!-- Reversed order -->
@@ -52,7 +115,7 @@
                  id="field-sort_reversed"
                  tal:attributes="checked here/sort_reversed"
                  value="selected"
-                 name="form.widgets.IDataBoxBehavior.sort_reversed:list">
+                 name="senaite.databox.sort_reversed:boolean">
           <label class="form-check-label" for="field-sort_reversed" i18n:translate="">
             Reversed order
           </label>
@@ -60,40 +123,11 @@
       </div>
     </div>
 
-    <div class="form-row align-items-center"
-         tal:repeat="column view/get_columns">
-      <!-- Column -->
-      <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Column</span>
-            </div>
-          </div>
-          <select class="form-control"
-                  name="form.widgets.IDataBoxBehavior.columns.key.0:list">
-            <tal:indexes repeat="field view/get_schema_fields">
-              <option tal:define="fieldname field/getName"
-                      tal:attributes="value fieldname; selected python:fieldname == column and 'selected' or ''">
-                <span tal:replace="fieldname"/>
-              </option>
-            </tal:indexes>
-          </select>
-        </div>
-      </div>
-
-    </div>
-
 
     <!-- hidden fields -->
-    <input type="hidden" name="form.widgets.IBasic.title" tal:attributes="value here/title" />
-    <input type="hidden" name="form.widgets.IDataBoxBehavior.query_type" tal:attributes="value here/query_type" />
+    <input type="hidden" name="submitted" value="1" />
+    <input tal:replace="structure context/@@authenticator/authenticator"/>
 
-    <!-- <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.key.0:list" value="id" />
-         <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.0.key.0" value="title" />
-         <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.0.0" value="ID" />
-         <input type="hidden" name="form.widgets.IDataBoxBehavior.columns.key.0-empty-marker" value="1" />
-    -->
     <!-- !TEMPORARY DEACTIVATED!
          ReactJS managed component -->
     <div tal:condition="python:False"

@@ -12,6 +12,7 @@ from senaite.core.listing.view import ListingView
 from senaite.core.supermodel.model import SuperModel
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
+from zope.component import getUtilitiesFor
 from zope.component import getUtility
 from zope.component import queryUtility
 from zope.interface import alsoProvides
@@ -103,7 +104,7 @@ class DataBoxView(ListingView):
     def get_columns(self):
         """Calculate visible columns
         """
-        columns = self.databox.columns
+        columns = self.databox.get_column_config()
         if columns:
             return columns
 
@@ -117,6 +118,19 @@ class DataBoxView(ListingView):
             }),
         ))
         return columns
+
+    def get_converters(self):
+        """Get all available converter utilities
+        """
+        converters = [{"name": "", "description": ""}]
+        utilities = getUtilitiesFor(IFieldConverter)
+        for utility in utilities:
+            name, component = utility
+            converters.append({
+                "name": name,
+                "description": component.__doc__,
+            })
+        return converters
 
     def folderitem(self, obj, item, index):
         model = SuperModel(obj)

@@ -17,14 +17,16 @@ def to_string(obj, key, value, **kw):
 
 
 def to_link(obj, key, value, **kw):
+    """Gnerate hyperlink to object
+    """
     return get_link(api.get_url(obj), to_string(obj, key, value))
 
 
-def to_date(obj, key, value, format="%d.%m.%y"):
+def to_date(obj, key, value, dfmt="%d.%m.%Y"):
     if not isinstance(value, DateTime):
         return ""
-    return DT2dt(value).strftime(format)
+    return DT2dt(value).strftime(dfmt)
 
 
-def to_long_date(obj, key, value, format="%d.%m.%y"):
-    return to_date(obj, key, value, format="%d.%m.%y %H:%M")
+def to_long_date(obj, key, value, dfmt="%d.%m.%Y %H:%M"):
+    return to_date(obj, key, value, dfmt=dfmt)

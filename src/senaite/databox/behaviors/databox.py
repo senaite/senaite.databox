@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import collections
+
 from bika.lims import api
 from DateTime import DateTime
 from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
+from z3c.form.browser.multi import multiFieldWidgetFactory
 from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
@@ -27,14 +30,18 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
-    columns = schema.Dict(
+    directives.widget("columns", multiFieldWidgetFactory, klass=u"datagrid")
+    columns = schema.List(
         title=_(u"Columns"),
-        key_type=schema.Choice(
-            title=_(u"Column"),
-            source="senaite.databox.vocabularies.display_columns"),
         value_type=schema.Dict(
-            key_type=schema.TextLine(title=u"Key"),
-            value_type=schema.TextLine(title=u"Value"),
+            title=_(u"Column Config"),
+            key_type=schema.Choice(
+                title=_(u"Column"),
+                source="senaite.databox.vocabularies.display_columns"),
+            value_type=schema.Dict(
+                key_type=schema.TextLine(title=u"Key"),
+                value_type=schema.TextLine(title=u"Value"),
+            ),
         ),
         required=False,
     )
@@ -109,6 +116,14 @@ class DataBox(object):
         }
         logger.info("DataBox Query: {}".format(query))
         return query
+
+    def get_column_config(self):
+        """Returns an ordered dict from the columns list
+        """
+        columns = collections.OrderedDict()
+        for column in self.columns:
+            columns.update(column)
+        return columns
 
     def get_fields(self):
         """Returns all schema fields of the selected query type
@@ -190,7 +205,10 @@ class DataBox(object):
         self.context.columns = value
 
     def _get_columns(self):
-        return getattr(self.context, "columns", {})
+        columns = getattr(self.context, "columns", [])
+        if not isinstance(columns, list):
+            self.columns = columns = []
+        return columns
 
     columns = property(_get_columns, _set_columns)
 
