@@ -19,7 +19,10 @@ def to_string(obj, key, value, **kw):
 def to_link(obj, key, value, **kw):
     """Gnerate hyperlink to object
     """
-    return get_link(api.get_url(obj), to_string(obj, key, value))
+    value = to_string(obj, key, value)
+    if not value:
+        return ""
+    return get_link(api.get_url(obj), value)
 
 
 def to_date(obj, key, value, dfmt="%d.%m.%Y"):

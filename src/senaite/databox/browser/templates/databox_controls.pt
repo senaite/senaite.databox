@@ -1,75 +1,25 @@
 <div i18n:domain="senaite.databox">
 
+  <script type="text/javascript">
+   document.addEventListener("DOMContentLoaded", () => {
+     console.debug("*** SENAITE.DATABOX::DOMContentLoaded: --> Loading JS Controller");
+     let btn = document.getElementById("add_column");
+     let columns = document.getElementById("columns");
+     btn.addEventListener("click", (event) => {
+       event.preventDefault();
+       let nodes = columns.querySelectorAll("div.column");
+       let last = nodes[nodes.length-1]
+       columns.prepend(last.cloneNode(true));
+     });
+   });
+  </script>
+
   <form name="databox-form"
         class="form"
         method="post"
         i18n:domain="senaite.core"
         enctype="multipart/form-data"
         tal:attributes="action string:${here/absolute_url}/@@update">
-
-    <!-- Custom Edit View -->
-
-    <div class="form-row align-items-center"
-         tal:define="columns view/columns"
-         tal:repeat="column columns">
-
-      <tal:row>
-      <!-- Column -->
-      <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Column</span>
-            </div>
-          </div>
-          <select class="form-control"
-                  name="senaite.databox.columns.column:records">
-            <tal:indexes repeat="field view/get_schema_fields">
-              <option tal:define="fieldname field/getName"
-                      tal:attributes="value fieldname; selected python:fieldname == column and 'selected' or ''">
-                <span tal:replace="fieldname"/>
-              </option>
-            </tal:indexes>
-          </select>
-        </div>
-      </div>
-
-      <!-- Column Title -->
-      <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Title</span>
-            </div>
-          </div>
-          <input type="text"
-                 class="form-control"
-                 tal:attributes="value column/title"
-                 name="senaite.databox.columns.title:records">
-        </div>
-      </div>
-
-      <!-- Column Converter -->
-      <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Converter</span>
-            </div>
-          </div>
-          <select class="form-control"
-                  name="senaite.databox.columns.converter:records">
-            <tal:indexes repeat="converter view/get_converters">
-              <option tal:define="name converter/name; description converter/description"
-                      tal:attributes="value name;
-                                      selected python:name == columns[column].get('converter') and 'selected' or ''">
-                <span tal:replace="name"/>
-              </option>
-            </tal:indexes>
-          </select>
-        </div>
-      </div>
-    </div>
 
     <div class="form-row align-items-center">
       <!-- sort on -->
@@ -123,6 +73,91 @@
       </div>
     </div>
 
+    <!-- Custom Edit View -->
+
+    <div id="columns" class="columns my-4">
+      <div class="column form-row align-items-center"
+          tal:define="columns view/columns"
+          tal:repeat="column columns">
+
+        <!-- Column -->
+        <div class="col-auto">
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span i18n:translate="">Column</span>
+              </div>
+            </div>
+            <select class="form-control"
+                    name="senaite.databox.columns.column:records">
+              <tal:indexes repeat="field view/get_schema_fields">
+                <option tal:attributes="value field; selected python:field == column and 'selected' or ''">
+                  <span tal:replace="field"/>
+                </option>
+              </tal:indexes>
+            </select>
+          </div>
+        </div>
+
+        <!-- Column Title -->
+        <div class="col-auto">
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span i18n:translate="">Title</span>
+              </div>
+            </div>
+            <input type="text"
+                  class="form-control"
+                  tal:attributes="value column/title"
+                  name="senaite.databox.columns.title:records">
+          </div>
+        </div>
+
+        <!-- REF -->
+        <div class="col-auto"
+             tal:repeat="ref python:view.get_refs_for(column)">
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span i18n:translate="">Reference</span>
+              </div>
+            </div>
+            <select class="form-control"
+                    name="senaite.databox.columns.refs:list:records">
+              <tal:keys repeat="key ref/fields">
+                <option tal:attributes="value key; selected python:key == ref.get('key') and 'selected' or ''">
+                  <span tal:replace="key"/>
+                </option>
+              </tal:keys>
+            </select>
+          </div>
+        </div>
+
+        <!-- Column Converter -->
+        <div class="col-auto">
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span i18n:translate="">Converter</span>
+              </div>
+            </div>
+            <select class="form-control"
+                    name="senaite.databox.columns.converter:records">
+              <tal:indexes repeat="converter view/get_converters">
+                <option tal:define="name converter/name; description converter/description"
+                        tal:attributes="value name;
+                                        selected python:name == columns[column].get('converter') and 'selected' or ''">
+                  <span tal:replace="name"/>
+                </option>
+              </tal:indexes>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- More button -->
+      <button id="add_column" class="btn btn-sm btn-outline-secondary" i18n:translate="">More</button>
+    </div>
 
     <!-- hidden fields -->
     <input type="hidden" name="submitted" value="1" />

@@ -18,6 +18,11 @@ from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 
+REFERENCE_FIELD_TYPES = [
+    "reference",
+]
+DEFAULT_REF_FIELD = "title"
+
 
 class DataBoxView(ListingView):
     """The default DataBox view
@@ -99,7 +104,8 @@ class DataBoxView(ListingView):
         # NOTE: we disable CSRF protection because the databox creates a
         # temporary object to fetch the form fields (write on read)
         alsoProvides(self.request, IDisableCSRFProtection)
-        return self.databox.get_fields()
+        fields = self.databox.get_fields()
+        return sorted(fields.keys())
 
     def get_columns(self):
         """Calculate visible columns
@@ -132,16 +138,58 @@ class DataBoxView(ListingView):
             })
         return converters
 
+    def get_refs_for(self, column):
+        """Dereference field references
+        """
+        out = []
+        config = self.columns[column]
+        refs = config.get("refs")
+        if refs is None:
+            return []
+        # check if the column is a valid type
+        pt = api.get_tool("portal_types")
+        if column not in pt.listContentTypes():
+            return []
+
+        # column is a reference field to another object
+        for num, ref in enumerate(refs):
+            fields = self.databox.get_fields(portal_type=column)
+            out.append({
+                "key": ref,
+                "fields": sorted(fields.keys()),
+            })
+            # check if the last field is a reference
+            if num + 1 == len(refs):
+                field = fields.get(ref)
+                if field.type in REFERENCE_FIELD_TYPES:
+                    out.append({
+                        "key": DEFAULT_REF_FIELD,
+                        "fields": sorted(fields.keys()),
+                    })
+        return out
+
+    def dereference_model_item(self, model, refs):
+        """Recursively dereferences model attributes
+        """
+        value = model.get(DEFAULT_REF_FIELD)
+        for ref in refs:
+            value = model.get(ref)
+            if isinstance(value, SuperModel):
+                return self.dereference_model_item(value, refs[1:])
+        return value
+
     def folderitem(self, obj, item, index):
         model = SuperModel(obj)
         for column, config in self.columns.items():
             value = model.get(column)
             converter = config.get("converter")
+            if isinstance(value, SuperModel):
+                refs = config.get("refs", ["title"])
+                value = self.dereference_model_item(value, refs)
+                config["refs"] = refs
             if converter:
                 func = queryUtility(IFieldConverter, name=converter)
                 if callable(func):
                     value = func(obj, column, value)
-            if isinstance(value, SuperModel):
-                value = value.get("title")
             item[column] = value
         return item

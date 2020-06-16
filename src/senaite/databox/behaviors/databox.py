@@ -125,16 +125,15 @@ class DataBox(object):
             columns.update(column)
         return columns
 
-    def get_fields(self):
+    def get_fields(self, portal_type=None):
         """Returns all schema fields of the selected query type
 
         IMPORTANT: Do not call from within `__init__` due to permissions
         """
-        obj = self._create_temporary_object()
+        obj = self._create_temporary_object(portal_type=portal_type)
         if obj is None:
             return []
-        fields = api.get_fields(obj).values()
-        return fields
+        return api.get_fields(obj)
 
     def get_catalog_indexes(self):
         """Returns available catalog indexes for the selected query type
@@ -148,12 +147,13 @@ class DataBox(object):
         catalog = api.get_tool(self.get_query_catalog())
         return sorted(catalog.schema())
 
-    def _create_temporary_object(self):
+    def _create_temporary_object(self, portal_type=None):
         """Create a temporary object to fetch the fields from
 
         This is needed to get schema extended fields as well.
         """
-        portal_type = self.query_type
+        if portal_type is None:
+            portal_type = self.query_type
         if portal_type is None:
             return None
         portal_factory = api.get_tool("portal_factory")
