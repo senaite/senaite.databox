@@ -5,6 +5,7 @@
      console.debug("*** SENAITE.DATABOX::DOMContentLoaded: --> Loading JS Controller");
      let btn = document.getElementById("add_column");
      let columns = document.getElementById("columns");
+     $(columns).sortable();
      btn.addEventListener("click", (event) => {
        event.preventDefault();
        let nodes = columns.querySelectorAll("li.column");
@@ -76,7 +77,7 @@
     <!-- Custom Edit View -->
     <ul id="columns" class="columns my-4 list-unstyled">
 
-      <li class="column d-flex p-0"
+      <li class="column d-flex flex-wrap p-0 mb-2"
           tal:define="columns view/columns"
           tal:repeat="column columns">
 
@@ -135,7 +136,7 @@
         </div>
 
         <!-- Column Converter -->
-        <div class="col-auto">
+        <div class="flex-fill mr-2">
           <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
@@ -147,6 +148,7 @@
               <tal:indexes repeat="converter view/get_converters">
                 <option tal:define="name converter/name; description converter/description"
                         tal:attributes="value name;
+                                        label converter/description;
                                         selected python:name == columns[column].get('converter') and 'selected' or ''">
                   <span tal:replace="name"/>
                 </option>
