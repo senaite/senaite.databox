@@ -209,7 +209,7 @@
                 </div>
                 <input type="text"
                        class="form-control"
-                       tal:attributes="value column/title"
+                       tal:attributes="value python:columns[column].get('title')"
                        name="senaite.databox.columns.title:records">
               </div>
             </div>
@@ -247,8 +247,8 @@
                   <tal:indexes repeat="converter view/get_converters">
                     <option tal:define="name converter/name; description converter/description"
                             tal:attributes="value name;
-                                        label converter/description;
-                                        selected python:name == columns[column].get('converter') and 'selected' or ''">
+                                            label converter/description;
+                                            selected python:name == columns[column].get('converter') and 'selected' or ''">
                       <span tal:replace="name"/>
                     </option>
                   </tal:indexes>

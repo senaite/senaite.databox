@@ -231,10 +231,7 @@ class DataBox(object):
         self.context.columns = value
 
     def _get_columns(self):
-        columns = getattr(self.context, "columns", [])
-        if not isinstance(columns, list):
-            self.columns = columns = []
-        return columns
+        return getattr(self.context, "columns", [])
 
     columns = property(_get_columns, _set_columns)
 
