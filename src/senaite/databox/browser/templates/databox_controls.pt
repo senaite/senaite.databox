@@ -167,8 +167,8 @@
                      tal:attributes="value python:date_to and date_to.strftime('%Y-%m-%d')"
                      name="senaite.databox.date_to">
             </div>
+          </div>
         </div>
-
       </div>
 
       <!-- Columns Config -->
