@@ -24,7 +24,7 @@
     <div class="form-row align-items-center">
       <!-- sort on -->
       <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group mb-2">
           <div class="input-group-prepend">
             <div class="input-group-text">
               <span i18n:translate="">Sort on</span>
@@ -42,7 +42,7 @@
       </div>
       <!-- limit -->
       <div class="col-auto">
-        <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group mb-2">
           <div class="input-group-prepend">
             <div class="input-group-text">
               <span i18n:translate="">Limit</span>
@@ -82,7 +82,7 @@
 
         <!-- Column -->
         <div class="flex-fill mr-2">
-          <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span i18n:translate="">Column</span>
@@ -101,7 +101,7 @@
 
         <!-- Column Title -->
         <div class="flex-fill mr-2">
-          <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span i18n:translate="">Title</span>
@@ -117,7 +117,7 @@
         <!-- REF -->
         <div class="flex-fill mr-2"
              tal:repeat="ref python:view.get_refs_for(column)">
-          <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span i18n:translate="">Reference</span>
@@ -136,7 +136,7 @@
 
         <!-- Column Converter -->
         <div class="col-auto">
-          <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group mb-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
                 <span i18n:translate="">Converter</span>
