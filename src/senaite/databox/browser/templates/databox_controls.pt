@@ -7,9 +7,9 @@
      let columns = document.getElementById("columns");
      btn.addEventListener("click", (event) => {
        event.preventDefault();
-       let nodes = columns.querySelectorAll("div.column");
+       let nodes = columns.querySelectorAll("li.column");
        let last = nodes[nodes.length-1]
-       columns.prepend(last.cloneNode(true));
+       columns.append(last.cloneNode(true));
      });
    });
   </script>
@@ -74,14 +74,14 @@
     </div>
 
     <!-- Custom Edit View -->
+    <ul id="columns" class="columns my-4 list-unstyled">
 
-    <div id="columns" class="columns my-4">
-      <div class="column form-row align-items-center"
+      <li class="column d-flex p-0"
           tal:define="columns view/columns"
           tal:repeat="column columns">
 
         <!-- Column -->
-        <div class="col-auto">
+        <div class="flex-fill mr-2">
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
@@ -100,7 +100,7 @@
         </div>
 
         <!-- Column Title -->
-        <div class="col-auto">
+        <div class="flex-fill mr-2">
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">
@@ -115,7 +115,7 @@
         </div>
 
         <!-- REF -->
-        <div class="col-auto"
+        <div class="flex-fill mr-2"
              tal:repeat="ref python:view.get_refs_for(column)">
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
@@ -154,10 +154,10 @@
             </select>
           </div>
         </div>
-      </div>
-      <!-- More button -->
-      <button id="add_column" class="btn btn-sm btn-outline-secondary" i18n:translate="">More</button>
-    </div>
+      </li>
+    </ul>
+    <!-- More button -->
+    <button id="add_column" class="btn btn-sm btn-outline-secondary" i18n:translate="">More</button>
 
     <!-- hidden fields -->
     <input type="hidden" name="submitted" value="1" />
