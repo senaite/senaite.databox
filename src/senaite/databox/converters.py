@@ -9,6 +9,8 @@ from Products.ATContentTypes.utils import DT2dt
 
 
 def to_string(obj, key, value, **kw):
+    """Convert to UTF8
+    """
     if isinstance(value, six.string_types):
         value = value.encode("utf-8")
     if value is None:
@@ -17,7 +19,7 @@ def to_string(obj, key, value, **kw):
 
 
 def to_link(obj, key, value, **kw):
-    """Gnerate hyperlink to object
+    """Link to object
     """
     value = to_string(obj, key, value)
     if not value:
@@ -26,10 +28,14 @@ def to_link(obj, key, value, **kw):
 
 
 def to_date(obj, key, value, dfmt="%d.%m.%Y"):
+    """Format value to date
+    """
     if not isinstance(value, DateTime):
         return ""
     return DT2dt(value).strftime(dfmt)
 
 
 def to_long_date(obj, key, value, dfmt="%d.%m.%Y %H:%M"):
+    """Format value to long date
+    """
     return to_date(obj, key, value, dfmt=dfmt)
