@@ -3,15 +3,21 @@
   <script type="text/javascript">
    document.addEventListener("DOMContentLoaded", () => {
      console.debug("*** SENAITE.DATABOX::DOMContentLoaded: --> Loading JS Controller");
-     let btn = document.getElementById("add_column");
-     let columns = document.getElementById("columns");
-     $(columns).sortable();
-     btn.addEventListener("click", (event) => {
-       event.preventDefault();
-       let nodes = columns.querySelectorAll("li.column");
-       let last = nodes[nodes.length-1]
-       columns.append(last.cloneNode(true));
+     let columns = document.querySelector("#columns");
+     let add_btns = document.querySelectorAll("button.add_column");
+     let del_btns = document.querySelectorAll("button.del_column");
+     add_btns.forEach((item )=> {
+       item.addEventListener("click", (event) => {
+         event.preventDefault();
+         let nodes = columns.querySelectorAll("li.column");
+         let node = nodes[0];
+         let new_node = node.cloneNode(true);
+         let add_btn = new_node.querySelector("button.add_column");
+         add_btn.style.display = "none";
+         columns.append(new_node);
+       });
      });
+     $(columns).sortable();
    });
   </script>
 
@@ -156,10 +162,24 @@
             </select>
           </div>
         </div>
+
+        <div class="flex mr-2" tal:condition="python:repeat['column'].start">
+          <button title="add"
+                  i18n:attributes="title"
+                  class="add_column btn btn-outline-secondary">
+            <i class="fas fa-plus"/>
+          </button>
+        </div>
+
+        <div class="flex mr-2" tal:condition="python:not repeat['column'].start">
+          <button title="Delete column"
+                  i18n:attributes="title"
+                  class="del_column btn btn-outline-secondary">
+            <i class="fas fa-minus"/>
+          </button>
+        </div>
       </li>
     </ul>
-    <!-- More button -->
-    <button id="add_column" class="btn btn-sm btn-outline-secondary" i18n:translate="">More</button>
 
     <!-- hidden fields -->
     <input type="hidden" name="submitted" value="1" />
