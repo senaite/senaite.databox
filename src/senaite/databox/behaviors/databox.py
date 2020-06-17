@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import ast
 import collections
 from datetime import datetime
 
 from bika.lims import api
 from DateTime import DateTime
+from dateutil import parser
 from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
@@ -14,7 +16,6 @@ from senaite.databox import _
 from senaite.databox import logger
 from senaite.databox.config import DATE_INDEX_TYPES
 from senaite.databox.config import TMP_FOLDER_KEY
-from z3c.form.browser.multi import multiFieldWidgetFactory
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -32,7 +33,7 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
-    directives.widget("columns", multiFieldWidgetFactory, klass=u"datagrid")
+    # directives.widget("columns", multiFieldWidgetFactory, klass=u"datagrid")
     columns = schema.List(
         title=_(u"Columns"),
         value_type=schema.Dict(
@@ -45,6 +46,15 @@ class IDataBoxBehavior(model.Schema):
                 value_type=schema.TextLine(title=u"Value"),
             ),
         ),
+        required=False,
+    )
+
+    additional_query = schema.Dict(
+        title=_(u"Additional Query"),
+        key_type=schema.Choice(
+            title=_(u"Query Index"),
+            source="senaite.databox.vocabularies.indexes"),
+        value_type=schema.TextLine(title=_("Query Value")),
         required=False,
     )
 
@@ -116,6 +126,7 @@ class DataBox(object):
             "query": (DateTime(date_from), DateTime(date_to) + 1),
             "range": "minmax"
         }
+        query.update(self.additional_query)
         logger.info("DataBox Query: {}".format(query))
         return query
 
@@ -226,6 +237,30 @@ class DataBox(object):
         return columns
 
     columns = property(_get_columns, _set_columns)
+
+    # ADDITIONAL QUERY
+
+    def _set_additional_query(self, value):
+        catalog = self.get_catalog_tool()
+        for k, v in value.items():
+            index = catalog._catalog.getIndex(k)
+            meta_type = index.meta_type
+            if meta_type in ["BooleanIndex"]:
+                v = v in ["True", "1"] and True or False
+            elif meta_type in ["DateIndex"]:
+                v = parser.parse(v)
+            else:
+                try:
+                    v = ast.literal_eval(v)
+                except (ValueError):
+                    pass
+            value[k] = v
+        self.context.additional_query = value
+
+    def _get_additional_query(self):
+        return getattr(self.context, "additional_query", {})
+
+    additional_query = property(_get_additional_query, _set_additional_query)
 
     # DATE INDEX
 

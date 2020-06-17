@@ -43,6 +43,11 @@
       component="senaite.databox.vocabularies.DisplayColumnsVocabularyFactory"
       name="senaite.databox.vocabularies.display_columns" />
 
+  <!-- Indexes Vocabulary -->
+  <utility
+      component="senaite.databox.vocabularies.IndexesVocabularyFactory"
+      name="senaite.databox.vocabularies.indexes" />
+
   <!-- Date Indexes Vocabulary -->
   <utility
       component="senaite.databox.vocabularies.DateIndexesVocabularyFactory"

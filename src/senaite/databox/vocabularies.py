@@ -11,6 +11,32 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IVocabularyFactory)
+class IndexesVocabulary(object):
+    """Returns all available indexes
+    """
+    def __call__(self, context):
+        # XXX Workaround for missing context in nested choice widget vocabulary
+        if context is None:
+            # fetch context from the request
+            request = api.get_request()
+            if request and request["PARENTS"]:
+                context = request["PARENTS"][0]
+        items = []
+        adapted = IDataBoxBehavior(context, None)
+        if adapted is None:
+            return SimpleVocabulary.fromValues([])
+        catalog = adapted.get_catalog_tool()
+        indexes = catalog.getIndexObjects()
+        for index in indexes:
+            name = index.getId()
+            items.append(SimpleTerm(name, token=name, title=name))
+        return SimpleVocabulary(items)
+
+
+IndexesVocabularyFactory = IndexesVocabulary()
+
+
+@implementer(IVocabularyFactory)
 class DateIndexesVocabulary(object):
     """Returns all available date indexes
     """
