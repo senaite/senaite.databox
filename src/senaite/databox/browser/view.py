@@ -100,6 +100,10 @@ class DataBoxView(ListingView):
         return self.databox.get_catalog_indexes()
 
     @view.memoize
+    def get_catalog_date_indexes(self):
+        return self.databox.get_catalog_date_indexes()
+
+    @view.memoize
     def get_schema_fields(self):
         # NOTE: we disable CSRF protection because the databox creates a
         # temporary object to fetch the form fields (write on read)

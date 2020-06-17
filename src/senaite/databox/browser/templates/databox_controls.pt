@@ -17,10 +17,22 @@
          columns.append(new_node);
        });
      });
+     del_btns.forEach((item )=> {
+       item.addEventListener("click", (event) => {
+         event.preventDefault();
+         let target = event.currentTarget;
+         target.closest("li.column").remove();
+       });
+     });
      $(columns).sortable();
+
+     // https://getbootstrap.com/docs/4.5/components/navs/#events
+     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+     })
    });
   </script>
 
+  <!-- Databox Edit Form -->
   <form name="databox-form"
         class="form"
         method="post"
@@ -28,158 +40,241 @@
         enctype="multipart/form-data"
         tal:attributes="action string:${here/absolute_url}/@@update">
 
-    <div class="form-row align-items-center">
-      <!-- sort on -->
-      <div class="col-auto">
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Sort on</span>
-            </div>
-          </div>
-          <select class="form-control"
-                  name="senaite.databox.sort_on">
-            <tal:indexes repeat="index view/get_catalog_indexes">
-              <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
-                <span tal:replace="index"/>
-              </option>
-            </tal:indexes>
-          </select>
-        </div>
-      </div>
-      <!-- limit -->
-      <div class="col-auto">
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <span i18n:translate="">Limit</span>
-            </div>
-          </div>
-          <input type="number"
-                 style="width:75px"
-                 class="form-control"
-                 id="field-limit"
-                 tal:attributes="value here/limit"
-                 min="1"
-                 name="senaite.databox.limit:int">
-        </div>
-      </div>
-      <!-- Reversed order -->
-      <div class="col-auto">
-        <div class="form-check mb-2">
-          <input type="checkbox"
-                 class="form-check-input"
-                 id="field-sort_reversed"
-                 tal:attributes="checked here/sort_reversed"
-                 value="selected"
-                 name="senaite.databox.sort_reversed:boolean">
-          <label class="form-check-label" for="field-sort_reversed" i18n:translate="">
-            Reversed order
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Custom Edit View -->
-    <ul id="columns" class="columns my-4 list-unstyled">
-
-      <li class="column d-flex flex-wrap p-0 mb-2"
-          tal:define="columns view/columns"
-          tal:repeat="column columns">
-
-        <!-- Column -->
-        <div class="flex-fill mr-2">
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <span i18n:translate="">Column</span>
-              </div>
-            </div>
-            <select class="form-control"
-                    name="senaite.databox.columns.column:records">
-              <tal:indexes repeat="field view/get_schema_fields">
-                <option tal:attributes="value field; selected python:field == column and 'selected' or ''">
-                  <span tal:replace="field"/>
-                </option>
-              </tal:indexes>
-            </select>
-          </div>
-        </div>
-
-        <!-- Column Title -->
-        <div class="flex-fill mr-2">
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <span i18n:translate="">Title</span>
-              </div>
-            </div>
-            <input type="text"
-                  class="form-control"
-                  tal:attributes="value column/title"
-                  name="senaite.databox.columns.title:records">
-          </div>
-        </div>
-
-        <!-- REF -->
-        <div class="flex-fill mr-2"
-             tal:repeat="ref python:view.get_refs_for(column)">
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <span i18n:translate="">Reference</span>
-              </div>
-            </div>
-            <select class="form-control"
-                    name="senaite.databox.columns.refs:list:records">
-              <tal:keys repeat="key ref/fields">
-                <option tal:attributes="value key; selected python:key == ref.get('key') and 'selected' or ''">
-                  <span tal:replace="key"/>
-                </option>
-              </tal:keys>
-            </select>
-          </div>
-        </div>
-
-        <!-- Column Converter -->
-        <div class="flex-fill mr-2">
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <div class="input-group-text">
-                <span i18n:translate="">Converter</span>
-              </div>
-            </div>
-            <select class="form-control"
-                    name="senaite.databox.columns.converter:records">
-              <tal:indexes repeat="converter view/get_converters">
-                <option tal:define="name converter/name; description converter/description"
-                        tal:attributes="value name;
-                                        label converter/description;
-                                        selected python:name == columns[column].get('converter') and 'selected' or ''">
-                  <span tal:replace="name"/>
-                </option>
-              </tal:indexes>
-            </select>
-          </div>
-        </div>
-
-        <div class="flex mr-2" tal:condition="python:repeat['column'].start">
-          <button title="add"
-                  i18n:attributes="title"
-                  class="add_column btn btn-outline-secondary">
-            <i class="fas fa-plus"/>
-          </button>
-        </div>
-
-        <div class="flex mr-2" tal:condition="python:not repeat['column'].start">
-          <button title="Delete column"
-                  i18n:attributes="title"
-                  class="del_column btn btn-outline-secondary">
-            <i class="fas fa-minus"/>
-          </button>
-        </div>
+    <!-- Edit Tabs -->
+    <ul class="nav nav-tabs" id="databox-edit" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active"
+           i18n:translate=""
+           id="query-tab"
+           data-toggle="tab"
+           href="#query"
+           role="tab">
+          Query
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link"
+           i18n:translate=""
+           id="columns-tab"
+           data-toggle="tab"
+           href="#columns"
+           role="tab">
+          Columns
+        </a>
       </li>
     </ul>
+    <div class="tab-content mt-3">
+
+      <!-- Query Config Tab -->
+      <div class="tab-pane fade show active" id="query" role="tabpanel">
+        <div class="form-row align-items-center">
+          <!-- sort on -->
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Sort on</span>
+                </div>
+              </div>
+              <select class="form-control"
+                      name="senaite.databox.sort_on">
+                <tal:indexes repeat="index view/get_catalog_indexes">
+                  <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
+                    <span tal:replace="index"/>
+                  </option>
+                </tal:indexes>
+              </select>
+            </div>
+          </div>
+          <!-- limit -->
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Limit</span>
+                </div>
+              </div>
+              <input type="number"
+                     style="width:75px"
+                     class="form-control"
+                     id="field-limit"
+                     tal:attributes="value here/limit"
+                     min="1"
+                     name="senaite.databox.limit:int">
+            </div>
+          </div>
+          <!-- Reversed order -->
+          <div class="col-auto">
+            <div class="form-check mb-2">
+              <input type="checkbox"
+                     class="form-check-input"
+                     id="field-sort_reversed"
+                     tal:attributes="checked here/sort_reversed"
+                     value="selected"
+                     name="senaite.databox.sort_reversed:boolean">
+              <label class="form-check-label" for="field-sort_reversed" i18n:translate="">
+                Reversed order
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row align-items-center">
+          <!-- date index -->
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Date Index</span>
+                </div>
+              </div>
+              <select class="form-control"
+                      name="senaite.databox.date_index">
+                <tal:indexes repeat="index view/get_catalog_date_indexes">
+                  <option tal:attributes="value index; selected python:context.date_index == index and 'selected' or ''">
+                    <span tal:replace="index"/>
+                  </option>
+                </tal:indexes>
+              </select>
+            </div>
+          </div>
+          <!-- date from -->
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Date From</span>
+                </div>
+              </div>
+              <input type="date"
+                     class="form-control"
+                     tal:define="date_from here/date_from"
+                     tal:attributes="value python:date_from and date_from.strftime('%Y-%m-%d')"
+                     name="senaite.databox.date_from">
+            </div>
+          </div>
+          <!-- date to -->
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span i18n:translate="">Date To</span>
+                </div>
+              </div>
+              <input type="date"
+                     class="form-control"
+                     tal:define="date_to here/date_to"
+                     tal:attributes="value python:date_to and date_to.strftime('%Y-%m-%d')"
+                     name="senaite.databox.date_to">
+            </div>
+        </div>
+
+      </div>
+
+      <!-- Columns Config -->
+      <div class="tab-pane fade" id="columns" role="tabpanel">
+        <!-- Custom Edit View -->
+        <ul id="columns" class="columns my-4 list-unstyled">
+
+          <li class="column d-flex flex-wrap p-0 mb-2"
+              tal:define="columns view/columns"
+              tal:repeat="column columns">
+
+            <!-- Column -->
+            <div class="flex-fill mr-2">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span i18n:translate="">Column</span>
+                  </div>
+                </div>
+                <select class="form-control"
+                        name="senaite.databox.columns.column:records">
+                  <tal:indexes repeat="field view/get_schema_fields">
+                    <option tal:attributes="value field; selected python:field == column and 'selected' or ''">
+                      <span tal:replace="field"/>
+                    </option>
+                  </tal:indexes>
+                </select>
+              </div>
+            </div>
+
+            <!-- Column Title -->
+            <div class="flex-fill mr-2">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span i18n:translate="">Title</span>
+                  </div>
+                </div>
+                <input type="text"
+                       class="form-control"
+                       tal:attributes="value column/title"
+                       name="senaite.databox.columns.title:records">
+              </div>
+            </div>
+
+            <!-- REF -->
+            <div class="flex-fill mr-2"
+                 tal:repeat="ref python:view.get_refs_for(column)">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span i18n:translate="">Reference</span>
+                  </div>
+                </div>
+                <select class="form-control"
+                        name="senaite.databox.columns.refs:list:records">
+                  <tal:keys repeat="key ref/fields">
+                    <option tal:attributes="value key; selected python:key == ref.get('key') and 'selected' or ''">
+                      <span tal:replace="key"/>
+                    </option>
+                  </tal:keys>
+                </select>
+              </div>
+            </div>
+
+            <!-- Column Converter -->
+            <div class="flex-fill mr-2">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span i18n:translate="">Converter</span>
+                  </div>
+                </div>
+                <select class="form-control"
+                        name="senaite.databox.columns.converter:records">
+                  <tal:indexes repeat="converter view/get_converters">
+                    <option tal:define="name converter/name; description converter/description"
+                            tal:attributes="value name;
+                                        label converter/description;
+                                        selected python:name == columns[column].get('converter') and 'selected' or ''">
+                      <span tal:replace="name"/>
+                    </option>
+                  </tal:indexes>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex mr-2" tal:condition="python:repeat['column'].start">
+              <button title="add"
+                      i18n:attributes="title"
+                      class="add_column btn btn-outline-secondary">
+                <i class="fas fa-plus"/>
+              </button>
+            </div>
+
+            <div class="flex mr-2" tal:condition="python:not repeat['column'].start">
+              <button title="Delete column"
+                      i18n:attributes="title"
+                      class="del_column btn btn-outline-secondary">
+                <i class="fas fa-minus"/>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <!-- hidden fields -->
     <input type="hidden" name="submitted" value="1" />

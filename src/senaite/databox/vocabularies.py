@@ -49,8 +49,7 @@ class DisplayColumnsVocabulary(object):
         if adapted is None:
             return SimpleVocabulary.fromValues([])
         for field in adapted.get_fields():
-            name = field.getName()
-            items.append(SimpleTerm(name, token=name, title=name))
+            items.append(SimpleTerm(field, token=field, title=field))
         return SimpleVocabulary(items)
 
 

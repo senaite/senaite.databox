@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import collections
+from datetime import datetime
 
 from bika.lims import api
 from DateTime import DateTime
@@ -8,11 +9,12 @@ from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
-from z3c.form.browser.multi import multiFieldWidgetFactory
 from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
+from senaite.databox.config import DATE_INDEX_TYPES
 from senaite.databox.config import TMP_FOLDER_KEY
+from z3c.form.browser.multi import multiFieldWidgetFactory
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -141,6 +143,19 @@ class DataBox(object):
         catalog = api.get_tool(self.get_query_catalog())
         return sorted(catalog.indexes())
 
+    def get_catalog_date_indexes(self):
+        """Returns available catalog date indexes for the selected query type
+        """
+        catalog = api.get_tool(self.get_query_catalog())
+        indexes = catalog.getIndexObjects()
+        date_indexes = []
+        for index in indexes:
+            if index.meta_type not in DATE_INDEX_TYPES:
+                continue
+            name = index.getId()
+            date_indexes.append(name)
+        return sorted(date_indexes)
+
     def get_catalog_columns(self):
         """Returns available catalog schema columns for the selected query type
         """
@@ -228,7 +243,10 @@ class DataBox(object):
         self.context.date_from = value
 
     def _get_date_from(self):
-        return getattr(self.context, "date_from", None)
+        value = getattr(self.context, "date_from", None)
+        if not isinstance(value, datetime):
+            return None
+        return value
 
     date_from = property(_get_date_from, _set_date_from)
 
@@ -238,7 +256,10 @@ class DataBox(object):
         self.context.date_to = value
 
     def _get_date_to(self):
-        return getattr(self.context, "date_to", None)
+        value = getattr(self.context, "date_to", None)
+        if not isinstance(value, datetime):
+            return None
+        return value
 
     date_to = property(_get_date_to, _set_date_to)
 

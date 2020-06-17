@@ -2,6 +2,7 @@
 
 from bika.lims import api
 from bika.lims.browser import BrowserView
+from dateutil import parser
 from plone.protect import PostOnly
 from plone.protect import protect
 from senaite.databox import logger
@@ -55,6 +56,8 @@ class FormController(BrowserView):
     def _process_form_value(self, key, value):
         """Process the form value for the databox
         """
+        if key in ["date_from", "date_to"]:
+            value = parser.parse(value)
         # TODO: Review the data structure to avoid processing
         if key == "columns":
             columns = []
