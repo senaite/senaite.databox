@@ -29,6 +29,8 @@
      // https://getbootstrap.com/docs/4.5/components/navs/#events
      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
        location.hash = e.target.hash;
+       let el = document.querySelector("input[name='hash']");
+       el.value = e.target.hash;
      })
 
      let hash = location.hash || "#query";
@@ -287,6 +289,7 @@
 
     <!-- hidden fields -->
     <input type="hidden" name="submitted" value="1" />
+    <input type="hidden" name="hash" value="#query" />
     <input tal:replace="structure context/@@authenticator/authenticator"/>
 
     <!-- !TEMPORARY DEACTIVATED!
