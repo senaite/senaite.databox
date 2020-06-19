@@ -38,6 +38,7 @@ class DataBoxView(ListingView):
         self.context_actions = {}
         self.title = self.context.Title()
         self.description = self.context.Description()
+        self.show_select_column = True
 
         self.columns = self.get_columns()
 
@@ -107,8 +108,9 @@ class DataBoxView(ListingView):
         # NOTE: we disable CSRF protection because the databox creates a
         # temporary object to fetch the form fields (write on read)
         alsoProvides(self.request, IDisableCSRFProtection)
-        fields = self.databox.get_fields()
-        return sorted(fields.keys())
+        fields = self.databox.get_fields().keys()
+        fields.extend(self.databox.get_catalog_columns())
+        return sorted(fields)
 
     def get_columns(self):
         """Calculate visible columns
