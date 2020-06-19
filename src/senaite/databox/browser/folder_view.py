@@ -35,7 +35,7 @@ class DataBoxFolderView(ListingView):
 
         self.title = self.context.Title()
         self.description = self.context.Description()
-        self.show_select_column = False
+        self.show_select_column = True
         self.pagesize = 25
 
         self.columns = collections.OrderedDict((
@@ -53,12 +53,20 @@ class DataBoxFolderView(ListingView):
         self.review_states = [
             {
                 "id": "default",
+                "title": _("Active"),
+                "contentFilter": {"is_active": True},
+                "columns": self.columns.keys(),
+            }, {
+                "id": "inactive",
+                "title": _("Inactive"),
+                "contentFilter": {'is_active': False},
+                "columns": self.columns.keys(),
+            }, {
+                "id": "all",
                 "title": _("All"),
                 "contentFilter": {},
-                "transitions": [],
-                "custom_transitions": [],
-                "columns": self.columns.keys()
-            }
+                "columns": self.columns.keys(),
+            },
         ]
 
     def update(self):
