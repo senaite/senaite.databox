@@ -137,6 +137,7 @@ class DataBox(object):
                 "query": (DateTime(date_from), DateTime(date_to) + 1),
                 "range": "minmax"
             }
+
         query.update(self.additional_query)
         logger.info("DataBox Query: {}".format(query))
         return query
@@ -268,7 +269,7 @@ class DataBox(object):
         self.context.additional_query = value
 
     def _get_additional_query(self):
-        return getattr(self.context, "additional_query", {})
+        return getattr(self.context, "additional_query", {}) or {}
 
     additional_query = property(_get_additional_query, _set_additional_query)
 
