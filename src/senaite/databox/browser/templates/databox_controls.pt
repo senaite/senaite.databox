@@ -28,11 +28,16 @@
 
      // https://getbootstrap.com/docs/4.5/components/navs/#events
      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+       location.hash = e.target.hash;
      })
+
+     let hash = location.hash || "#query";
+     $(hash + '-tab').tab("show");
    });
+
   </script>
 
-  <!-- Databox Edit Form -->
+  <!-- DATABOX EDITOR -->
   <form name="databox-form"
         class="form"
         method="post"
@@ -64,8 +69,7 @@
       </li>
     </ul>
     <div class="tab-content mt-3">
-
-      <!-- Query Config Tab -->
+      <!-- QUERY CONFIG TAB -->
       <div class="tab-pane fade show active" id="query" role="tabpanel">
         <div class="form-row align-items-center">
           <!-- sort on -->
@@ -103,7 +107,7 @@
                      name="senaite.databox.limit:int">
             </div>
           </div>
-          <!-- Reversed order -->
+          <!-- reversed order -->
           <div class="col-auto">
             <div class="form-check mb-2">
               <input type="checkbox"
@@ -171,16 +175,14 @@
         </div>
       </div>
 
-      <!-- Columns Config -->
+      <!-- COLUMNS CONFIG TAB -->
       <div class="tab-pane fade" id="columns" role="tabpanel">
-        <!-- Custom Edit View -->
-        <ul id="columns" class="columns my-4 list-unstyled">
 
+        <ul id="columns" class="columns my-4 list-unstyled">
           <li class="column d-flex flex-wrap p-0 mb-2"
               tal:define="columns view/columns"
               tal:repeat="column columns">
-
-            <!-- Column -->
+            <!-- column -->
             <div class="flex-fill mr-2">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -199,7 +201,7 @@
               </div>
             </div>
 
-            <!-- Column Title -->
+            <!-- column title -->
             <div class="flex-fill mr-2">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -214,13 +216,18 @@
               </div>
             </div>
 
-            <!-- REF -->
+            <!-- referenc columns -->
             <div class="flex-fill mr-2"
-                 tal:repeat="ref python:view.get_refs_for(column)">
+                 tal:repeat="ref python:view.get_reference_columns(column)">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <span i18n:translate="">Reference</span>
+                    <span i18n:translate="">
+                      Reference
+                      <span class="ref-type text-muted small">
+                          (<span tal:replace ="ref/type"/>)
+                      </span>
+                    </span>
                   </div>
                 </div>
                 <select class="form-control"
@@ -234,7 +241,7 @@
               </div>
             </div>
 
-            <!-- Column Converter -->
+            <!-- converter -->
             <div class="flex-fill mr-2">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -256,6 +263,7 @@
               </div>
             </div>
 
+            <!-- add column button -->
             <div class="flex mr-2" tal:condition="python:repeat['column'].start">
               <button title="add"
                       i18n:attributes="title"
@@ -264,6 +272,7 @@
               </button>
             </div>
 
+            <!-- delete column button -->
             <div class="flex mr-2" tal:condition="python:not repeat['column'].start">
               <button title="Delete column"
                       i18n:attributes="title"
@@ -288,7 +297,7 @@
     </div>
     <!-- /ReactJS managed component -->
 
-    <!-- submit -->
+    <!-- submit button -->
     <input class="btn btn-sm btn-primary" type="submit" name="form.buttons.save" value="Update" />
   </form>
 

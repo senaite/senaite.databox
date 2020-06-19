@@ -10,6 +10,7 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.listing.view import ListingView
 from senaite.core.supermodel.model import SuperModel
+from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
 from zope.component import getUtilitiesFor
@@ -18,10 +19,8 @@ from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.schema.interfaces import IVocabularyFactory
 
-REFERENCE_FIELD_TYPES = [
-    "reference",
-]
-DEFAULT_REF_FIELD = "title"
+DEFAULT_REF = "title"
+REF_FIELD_TYPES = ["reference"]
 
 
 class DataBoxView(ListingView):
@@ -142,58 +141,119 @@ class DataBoxView(ListingView):
             })
         return converters
 
-    def get_refs_for(self, column):
-        """Dereference field references
+    def get_type_info(self, portal_type):
+        """Returns the portal type information for the given type
+
+        :returns: FTI or None
         """
-        out = []
-        config = self.columns[column]
-        refs = config.get("refs")
-        if refs is None:
-            return []
-        # check if the column is a valid type
         pt = api.get_tool("portal_types")
-        if column not in pt.listContentTypes():
-            return []
+        return pt.getTypeInfo(portal_type)
 
-        # column is a reference field to another object
-        for num, ref in enumerate(refs):
-            fields = self.databox.get_fields(portal_type=column)
-            out.append({
-                "key": ref,
-                "fields": sorted(fields.keys()),
-            })
-            # check if the last field is a reference
-            if num + 1 == len(refs):
-                field = fields.get(ref)
-                if field.type in REFERENCE_FIELD_TYPES:
-                    out.append({
-                        "key": DEFAULT_REF_FIELD,
-                        "fields": sorted(fields.keys()),
-                    })
-        return out
-
-    def dereference_model_item(self, model, refs):
-        """Recursively dereferences model attributes
+    def is_reference_field(self, field):
+        """Checks if the field is a reference field type
         """
-        value = model.get(DEFAULT_REF_FIELD)
+        if not field:
+            return False
+        return field.type in REF_FIELD_TYPES
+
+    def get_reftype(self, field):
+        """Returns the first allowed type of the reference field
+        """
+        allowed_types = getattr(field, "allowed_types", [])
+        if not allowed_types:
+            return None
+        return allowed_types[0]
+
+    def get_reference_columns(self, column):
+        """Returns configured reference columns for the given colum
+        """
+
+        columns = []
+
+        # get all fields of the databox
+        fields = self.databox.get_fields()
+
+        # get the requested field
+        field = fields.get(column)
+
+        # return immediately if the field is not a reference field
+        if not self.is_reference_field(field):
+            return columns
+
+        # get the column data from the columns config
+        column_data = self.columns.get(column)
+
+        # check if we have further stored references
+        refs = column_data.get("refs", [DEFAULT_REF])
+
+        logger.info("Reference Columns '{}' -> {}".format(column, refs))
+
+        # get the fields of the referenced object
+        ref_type = self.get_reftype(field)
+        ref_fields = self.databox.get_fields(portal_type=ref_type)
+
+        for num, ref in enumerate(refs):
+
+            # get the field of the referenced object
+            field = ref_fields.get(ref)
+
+            if field is None:
+                continue
+
+            columns.append({
+                "key": ref,
+                "type": ref_type,
+                "fields": sorted(ref_fields),
+            })
+
+            # get the fields of the referenced object
+            ref_type = self.get_reftype(field)
+            ref_fields = self.databox.get_fields(portal_type=ref_type)
+
+            if num == len(refs) - 1:
+                if self.is_reference_field(field):
+                    ref_type = self.get_reftype(field)
+                    ref_fields = self.databox.get_fields(portal_type=ref_type)
+                    columns.append({
+                        "key": DEFAULT_REF,
+                        "type": ref_type,
+                        "fields": sorted(ref_fields),
+                    })
+
+        return columns
+
+    def resolve_reference_model(self, model, refs=None):
+        """Resolve the references of the object
+        """
+        if not isinstance(refs, list):
+            return model
         for ref in refs:
             value = model.get(ref)
             if isinstance(value, SuperModel):
-                return self.dereference_model_item(value, refs[1:])
-        return value
+                model = self.resolve_reference_model(value, refs[1:])
+        return model
 
     def folderitem(self, obj, item, index):
-        model = SuperModel(obj)
         for column, config in self.columns.items():
+            model = SuperModel(obj)
             value = model.get(column)
-            converter = config.get("converter")
+
+            # Handle reference columns
             if isinstance(value, SuperModel):
-                refs = config.get("refs", ["title"])
-                value = self.dereference_model_item(value, refs)
-                config["refs"] = refs
+                # reference columns are stored in the column config
+                refs = config.get("refs", [DEFAULT_REF])
+                # resolve the referenced model
+                model = self.resolve_reference_model(value, refs)
+                # get the last selected reference column
+                ref = refs[-1]
+                # get the referenced value
+                value = model.get(ref)
+
+            converter = config.get("converter")
             if converter:
                 func = queryUtility(IFieldConverter, name=converter)
                 if callable(func):
-                    value = func(obj, column, value)
+                    value = func(model.instance, column, value)
+
             item[column] = value
         return item
