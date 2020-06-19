@@ -69,6 +69,16 @@
           Columns
         </a>
       </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link"
+           i18n:translate=""
+           id="debug-tab"
+           data-toggle="tab"
+           href="#debug"
+           role="tab">
+          Debug
+        </a>
+      </li>
     </ul>
     <div class="tab-content mt-3">
       <!-- QUERY CONFIG TAB -->
@@ -285,6 +295,14 @@
           </li>
         </ul>
       </div>
+
+      <!-- DEBUG TAB -->
+      <div class="tab-pane fade" id="debug" role="tabpanel">
+        <div class="mb-4">
+          <code tal:content="view/databox/query"> </code>
+        </div>
+      </div>
+
     </div>
 
     <!-- hidden fields -->

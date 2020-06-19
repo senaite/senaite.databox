@@ -8,11 +8,6 @@
   <body>
 
     <metal:content-core fill-slot="content-core">
-
-      <div class="mb-4">
-        <code tal:content="view/databox/query"> </code>
-      </div>
-
       <!-- Databox Controls -->
       <div tal:replace="structure view/controls"/>
 
