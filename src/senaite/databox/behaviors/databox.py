@@ -62,7 +62,7 @@ class IDataBoxBehavior(model.Schema):
         title=_(u"Query date index"),
         description=_(u"The date index to query"),
         source="senaite.databox.vocabularies.date_indexes",
-        required=True,
+        required=False,
         default="created",
     )
 
@@ -113,19 +113,22 @@ class DataBox(object):
     def query(self):
         """Catalog query
         """
-        query = {
-            "portal_type": self.query_type,
-            "limit": self.limit,
-            "sort_on": self.sort_on,
-            "sort_order": self.sort_order,
-        }
-        date_from = self.date_from or DateTime("2000-01-01")
-        date_to = self.date_to or DateTime()
-        # always make the to_date inclusive
-        query[self.date_index] = {
-            "query": (DateTime(date_from), DateTime(date_to) + 1),
-            "range": "minmax"
-        }
+        query = {"portal_type": self.query_type}
+        if self.limit:
+            query["limit"] = self.limit
+        if self.sort_on:
+            query["sort_on"] = self.sort_on
+        if self.sort_order:
+            query["sort_order"] = self.sort_order
+
+        if self.date_index:
+            date_from = self.date_from or DateTime("2000-01-01")
+            date_to = self.date_to or DateTime()
+            # always make the to_date inclusive
+            query[self.date_index] = {
+                "query": (DateTime(date_from), DateTime(date_to) + 1),
+                "range": "minmax"
+            }
         query.update(self.additional_query)
         logger.info("DataBox Query: {}".format(query))
         return query
@@ -159,7 +162,7 @@ class DataBox(object):
         """
         catalog = api.get_tool(self.get_query_catalog())
         indexes = catalog.getIndexObjects()
-        date_indexes = []
+        date_indexes = [""]
         for index in indexes:
             if index.meta_type not in DATE_INDEX_TYPES:
                 continue
@@ -231,13 +234,15 @@ class DataBox(object):
         self.context.columns = value
 
     def _get_columns(self):
-        return getattr(self.context, "columns", [])
+        return getattr(self.context, "columns", []) or []
 
     columns = property(_get_columns, _set_columns)
 
     # ADDITIONAL QUERY
 
     def _set_additional_query(self, value):
+        if value is None:
+            value = {}
         catalog = self.get_catalog_tool()
         for k, v in value.items():
             index = catalog._catalog.getIndex(k)

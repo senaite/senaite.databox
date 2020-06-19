@@ -59,7 +59,8 @@ class FormController(BrowserView):
         """Process the form value for the databox
         """
         if key in ["date_from", "date_to"]:
-            value = parser.parse(value)
+            if value:
+                value = parser.parse(value)
         # TODO: Review the data structure to avoid processing
         if key == "columns":
             columns = []
