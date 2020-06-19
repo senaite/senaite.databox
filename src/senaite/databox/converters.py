@@ -12,7 +12,7 @@ def to_string(obj, key, value, **kw):
     """Convert to UTF8
     """
     if isinstance(value, six.string_types):
-        value = value.encode("utf-8")
+        value = api.safe_unicode(value).encode("utf-8")
     if value is None:
         value = ""
     return str(value)
