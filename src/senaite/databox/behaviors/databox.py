@@ -16,6 +16,7 @@ from senaite.databox import _
 from senaite.databox import logger
 from senaite.databox.config import DATE_INDEX_TYPES
 from senaite.databox.config import TMP_FOLDER_KEY
+from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -34,6 +35,7 @@ class IDataBoxBehavior(model.Schema):
     )
 
     # directives.widget("columns", multiFieldWidgetFactory, klass=u"datagrid")
+    directives.omitted(IAddForm, "columns")
     columns = schema.List(
         title=_(u"Columns"),
         value_type=schema.Dict(
@@ -49,6 +51,7 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
+    directives.omitted(IAddForm, "additional_query")
     additional_query = schema.Dict(
         title=_(u"Additional Query"),
         key_type=schema.Choice(
@@ -58,6 +61,7 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
+    directives.omitted(IAddForm, "date_index")
     date_index = schema.Choice(
         title=_(u"Query date index"),
         description=_(u"The date index to query"),
@@ -67,17 +71,20 @@ class IDataBoxBehavior(model.Schema):
     )
 
     directives.widget("date_from", DatetimeFieldWidget, klass=u"datepicker")
+    directives.omitted(IAddForm, "date_from")
     date_from = schema.Datetime(
         title=_(u"Query from date"),
         required=False,
     )
 
     directives.widget("date_to", DatetimeFieldWidget, klass=u"datepicker")
+    directives.omitted(IAddForm, "date_to")
     date_to = schema.Datetime(
         title=_(u"Query to date"),
         required=False,
     )
 
+    directives.omitted(IAddForm, "limit")
     limit = schema.Int(
         title=_(u"Limit"),
         description=_(u"Limit Search Results"),
@@ -86,13 +93,14 @@ class IDataBoxBehavior(model.Schema):
         min=1,
     )
 
+    directives.omitted(IAddForm, "sort_on")
     sort_on = schema.TextLine(
         title=_(u"label_sort_on", default=u"Sort on"),
         description=_(u"Sort the databox on this index"),
         required=False,
     )
 
-    # form.omitted("sort_reversed")
+    directives.omitted(IAddForm, "sort_reversed")
     sort_reversed = schema.Bool(
         title=_(u"label_sort_reversed", default=u"Reversed order"),
         description=_(u"Sort the results in reversed order"),
