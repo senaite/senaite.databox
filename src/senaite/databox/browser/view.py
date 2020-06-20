@@ -244,6 +244,9 @@ class DataBoxView(ListingView):
                 # get the referenced value
                 value = model.get(ref)
 
+            if callable(value):
+                value = value()
+
             converter = config.get("converter")
             if converter:
                 func = queryUtility(IFieldConverter, name=converter)
