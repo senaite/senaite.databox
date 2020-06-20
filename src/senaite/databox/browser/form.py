@@ -7,6 +7,7 @@ from plone.protect import PostOnly
 from plone.protect import protect
 from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
+from zope.lifecycleevent import modified
 
 
 class FormController(BrowserView):
@@ -41,6 +42,7 @@ class FormController(BrowserView):
         for key, value in form_data.items():
             logger.info("Set field '{}' -> {}".format(key, value))
             setattr(self.databox, key, value)
+        modified(self.context)
 
     def get_form_data(self):
         """Returns the processed form data
