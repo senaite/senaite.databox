@@ -6,6 +6,8 @@ import StringIO
 
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
+from openpyxl import Workbook
+from openpyxl.writer.excel import save_virtual_workbook
 from plone.memoize import view
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -57,13 +59,18 @@ class DataBoxView(ListingView):
     def export_to_csv(self):
         """Action handler export to CSV
         """
-        filename = "{}.csv".format(self.context.getId())
+        self.pagesize = 0
+        filename = "{}.csv".format(self.context.Title())
         data = self.get_csv()
         return self.download(data, filename)
 
     def export_to_excel(self):
         """Action handler export to Excel
         """
+        self.pagesize = 0
+        filename = "{}.xlsx".format(self.context.Title())
+        data = self.get_excel()
+        return self.download(data, filename, type="application/vnd.ms-excel")
 
     def get_rows(self, header=True):
         """Extract the rows from the folderitems
@@ -80,7 +87,7 @@ class DataBoxView(ListingView):
 
     def get_csv(self, delimiter=",", quotechar='"',
                 quoting=csv.QUOTE_ALL, dialect=csv.excel):
-        """Export data as CSV
+        """Export databox to CSV
         """
         csvfile = StringIO.StringIO()
         writer = csv.writer(csvfile,
@@ -94,6 +101,16 @@ class DataBoxView(ListingView):
             writer.writerow(row)
 
         return csvfile.getvalue()
+
+    def get_excel(self):
+        """Export databox to Excel
+        """
+        workbook = Workbook()
+        first_sheet = workbook.get_active_sheet()
+        first_sheet.title = self.context.Title()
+        for row in self.get_rows():
+            first_sheet.append(row)
+        return save_virtual_workbook(workbook)
 
     def download(self, data, filename, type="text/csv"):
         response = self.request.response
