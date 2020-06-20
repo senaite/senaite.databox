@@ -19,7 +19,7 @@ module.exports = {
   context: path.resolve(__dirname, "app"),
   entry: {
     "senaite.databox": [
-      "./senaite.databox.coffee",
+      "./senaite.databox.js",
       "./scss/senaite.databox.scss"
     ],
   },

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import collections
-import json
 
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
@@ -52,27 +51,6 @@ class DataBoxView(ListingView):
                 "columns": self.columns.keys()
             }
         ]
-
-    def update(self):
-        """Update hook
-        """
-        super(DataBoxView, self).update()
-
-    def before_render(self):
-        """Before template render hook
-        """
-        super(DataBoxView, self).before_render()
-
-    @view.memoize
-    def settings(self):
-        return {
-            "data-databox_id":  api.get_id(self.context),
-            "data-databox_uid": api.get_uid(self.context),
-            "data-query_type": self.context.query_type,
-            "data-sort_on":  json.dumps(self.context.sort_on),
-            "data-sort_reversed": json.dumps(self.databox.sort_order),
-            "data-query_types": json.dumps(self.get_query_types()),
-        }
 
     @property
     @view.memoize
@@ -225,7 +203,11 @@ class DataBoxView(ListingView):
         return columns
 
     def resolve_reference_model(self, model, refs=None):
-        """Resolve the references of the object
+        """Dereferences a list of attributes of a given model
+
+        :param model: SuperModel to be traversed
+        :param refs: List of attributes to traverse
+        :returns: Dereferenced model
         """
         if not isinstance(refs, list):
             return model
@@ -236,6 +218,17 @@ class DataBoxView(ListingView):
         return model
 
     def folderitem(self, obj, item, index):
+        """Applies new properties to the item being rendered in the list
+
+        :param obj: object to be rendered as a row in the list
+        :param item: dict representation of the obj suitable for the listing
+        :param index: current index within the list of items
+        :type obj: CatalogBrain
+        :type item: dict
+        :type index: int
+        :return: the dict representation of the item
+        :rtype: dict
+        """
         for column, config in self.columns.items():
             model = SuperModel(obj)
             value = model.get(column)
@@ -255,7 +248,8 @@ class DataBoxView(ListingView):
             if converter:
                 func = queryUtility(IFieldConverter, name=converter)
                 if callable(func):
-                    value = func(model.instance, column, value)
+                    converted_value = func(model.instance, column, value)
+                    item["replace"][column] = converted_value
 
             item[column] = value
         return item

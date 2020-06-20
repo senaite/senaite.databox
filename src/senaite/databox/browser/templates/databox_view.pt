@@ -8,6 +8,8 @@
   <body>
 
     <metal:content-core fill-slot="content-core">
+      <div id="viewlet-senaite-databox-js" tal:content="structure provider:senaite.databox.js" />
+
       <!-- Databox Controls -->
       <div tal:replace="structure view/controls"/>
 
