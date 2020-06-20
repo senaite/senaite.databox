@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import collections
+import csv
+import StringIO
 
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
@@ -51,6 +53,57 @@ class DataBoxView(ListingView):
                 "columns": self.columns.keys()
             }
         ]
+
+    def export_to_csv(self):
+        """Action handler export to CSV
+        """
+        filename = "{}.csv".format(self.context.getId())
+        data = self.get_csv()
+        return self.download(data, filename)
+
+    def export_to_excel(self):
+        """Action handler export to Excel
+        """
+
+    def get_rows(self, header=True):
+        """Extract the rows from the folderitems
+        """
+        rows = []
+        if header:
+            header = map(lambda v: v.get("title"), self.columns.values())
+            rows = [header]
+        keys = self.columns.keys()
+        for item in self.folderitems():
+            row = map(lambda key: item.get(key), keys)
+            rows.append(row)
+        return rows
+
+    def get_csv(self, delimiter=",", quotechar='"',
+                quoting=csv.QUOTE_ALL, dialect=csv.excel):
+        """Export data as CSV
+        """
+        csvfile = StringIO.StringIO()
+        writer = csv.writer(csvfile,
+                            delimiter=delimiter,
+                            quotechar=quotechar,
+                            quoting=quoting,
+                            dialect=dialect)
+
+        # write the rows as CSV
+        for row in self.get_rows():
+            writer.writerow(row)
+
+        return csvfile.getvalue()
+
+    def download(self, data, filename, type="text/csv"):
+        response = self.request.response
+        response.setHeader("Content-Disposition",
+                           "attachment; filename={}".format(filename))
+        response.setHeader("Content-Type", "{}; charset=utf-8".format(type))
+        response.setHeader("Content-Length", len(data))
+        response.setHeader("Cache-Control", "no-store")
+        response.setHeader("Pragma", "no-cache")
+        response.write(data)
 
     @property
     @view.memoize

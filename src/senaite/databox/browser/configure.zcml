@@ -26,6 +26,22 @@
       />
 
   <browser:page
+      name="export_to_csv"
+      for="senaite.databox.content.databox.IDataBox"
+      class="senaite.databox.browser.view.DataBoxView"
+      attribute="export_to_csv"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="export_to_excel"
+      for="senaite.databox.content.databox.IDataBox"
+      class="senaite.databox.browser.view.DataBoxView"
+      attribute="export_to_excel"
+      permission="zope2.View"
+      />
+
+  <browser:page
       name="edit"
       for="senaite.databox.content.databox.IDataBox"
       class="senaite.databox.browser.edit.DataBoxEdit"

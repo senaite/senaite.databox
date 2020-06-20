@@ -89,4 +89,30 @@
     <permission value="Modify portal content"/>
   </action>
 
+  <!-- Export to CSV -->
+  <action title="Export CSV"
+          action_id="export_csv"
+          category="document_actions"
+          condition_expr="python:True"
+          icon_expr="string:${portal_url}/senaite_theme/icon/export_to_csv"
+          link_target=""
+          url_expr="string:${object_url}/export_to_csv"
+          i18n:attributes="title"
+          visible="True">
+    <permission value="senaite.core: Manage Bika"/>
+  </action>
+
+  <!-- Export to Excel -->
+  <action title="Export Excel"
+          action_id="export_excel"
+          category="document_actions"
+          condition_expr="python:True"
+          icon_expr="string:${portal_url}/senaite_theme/icon/export_to_excel"
+          link_target=""
+          url_expr="string:${object_url}/export_to_excel"
+          i18n:attributes="title"
+          visible="True">
+    <permission value="senaite.core: Manage Bika"/>
+  </action>
+
 </object>
