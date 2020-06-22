@@ -8,6 +8,7 @@ from bika.lims import api
 from bika.lims import bikaMessageFactory as _
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
+from plone.dexterity.browser.view import DefaultView
 from plone.memoize import view
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -26,7 +27,7 @@ DEFAULT_REF = "title"
 REF_FIELD_TYPES = ["reference"]
 
 
-class DataBoxView(ListingView):
+class DataBoxView(ListingView, DefaultView):
     """The default DataBox view
     """
     template = ViewPageTemplateFile("templates/databox_view.pt")
@@ -55,6 +56,11 @@ class DataBoxView(ListingView):
                 "columns": self.columns.keys()
             }
         ]
+
+    def update(self):
+        super(DataBoxView, self).update()
+        # call update hook from `plone.autoform.view.WidgetsVew`
+        self._update()
 
     def export_to_csv(self):
         """Action handler export to CSV
