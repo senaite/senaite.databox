@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   add_btns.forEach((item )=> {
     item.addEventListener("click", (event) => {
       event.preventDefault();
-      let nodes = columns.querySelectorAll("li.column");
-      let node = nodes[0];
+      let target = event.currentTarget;
+      let node = target.closest("li");
       let new_node = node.cloneNode(true);
       let add_btn = new_node.querySelector("button.add_column");
       add_btn.style.display = "none";
