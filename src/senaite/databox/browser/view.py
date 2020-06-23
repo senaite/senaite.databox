@@ -10,6 +10,7 @@ from bika.lims import bikaMessageFactory as _
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from plone.memoize import view
+from Products.CMFCore.permissions import AddPortalContent
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.listing.view import ListingView
@@ -35,7 +36,6 @@ class DataBoxView(ListingView):
     """The default DataBox view
     """
     template = ViewPageTemplateFile("templates/databox_view.pt")
-    controls = ViewPageTemplateFile("templates/databox_controls.pt")
 
     def __init__(self, context, request):
         super(DataBoxView, self).__init__(context, request)
@@ -63,6 +63,15 @@ class DataBoxView(ListingView):
 
     def update(self):
         super(DataBoxView, self).update()
+
+    def render_databox_controls(self):
+        """Renders the databox controls edit form
+        """
+        # N.B.: the form controls implicitly create a temporary object to fetch
+        #       the available (and extended) schema fields.
+        if not api.security.check_permission(AddPortalContent, self.context):
+            return ""
+        return ViewPageTemplateFile("templates/databox_controls.pt")
 
     def widgets(self, mode=DISPLAY_MODE):
         """Return the widgets for the databox

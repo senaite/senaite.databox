@@ -11,7 +11,7 @@
       <div id="viewlet-senaite-databox-js" tal:content="structure provider:senaite.databox.js" />
 
       <!-- Databox Controls -->
-      <div tal:replace="structure view/controls"/>
+      <div tal:replace="structure view/render_databox_controls"/>
 
       <div id="viewlet-above-listing-table" tal:content="structure provider:senaite.abovelistingtable" />
       <div id="folderlisting-main-table"
