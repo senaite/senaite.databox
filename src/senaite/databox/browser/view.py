@@ -3,6 +3,7 @@
 import collections
 import csv
 import StringIO
+import sys
 
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
@@ -84,7 +85,7 @@ class DataBoxView(ListingView):
     def export_to_csv(self):
         """Action handler export to CSV
         """
-        self.pagesize = 0
+        self.pagesize = sys.maxint
         filename = "{}.csv".format(self.context.Title())
         data = self.get_csv()
         return self.download(data, filename)
@@ -92,7 +93,7 @@ class DataBoxView(ListingView):
     def export_to_excel(self):
         """Action handler export to Excel
         """
-        self.pagesize = 0
+        self.pagesize = sys.maxint
         filename = "{}.xlsx".format(self.context.Title())
         data = self.get_excel()
         return self.download(data, filename, type="application/vnd.ms-excel")
