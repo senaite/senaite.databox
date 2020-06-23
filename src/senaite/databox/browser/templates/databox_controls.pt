@@ -33,11 +33,11 @@
       <li class="nav-item" role="presentation">
         <a class="nav-link"
            i18n:translate=""
-           id="view-tab"
+           id="info-tab"
            data-toggle="tab"
-           href="#view"
+           href="#info"
            role="tab">
-          View
+          Info
         </a>
       </li>
     </ul>
@@ -257,39 +257,47 @@
         </ul>
       </div>
 
-      <!-- VIEW TAB -->
-      <div class="tab-pane fade" id="view" role="tabpanel">
+      <!-- Info TAB -->
+      <div class="tab-pane fade" id="info" role="tabpanel">
         <table class="table-borderless mb-4">
+          <!-- Schema fields -->
+          <tr tal:condition="python:request.get('debug', False)"
+              tal:repeat="widget view/widgets">
+            <td class="text-nowrap font-weight-bold pr-1">
+              <div tal:content="widget/label" />
+            </td>
+            <td>
+              <code class="text-dark" tal:content="structure widget/value" />
+            </td>
+          </tr>
+          <!-- Primary Type -->
+          <tr>
+            <td class="font-weight-bold text-nowrap align-top mr-2" i18n:translate="">
+              Portal Type
+            </td>
+            <td>
+              <code class="text-dark" tal:content="view/databox/query_type"></code>
+            </td>
+          </tr>
           <!-- Catalog -->
           <tr>
-            <td class="font-weight-bold">
+            <td class="font-weight-bold text-nowrap align-top mr-2" i18n:translate="">
               Catalog
             </td>
             <td>
-              <span class="" tal:content="view/databox/get_query_catalog"></span>
+              <code class="text-dark" tal:content="view/databox/get_query_catalog"></code>
             </td>
           </tr>
           <!-- Catalog Query -->
           <tr>
             <td>
-              <span class="font-weight-bold text-nowrap">
+              <span class="font-weight-bold text-nowrap align-top mr-2" i18n:translate="">
                 Catalog Query
               </span>
             </td>
             <td>
               <code class="text-dark" tal:content="view/databox/query"></code>
             </td>
-          </tr>
-          <!-- Other fields -->
-          <tr tal:repeat="widget view/widgets">
-            <tal:widget define="w python:view.widgets[widget]">
-              <td class="text-nowrap font-weight-bold pr-1">
-                <div tal:content="structure w/label" />
-              </td>
-              <td>
-                <div tal:replace="structure w/render" />
-              </td>
-            </tal:widget>
           </tr>
         </table>
       </div>

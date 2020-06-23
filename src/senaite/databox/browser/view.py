@@ -8,7 +8,6 @@ from bika.lims import api
 from bika.lims import bikaMessageFactory as _
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
-from plone.dexterity.browser.view import DefaultView
 from plone.memoize import view
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -17,6 +16,10 @@ from senaite.core.supermodel.model import SuperModel
 from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
+from z3c.form.interfaces import DISPLAY_MODE
+from z3c.form.interfaces import IDataConverter
+from z3c.form.interfaces import IFieldWidget
+from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import getUtility
 from zope.component import queryUtility
@@ -27,7 +30,7 @@ DEFAULT_REF = "title"
 REF_FIELD_TYPES = ["reference"]
 
 
-class DataBoxView(ListingView, DefaultView):
+class DataBoxView(ListingView):
     """The default DataBox view
     """
     template = ViewPageTemplateFile("templates/databox_view.pt")
@@ -59,8 +62,24 @@ class DataBoxView(ListingView, DefaultView):
 
     def update(self):
         super(DataBoxView, self).update()
-        # call update hook from `plone.autoform.view.WidgetsVew`
-        self._update()
+
+    def widgets(self, mode=DISPLAY_MODE):
+        """Return the widgets for the databox
+
+        # https://stackoverflow.com/questions/8476781/how-to-access-z3c-form-widget-settings-from-browser-view
+        """
+        widgets = []
+        fields = api.get_fields(self.context)
+        for name, field in fields.items():
+            widget = getMultiAdapter((field, self.request), IFieldWidget)
+            widget.mode = mode
+            widget.context = self.context
+            converter = IDataConverter(widget)
+            value = field.get(self.context)
+            widget.value = converter.toWidgetValue(value)
+            widget.update()
+            widgets.append(widget)
+        return widgets
 
     def export_to_csv(self):
         """Action handler export to CSV
