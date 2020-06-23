@@ -12,6 +12,7 @@
 
     <!-- Export DataBox to CSV/Excel -->
     <permission name="senaite.databox: Export DataBox" acquire="False">
+      <role name="LabClerk"/>
       <role name="LabManager"/>
       <role name="Manager"/>
     </permission>
