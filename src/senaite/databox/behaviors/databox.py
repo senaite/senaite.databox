@@ -22,6 +22,10 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
 
+IGNORE_CATALOG_IDS = [
+    "auditlog_catalog"
+]
+
 
 @provider(IFormFieldProvider)
 class IDataBoxBehavior(model.Schema):
@@ -209,10 +213,12 @@ class DataBox(object):
         archetype_tool = api.get_tool("archetype_tool")
         portal_type = self.query_type
         catalogs = archetype_tool.getCatalogsByType(portal_type)
-        if len(catalogs) == 0:
+        catalog_ids = filter(
+            lambda cid: cid not in IGNORE_CATALOG_IDS,
+            map(lambda cat: cat.getId(), catalogs))
+        if len(catalog_ids) == 0:
             return default
-        primary_catalog = catalogs[0]
-        return primary_catalog.getId()
+        return catalog_ids[0]
 
     def get_catalog_tool(self):
         """Returns the primary catalog tool for the selected query type
