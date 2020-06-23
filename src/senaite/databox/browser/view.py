@@ -71,7 +71,7 @@ class DataBoxView(ListingView):
         #       the available (and extended) schema fields.
         if not api.security.check_permission(AddPortalContent, self.context):
             return ""
-        return ViewPageTemplateFile("templates/databox_controls.pt")
+        return ViewPageTemplateFile("templates/databox_controls.pt")(self)
 
     def widgets(self, mode=DISPLAY_MODE):
         """Return the widgets for the databox
