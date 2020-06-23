@@ -29,7 +29,7 @@ def add_databoxes_folder(portal):
     """
     if portal.get("databoxes") is None:
         logger.info("Adding DataBox Folder")
-        portal.invokeFactory("DataBoxFolder", "databoxes")
+        portal.invokeFactory("DataBoxFolder", "databoxes", title="Databoxes")
 
 
 def setup_navigation_types(portal):
