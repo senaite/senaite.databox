@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", (event) => {
       event.preventDefault();
       let target = event.currentTarget;
-      target.closest("li.column").remove();
+      target.closest("li").remove();
     });
   });
   $(columns).sortable();

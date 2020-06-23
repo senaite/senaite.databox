@@ -180,11 +180,24 @@ class DataBoxView(ListingView):
 
     @view.memoize
     def get_catalog_indexes(self):
-        return self.databox.get_catalog_indexes()
+        indexes = self.databox.get_catalog_indexes()
+        # insert an empty item
+        indexes.insert(0, "")
+        return indexes
 
     @view.memoize
     def get_catalog_date_indexes(self):
-        return self.databox.get_catalog_date_indexes()
+        indexes = self.databox.get_catalog_date_indexes()
+        # insert an empty item
+        indexes.insert(0, "")
+        return indexes
+
+    @view.memoize
+    def get_advanced_query(self):
+        advanced_query = self.databox.advanced_query
+        # insert an empty item
+        advanced_query.update({"": ""})
+        return advanced_query
 
     @view.memoize
     def get_schema_fields(self):

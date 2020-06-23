@@ -23,6 +23,16 @@
       <li class="nav-item" role="presentation">
         <a class="nav-link"
            i18n:translate=""
+           id="advanced-query-tab"
+           data-toggle="tab"
+           href="#advanced-query"
+           role="tab">
+          Advanced Query
+        </a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link"
+           i18n:translate=""
            id="columns-tab"
            data-toggle="tab"
            href="#columns"
@@ -148,12 +158,68 @@
         </div>
       </div>
 
+      <!-- ADVANCED QUERY CONFIG TAB -->
+      <div class="tab-pane fade" id="advanced-query" role="tabpanel">
+        <div class="form-row align-items-center">
+          <ul id="advanced-queries" class="my-4 list-unstyled">
+            <li class="advanced-query d-flex flex-wrap p-0 mb-2"
+                tal:define="query view/get_advanced_query;"
+                tal:repeat="q python:sorted(query, reverse=1)">
+
+              <!-- Index -->
+              <div class="flex-fill mr-2">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <span i18n:translate="">Index</span>
+                    </div>
+                  </div>
+                  <select class="form-control"
+                          name="senaite.databox.advanced_query.index:records">
+                    <tal:indexes repeat="index view/get_catalog_indexes">
+                      <option tal:attributes="value index; selected python:index == q and 'selected' or ''">
+                        <span tal:replace="index"/>
+                      </option>
+                    </tal:indexes>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Value -->
+              <div class="flex-fill mr-2">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <span i18n:translate="">=</span>
+                    </div>
+                  </div>
+                  <input type="text"
+                         class="form-control"
+                         tal:attributes="value python:query[q];"
+                         name="senaite.databox.advanced_query.value:records">
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <input class="mr-2"
+                             value="1"
+                             name="senaite.databox.advanced_query.delete:bool:records"
+                             type="checkbox"/>
+                      <span i18n:translate="">Delete</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <!-- COLUMNS CONFIG TAB -->
       <div class="tab-pane fade" id="columns" role="tabpanel">
 
         <ul id="columns" class="columns my-4 list-unstyled">
           <li class="column d-flex flex-wrap p-0 mb-2"
-              tal:define="columns view/columns"
+              tal:define="columns python:view.columns;"
               tal:repeat="column columns">
             <!-- column -->
             <div class="flex-fill mr-2">

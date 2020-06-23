@@ -2,6 +2,7 @@
 
 import ast
 import collections
+from copy import copy
 from datetime import datetime
 
 from bika.lims import api
@@ -55,9 +56,9 @@ class IDataBoxBehavior(model.Schema):
         required=False,
     )
 
-    directives.omitted(IAddForm, "additional_query")
-    additional_query = schema.Dict(
-        title=_(u"Additional Query"),
+    directives.omitted(IAddForm, "advanced_query")
+    advanced_query = schema.Dict(
+        title=_(u"Advanced Query"),
         key_type=schema.Choice(
             title=_(u"Query Index"),
             source="senaite.databox.vocabularies.indexes"),
@@ -142,7 +143,8 @@ class DataBox(object):
                 "range": "minmax"
             }
 
-        query.update(self.additional_query)
+        # update additional queries
+        query.update(self.advanced_query)
         logger.info("DataBox Query: {}".format(query))
         return query
 
@@ -175,7 +177,7 @@ class DataBox(object):
         """
         catalog = api.get_tool(self.get_query_catalog())
         indexes = catalog.getIndexObjects()
-        date_indexes = [""]
+        date_indexes = []
         for index in indexes:
             if index.meta_type not in DATE_INDEX_TYPES:
                 continue
@@ -249,15 +251,19 @@ class DataBox(object):
         self.context.columns = value
 
     def _get_columns(self):
-        return getattr(self.context, "columns", []) or []
+        columns = getattr(self.context, "columns", []) or []
+        # always return by value
+        return copy(columns)
 
     columns = property(_get_columns, _set_columns)
 
     # ADDITIONAL QUERY
 
-    def _set_additional_query(self, value):
+    def _set_advanced_query(self, value):
         if value is None:
             value = {}
+        # drop empty items
+        value.pop("", None)
         catalog = self.get_catalog_tool()
         for k, v in value.items():
             index = catalog._catalog.getIndex(k)
@@ -269,15 +275,17 @@ class DataBox(object):
             else:
                 try:
                     v = ast.literal_eval(v)
-                except (ValueError):
+                except (ValueError, SyntaxError):
                     pass
             value[k] = v
-        self.context.additional_query = value
+        self.context.advanced_query = value
 
-    def _get_additional_query(self):
-        return getattr(self.context, "additional_query", {}) or {}
+    def _get_advanced_query(self):
+        query = getattr(self.context, "advanced_query", {}) or {}
+        # always return by value
+        return copy(query)
 
-    additional_query = property(_get_additional_query, _set_additional_query)
+    advanced_query = property(_get_advanced_query, _set_advanced_query)
 
     # DATE INDEX
 

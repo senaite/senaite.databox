@@ -62,13 +62,22 @@ class FormController(BrowserView):
         """
         if key in ["date_from", "date_to"]:
             if value:
-                value = parser.parse(value)
+                return parser.parse(value)
+
         # TODO: Review the data structure to avoid processing
         if key == "columns":
             columns = []
             for record in value:
                 record = dict(record)
-                column = record.pop("column")
-                columns.append({column: record})
+                columns.append({record["column"]: record})
             return columns
+
+        if key == "advanced_query":
+            query = {}
+            for record in value:
+                if record.get("delete"):
+                    continue
+                query[record.get("index")] = record.get("value")
+            return query
+
         return value
