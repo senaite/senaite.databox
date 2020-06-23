@@ -86,7 +86,7 @@
           icon_expr=""
           link_target=""
           url_expr="string:${object_url}/edit" visible="True">
-    <permission value="Modify portal content"/>
+    <permission value="senaite.databox: Manage DataBox"/>
   </action>
 
   <!-- Export to CSV -->
@@ -99,7 +99,7 @@
           url_expr="string:${object_url}/export_to_csv"
           i18n:attributes="title"
           visible="True">
-    <permission value="senaite.core: Manage Bika"/>
+    <permission value="senaite.databox: Export DataBox"/>
   </action>
 
   <!-- Export to Excel -->
@@ -112,7 +112,7 @@
           url_expr="string:${object_url}/export_to_excel"
           i18n:attributes="title"
           visible="True">
-    <permission value="senaite.core: Manage Bika"/>
+    <permission value="senaite.databox: Export DataBox"/>
   </action>
 
 </object>
