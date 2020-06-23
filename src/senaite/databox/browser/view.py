@@ -10,7 +10,6 @@ from bika.lims import bikaMessageFactory as _
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from plone.memoize import view
-from Products.CMFCore.permissions import AddPortalContent
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.core.listing.view import ListingView
@@ -18,6 +17,7 @@ from senaite.core.supermodel.model import SuperModel
 from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
+from senaite.databox.permissions import ManageDataBox
 from z3c.form.interfaces import DISPLAY_MODE
 from z3c.form.interfaces import IDataConverter
 from z3c.form.interfaces import IFieldWidget
@@ -69,7 +69,7 @@ class DataBoxView(ListingView):
         """
         # N.B.: the form controls implicitly create a temporary object to fetch
         #       the available (and extended) schema fields.
-        if not api.security.check_permission(AddPortalContent, self.context):
+        if not api.security.check_permission(ManageDataBox, self.context):
             return ""
         return ViewPageTemplateFile("templates/databox_controls.pt")(self)
 

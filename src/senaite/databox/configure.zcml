@@ -11,6 +11,9 @@
   <include package=".behaviors" />
   <include package=".browser" />
 
+  <!-- Permissions -->
+  <include file="permissions.zcml" />
+
   <!-- Field Converters -->
   <utility
       provides="senaite.databox.interfaces.IFieldConverter"
