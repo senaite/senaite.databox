@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object name="DataBox" meta_type="Dexterity FTI"
+<object name="DataBoxFolder" meta_type="Dexterity FTI"
         i18n:domain="senaite.databox"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
