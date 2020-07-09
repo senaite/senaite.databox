@@ -1,0 +1,164 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-07-09 07:03+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: senaite.databox\n"
+
+#: senaite/databox/browser/folder_view.py:56
+msgid "Active"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:27
+msgid "Add"
+msgstr ""
+
+#: senaite/databox/behaviors/configure.zcml:18
+msgid "Adds databox behavior"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:61
+msgid "Advanced Query"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:66
+#: senaite/databox/browser/view.py:56
+msgid "All"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:49
+msgid "Column"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:47
+msgid "Column Config"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:45
+msgid "Columns"
+msgstr ""
+
+#: senaite/databox/behaviors/configure.zcml:18
+msgid "DataBox"
+msgstr ""
+
+#: senaite/databox/profiles/default/types/DataBox.xml
+msgid "Databox"
+msgstr ""
+
+#: senaite/databox/profiles/default/types/DataBoxFolder.xml
+msgid "Databoxes"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:46
+#: senaite/databox/browser/view.py:224
+msgid "Description"
+msgstr ""
+
+#: senaite/databox/profiles/default/types/DataBox.xml
+msgid "Export CSV"
+msgstr ""
+
+#: senaite/databox/profiles/default/types/DataBox.xml
+msgid "Export Excel"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:61
+msgid "Inactive"
+msgstr ""
+
+#: senaite/databox/configure.zcml:71
+msgid "Installs SENAITE DATABOX"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:94
+msgid "Limit"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:95
+msgid "Limit Search Results"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:63
+msgid "Query Index"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:36
+msgid "Query Type"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:65
+msgid "Query Value"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:71
+msgid "Query date index"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:81
+msgid "Query from date"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:88
+msgid "Query to date"
+msgstr ""
+
+#: senaite/databox/configure.zcml:71
+msgid "SENAITE DATABOX"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:104
+msgid "Sort the databox on this index"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:111
+msgid "Sort the results in reversed order"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:72
+msgid "The date index to query"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:37
+msgid "The type to query"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:43
+#: senaite/databox/browser/view.py:221
+msgid "Title"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:49
+msgid "Type"
+msgstr ""
+
+#: senaite/databox/configure.zcml:81
+msgid "Uninstalls SENAITE DATABOX"
+msgstr ""
+
+#. Default: "Sort on"
+#: senaite/databox/behaviors/databox.py:103
+msgid "label_sort_on"
+msgstr ""
+
+#. Default: "Reversed order"
+#: senaite/databox/behaviors/databox.py:110
+msgid "label_sort_reversed"
+msgstr ""
+
+#. Default: "Required"
+#: senaite/databox/browser/templates/databox_edit.pt:39
+msgid "title_required"
+msgstr ""
