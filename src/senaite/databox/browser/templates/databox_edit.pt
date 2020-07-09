@@ -10,10 +10,11 @@
     <metal:main fill-slot="main">
       <tal:main-macro metal:define-macro="main">
 
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
+        <div tal:replace="structure provider:plone.abovecontenttitle"/>
+
         <div class="alert alert-info" tal:condition="view/status">
           <p class="mb-0">
-            <div tal:replace="view/status"></div>
+            <span tal:replace="view/status"></span>
           </p>
         </div>
 
@@ -55,7 +56,7 @@
                    tal:define="description widget/field/description"
                    i18n:translate=""
                    tal:content="description"
-                   tal:condition="python:description and not hidden" >
+                   tal:condition="python:description and not hidden">
                 field description
               </div>
 
@@ -69,10 +70,10 @@
                                data-databox_uid here/UID">
           </div>
 
-          <metal:actions metal:use-macro="context/@@ploneform-macros/actions"/>
+          <metal:actions metal:use-macro="context/@@ploneform-macros/actions"></metal:actions>
         </form>
 
-        <div tal:replace="structure provider:plone.belowcontentbody" />
+        <div tal:replace="structure provider:plone.belowcontentbody"/>
 
       </tal:main-macro>
     </metal:main>
