@@ -11,3 +11,4 @@ node_modules
 parts
 src/senaite.*
 var
+*.mo
