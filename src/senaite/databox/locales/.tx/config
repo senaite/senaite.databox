@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[senaite-core.senaite]
+[senaite-databox.senaite]
 file_filter = <lang>/LC_MESSAGES/senaite.databox.po
 host = https://www.transifex.com
 source_file = senaite.databox.pot
