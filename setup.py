@@ -30,7 +30,7 @@ setup(
     ],
     keywords="",
     author="RIDING BYTES & NARALABS",
-    author_email="psp@senaite.com",
+    author_email="senaite@senaite.com",
     url="https://github.com/senaite/senaite.databox",
     license="GPLv2",
     packages=find_packages("src", exclude=["ez_setup"]),
