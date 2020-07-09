@@ -8,7 +8,6 @@
   <form name="databox-form"
         class="form"
         method="post"
-        i18n:domain="senaite.core"
         enctype="multipart/form-data"
         tal:attributes="action string:${here/absolute_url}/@@update">
 
