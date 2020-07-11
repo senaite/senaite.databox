@@ -148,7 +148,7 @@ class DataBoxView(ListingView):
             return value
         elif isinstance(value, DateTime):
             return value.ISO()
-        return repr(value)
+        return str(value)
 
     def get_csv(self, delimiter=",", quotechar='"',
                 quoting=csv.QUOTE_ALL, dialect=csv.excel):
