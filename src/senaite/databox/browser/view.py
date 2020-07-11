@@ -23,8 +23,11 @@ import csv
 import StringIO
 import sys
 
+import six
+
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
+from DateTime import DateTime
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from plone.memoize import view
@@ -134,9 +137,18 @@ class DataBoxView(ListingView):
             rows = [header]
         keys = self.columns.keys()
         for item in self.folderitems():
-            row = map(lambda key: item.get(key), keys)
+            row = map(lambda key: self.to_string(item.get(key)), keys)
             rows.append(row)
         return rows
+
+    def to_string(self, value):
+        """Convert value to string
+        """
+        if isinstance(value, six.string_types):
+            return value
+        elif isinstance(value, DateTime):
+            return value.ISO()
+        return repr(value)
 
     def get_csv(self, delimiter=",", quotechar='"',
                 quoting=csv.QUOTE_ALL, dialect=csv.excel):
