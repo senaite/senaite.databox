@@ -1,10 +1,13 @@
-<div i18n:domain="senaite.databox">
+<div xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     lang="en"
+     i18n:domain="senaite.databox">
 
   <!-- DATABOX EDITOR -->
   <form name="databox-form"
         class="form"
         method="post"
-        i18n:domain="senaite.core"
         enctype="multipart/form-data"
         tal:attributes="action string:${here/absolute_url}/@@update">
 

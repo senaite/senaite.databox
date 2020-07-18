@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[senaite-databox.senaite]
+file_filter = <lang>/LC_MESSAGES/senaite.databox.po
+host = https://www.transifex.com
+source_file = senaite.databox.pot
+source_lang = en
+type = PO
