@@ -34,6 +34,7 @@ from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
 from senaite.databox.config import DATE_INDEX_TYPES
+from senaite.databox.config import IGNORE_CATALOG_IDS
 from senaite.databox.config import IGNORE_FIELDS
 from senaite.databox.config import TMP_FOLDER_KEY
 from z3c.form.interfaces import IAddForm
@@ -41,10 +42,6 @@ from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
-
-IGNORE_CATALOG_IDS = [
-    "auditlog_catalog"
-]
 
 
 @provider(IFormFieldProvider)

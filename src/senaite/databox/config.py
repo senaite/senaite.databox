@@ -36,6 +36,10 @@ IGNORE_FIELDS = [
     "subject",
 ]
 
+IGNORE_CATALOG_IDS = [
+    "auditlog_catalog"
+]
+
 # NOTE; Visible types are commented
 NON_QUERYABLE_TYPES = [
     # "ARReport",
