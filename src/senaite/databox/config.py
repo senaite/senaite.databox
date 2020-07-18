@@ -6,6 +6,18 @@ TMP_FOLDER_KEY = "senaite.databox.tmp"
 
 DATE_INDEX_TYPES = ["DateIndex"]
 
+IGNORE_FIELDS = [
+    "allowDiscussion",
+    "contributors",
+    "creators",
+    "effectiveDate",
+    "expirationDate",
+    "language",
+    "location",
+    "rights",
+    "subject",
+]
+
 # NOTE; Visible types are commented
 NON_QUERYABLE_TYPES = [
     # "ARReport",

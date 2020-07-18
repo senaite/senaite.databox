@@ -205,7 +205,7 @@ class DataBoxView(ListingView):
         # temporary object to fetch the form fields (write on read)
         alsoProvides(self.request, IDisableCSRFProtection)
         fields = self.databox.get_fields().keys()
-        fields.extend(self.databox.get_catalog_columns())
+        # fields.extend(self.databox.get_catalog_columns())
         return sorted(fields)
 
     def get_columns(self):

@@ -16,6 +16,7 @@ from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
 from senaite.databox.config import DATE_INDEX_TYPES
+from senaite.databox.config import IGNORE_FIELDS
 from senaite.databox.config import TMP_FOLDER_KEY
 from z3c.form.interfaces import IAddForm
 from zope import schema
@@ -164,7 +165,11 @@ class DataBox(object):
         obj = self._create_temporary_object(portal_type=portal_type)
         if obj is None:
             return []
-        return api.get_fields(obj)
+        fields = api.get_fields(obj)
+        # drop ignored fields
+        for field in IGNORE_FIELDS:
+            fields.pop(field, None)
+        return fields
 
     def get_catalog_indexes(self):
         """Returns available catalog indexes for the selected query type
