@@ -287,6 +287,9 @@ class DataBoxView(ListingView):
     def get_reftype(self, field):
         """Returns the first allowed type of the reference field
         """
+        portal_type = getattr(field, "portal_type", None)
+        if portal_type:
+            return portal_type
         allowed_types = getattr(field, "allowed_types", [])
         if not allowed_types:
             return None
@@ -294,6 +297,11 @@ class DataBoxView(ListingView):
 
     def get_reference_columns(self, column):
         """Returns configured reference columns for the given colum
+
+        Called from the page template to render the column controls.
+
+        Note: Here we need to work without any real objects!
+              This is just to configure the column config for the query
         """
 
         columns = []
@@ -379,7 +387,10 @@ class DataBoxView(ListingView):
         """
         for column, config in self.columns.items():
             model = SuperModel(obj)
-            value = model.get(column)
+            if column == "Parent":
+                value = SuperModel(api.get_parent(obj))
+            else:
+                value = model.get(column)
 
             # Handle reference columns
             if isinstance(value, SuperModel):

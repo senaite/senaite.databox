@@ -24,6 +24,11 @@ TMP_FOLDER_KEY = "senaite.databox.tmp"
 
 DATE_INDEX_TYPES = ["DateIndex"]
 
+PARENT_TYPES = {
+    "Analysis": "AnalysisRequest",
+    "AnalysisRequest": "Client",
+}
+
 # TODO: Move to registry config
 IGNORE_FIELDS = [
     "allowDiscussion",

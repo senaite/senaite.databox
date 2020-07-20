@@ -36,12 +36,20 @@ from senaite.databox import logger
 from senaite.databox.config import DATE_INDEX_TYPES
 from senaite.databox.config import IGNORE_CATALOG_IDS
 from senaite.databox.config import IGNORE_FIELDS
+from senaite.databox.config import PARENT_TYPES
 from senaite.databox.config import TMP_FOLDER_KEY
 from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import provider
+
+
+class ParentField(object):
+    def __init__(self, portal_type):
+        self.type = "reference"
+        self.name = "Parent"
+        self.portal_type = portal_type
 
 
 @provider(IFormFieldProvider)
@@ -184,6 +192,12 @@ class DataBox(object):
         # drop ignored fields
         for field in IGNORE_FIELDS:
             fields.pop(field, None)
+        # Inject Parent Field
+        portal_type = api.get_portal_type(obj)
+        parent_type = PARENT_TYPES.get(portal_type)
+        if parent_type:
+            field = ParentField(portal_type=parent_type)
+            fields["Parent"] = field
         return fields
 
     def get_catalog_indexes(self):
