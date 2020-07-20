@@ -19,7 +19,6 @@
 # Some rights reserved, see README and LICENSE.
 
 import ast
-import collections
 from copy import copy
 from datetime import datetime
 
@@ -171,14 +170,6 @@ class DataBox(object):
         query.update(self.advanced_query)
         logger.info("DataBox Query: {}".format(query))
         return query
-
-    def get_column_config(self):
-        """Returns an ordered dict from the columns list
-        """
-        columns = collections.OrderedDict()
-        for column in self.columns:
-            columns.update(column)
-        return columns
 
     def get_fields(self, portal_type=None):
         """Returns all schema fields of the selected query type

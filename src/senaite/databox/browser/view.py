@@ -241,19 +241,16 @@ class DataBoxView(ListingView):
     def get_columns(self):
         """Calculate visible columns
         """
-        columns = self.databox.get_column_config()
-        if columns:
-            return columns
+        columns = collections.OrderedDict()
 
-        # default columns
-        columns = collections.OrderedDict((
-            ("title", {
-                "title": _("Title")
-            }),
-            ("description", {
-                "title": _("Description"),
-            }),
-        ))
+        if not self.databox.columns:
+            # default columns
+            columns["0"] = {"column": "title", "title": _("Title")}
+
+        for num, record in enumerate(self.databox.columns):
+            key, column = record.items()[0]
+            columns[str(num)] = column
+
         return columns
 
     def get_converters(self):
@@ -306,18 +303,21 @@ class DataBoxView(ListingView):
 
         columns = []
 
+        # get the column data from the columns config
+        column_data = self.columns.get(column)
+
+        # get the column key
+        column_key = column_data.get("column")
+
         # get all fields of the databox
         fields = self.databox.get_fields()
 
         # get the requested field
-        field = fields.get(column)
+        field = fields.get(column_key)
 
         # return immediately if the field is not a reference field
         if not self.is_reference_field(field):
             return columns
-
-        # get the column data from the columns config
-        column_data = self.columns.get(column)
 
         # check if we have further stored references
         refs = column_data.get("refs", [DEFAULT_REF])
@@ -385,12 +385,15 @@ class DataBoxView(ListingView):
         :return: the dict representation of the item
         :rtype: dict
         """
+
         for column, config in self.columns.items():
+            key = config.get("column")
+
             model = SuperModel(obj)
-            if column == "Parent":
+            if key == "Parent":
                 value = SuperModel(api.get_parent(obj))
             else:
-                value = model.get(column)
+                value = model.get(key)
 
             # Handle reference columns
             if isinstance(value, SuperModel):
