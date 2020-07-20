@@ -385,6 +385,7 @@ class DataBoxView(ListingView):
         :return: the dict representation of the item
         :rtype: dict
         """
+        obj = api.get_object(obj)
 
         for column, config in self.columns.items():
             key = config.get("column")
@@ -392,6 +393,8 @@ class DataBoxView(ListingView):
             model = SuperModel(obj)
             if key == "Parent":
                 value = SuperModel(api.get_parent(obj))
+            elif key == "Result" and getattr(obj, "getFormattedResult", None):
+                value = obj.getFormattedResult()
             else:
                 value = model.get(key)
 
