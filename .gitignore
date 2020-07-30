@@ -12,3 +12,7 @@ parts
 src/senaite.*
 var
 *.mo
+.Python
+include/
+lib/
+pyvenv.cfg
