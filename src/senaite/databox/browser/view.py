@@ -23,8 +23,11 @@ import csv
 import StringIO
 import sys
 
+import six
+
 from bika.lims import api
 from bika.lims import bikaMessageFactory as _
+from DateTime import DateTime
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from plone.memoize import view
@@ -134,9 +137,18 @@ class DataBoxView(ListingView):
             rows = [header]
         keys = self.columns.keys()
         for item in self.folderitems():
-            row = map(lambda key: item.get(key), keys)
+            row = map(lambda key: self.to_string(item.get(key)), keys)
             rows.append(row)
         return rows
+
+    def to_string(self, value):
+        """Convert value to string
+        """
+        if isinstance(value, six.string_types):
+            return value
+        elif isinstance(value, DateTime):
+            return value.ISO()
+        return str(value)
 
     def get_csv(self, delimiter=",", quotechar='"',
                 quoting=csv.QUOTE_ALL, dialect=csv.excel):
@@ -223,25 +235,22 @@ class DataBoxView(ListingView):
         # temporary object to fetch the form fields (write on read)
         alsoProvides(self.request, IDisableCSRFProtection)
         fields = self.databox.get_fields().keys()
-        fields.extend(self.databox.get_catalog_columns())
+        # fields.extend(self.databox.get_catalog_columns())
         return sorted(fields)
 
     def get_columns(self):
         """Calculate visible columns
         """
-        columns = self.databox.get_column_config()
-        if columns:
-            return columns
+        columns = collections.OrderedDict()
 
-        # default columns
-        columns = collections.OrderedDict((
-            ("title", {
-                "title": _("Title")
-            }),
-            ("description", {
-                "title": _("Description"),
-            }),
-        ))
+        if not self.databox.columns:
+            # default columns
+            columns["0"] = {"column": "title", "title": _("Title")}
+
+        for num, record in enumerate(self.databox.columns):
+            key, column = record.items()[0]
+            columns[str(num)] = column
+
         return columns
 
     def get_converters(self):
@@ -275,6 +284,9 @@ class DataBoxView(ListingView):
     def get_reftype(self, field):
         """Returns the first allowed type of the reference field
         """
+        portal_type = getattr(field, "portal_type", None)
+        if portal_type:
+            return portal_type
         allowed_types = getattr(field, "allowed_types", [])
         if not allowed_types:
             return None
@@ -282,22 +294,30 @@ class DataBoxView(ListingView):
 
     def get_reference_columns(self, column):
         """Returns configured reference columns for the given colum
+
+        Called from the page template to render the column controls.
+
+        Note: Here we need to work without any real objects!
+              This is just to configure the column config for the query
         """
 
         columns = []
+
+        # get the column data from the columns config
+        column_data = self.columns.get(column)
+
+        # get the column key
+        column_key = column_data.get("column")
 
         # get all fields of the databox
         fields = self.databox.get_fields()
 
         # get the requested field
-        field = fields.get(column)
+        field = fields.get(column_key)
 
         # return immediately if the field is not a reference field
         if not self.is_reference_field(field):
             return columns
-
-        # get the column data from the columns config
-        column_data = self.columns.get(column)
 
         # check if we have further stored references
         refs = column_data.get("refs", [DEFAULT_REF])
@@ -365,9 +385,18 @@ class DataBoxView(ListingView):
         :return: the dict representation of the item
         :rtype: dict
         """
+        obj = api.get_object(obj)
+
         for column, config in self.columns.items():
+            key = config.get("column")
+
             model = SuperModel(obj)
-            value = model.get(column)
+            if key == "Parent":
+                value = SuperModel(api.get_parent(obj))
+            elif key == "Result" and getattr(obj, "getFormattedResult", None):
+                value = obj.getFormattedResult()
+            else:
+                value = model.get(key)
 
             # Handle reference columns
             if isinstance(value, SuperModel):

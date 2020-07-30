@@ -24,7 +24,29 @@ TMP_FOLDER_KEY = "senaite.databox.tmp"
 
 DATE_INDEX_TYPES = ["DateIndex"]
 
-# NOTE; Visible types are commented
+PARENT_TYPES = {
+    "Analysis": "AnalysisRequest",
+    "AnalysisRequest": "Client",
+}
+
+# TODO: Move to registry config
+IGNORE_FIELDS = [
+    "allowDiscussion",
+    "contributors",
+    "creators",
+    "effectiveDate",
+    "expirationDate",
+    "language",
+    "location",
+    "rights",
+    "subject",
+]
+
+IGNORE_CATALOG_IDS = [
+    "auditlog_catalog"
+]
+
+# NOTE: Visible types are commented
 NON_QUERYABLE_TYPES = [
     # "ARReport",
     # "ARTemplate",
