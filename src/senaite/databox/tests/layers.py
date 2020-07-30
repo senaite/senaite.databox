@@ -42,28 +42,17 @@ class BaseLayer(PloneSandboxLayer):
         import Products.TextIndexNG3
         import bika.lims
         import senaite.core
-        import senaite.core.listing
-        import senaite.core.spotlight
+        import senaite.app.listing
+        import senaite.app.spotlight
         import senaite.databox
         import senaite.impress
         import senaite.lims
 
-        # XXX Hack to avoid this bug:
-        # IOError: [Errno 2] No such file or directory:
-        #          '.../senaite.core.supermodel/src/senaite/core/configure.zcml'
-        # Call Stack:
-        # plone.app.testing.helpers.loadZCML
-        # zope.configuration.xmlconfig.file
-        # zope.configuration.xmlconfig.include
-        # zope.configuration.config.ConfigurationContext.path
-        # zope.configuration.config.ConfigurationContext.processxmlfile
-        senaite.core.__path__ = [os.path.dirname(senaite.core.__file__)]
-
         self.loadZCML(package=Products.TextIndexNG3)
         self.loadZCML(package=bika.lims)
         self.loadZCML(package=senaite.core)
-        self.loadZCML(package=senaite.core.listing)
-        self.loadZCML(package=senaite.core.spotlight)
+        self.loadZCML(package=senaite.app.listing)
+        self.loadZCML(package=senaite.app.spotlight)
         self.loadZCML(package=senaite.databox)
         self.loadZCML(package=senaite.impress)
         self.loadZCML(package=senaite.lims)
@@ -72,8 +61,8 @@ class BaseLayer(PloneSandboxLayer):
         zope.installProduct(app, "Products.TextIndexNG3")
         zope.installProduct(app, "bika.lims")
         zope.installProduct(app, "senaite.core")
-        zope.installProduct(app, "senaite.core.listing")
-        zope.installProduct(app, "senaite.core.spotlight")
+        zope.installProduct(app, "senaite.app.listing")
+        zope.installProduct(app, "senaite.app.spotlight")
         zope.installProduct(app, "senaite.databox")
         zope.installProduct(app, "senaite.impress")
         zope.installProduct(app, "senaite.lims")

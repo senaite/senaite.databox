@@ -23,7 +23,7 @@ import collections
 from bika.lims import api
 from bika.lims import senaiteMessageFactory as _
 from bika.lims.utils import get_link
-from senaite.core.listing.view import ListingView
+from senaite.app.listing.view import ListingView
 
 
 class DataBoxFolderView(ListingView):

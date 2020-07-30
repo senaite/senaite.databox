@@ -30,8 +30,8 @@ from openpyxl.writer.excel import save_virtual_workbook
 from plone.memoize import view
 from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from senaite.core.listing.view import ListingView
-from senaite.core.supermodel.model import SuperModel
+from senaite.app.listing.view import ListingView
+from senaite.app.supermodel.model import SuperModel
 from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
