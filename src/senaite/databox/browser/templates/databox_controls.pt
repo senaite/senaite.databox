@@ -102,9 +102,13 @@
               <input type="checkbox"
                      class="form-check-input"
                      id="field-sort_reversed"
-                     tal:attributes="checked here/sort_reversed"
+                     tal:attributes="checked here/sort_reversed;"
                      value="selected"
                      name="senaite.databox.sort_reversed:boolean">
+              <input type="hidden"
+                     value=""
+                     tal:condition="here/sort_reversed"
+                     name="senaite.databox.sort_reversed:boolean" />
               <label class="form-check-label" for="field-sort_reversed" i18n:translate="">
                 Reversed order
               </label>

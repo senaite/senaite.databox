@@ -132,6 +132,7 @@ class IDataBoxBehavior(model.Schema):
     sort_reversed = schema.Bool(
         title=_(u"label_sort_reversed", default=u"Reversed order"),
         description=_(u"Sort the results in reversed order"),
+        default=False,
         required=False,
     )
 
@@ -254,7 +255,7 @@ class DataBox(object):
 
     @property
     def sort_order(self):
-        if self.sort_reversed is False:
+        if self.sort_reversed is True:
             return "descending"
         return "ascending"
 
@@ -374,6 +375,6 @@ class DataBox(object):
         self.context.sort_reversed = value
 
     def _get_sort_reversed(self):
-        return getattr(self.context, "sort_reversed", None)
+        return getattr(self.context, "sort_reversed", False)
 
     sort_reversed = property(_get_sort_reversed, _set_sort_reversed)
