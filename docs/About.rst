@@ -4,7 +4,7 @@
    :height: 128
    :align: center
 
-- **SENAITE.DATABOX**: *A beautiful content wrapper for SENAITE that you will love*
+- **SENAITE.DATABOX**: *An intelligent folder for SENAITE*
 
 .. image:: https://img.shields.io/pypi/v/senaite.databox.svg?style=flat-square
    :target: https://pypi.python.org/pypi/senaite.databox
@@ -24,5 +24,12 @@
 .. image:: https://img.shields.io/badge/Made%20for%20SENAITE-%E2%AC%A1-lightgrey.svg
    :target: https://www.senaite.com
 
+
 About
 =====
+
+SENAITE.DATABOX behaves like an intelligent folder with a stored database query.
+When viewing the contents of a databox, the database query is executed and the
+results are shown in a table listing with the configured columns.
+
+Each databox can be directly exported as CSV or Excel.
