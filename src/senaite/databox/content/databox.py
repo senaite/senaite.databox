@@ -1,30 +1,29 @@
 # -*- coding: utf-8 -*-
 #
-# This file is part of SENAITE.DATABOX
+# This file is part of SENAITE.DATABOX.
 #
-# Copyright 2018 by it's authors.
+# SENAITE.DATABOX is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation, version 2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51
+# Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Copyright 2018-2020 by it's authors.
+# Some rights reserved, see README and LICENSE.
 
-from bika.lims import _
 from plone.dexterity.content import Item
-from plone.supermodel import model
-from zope import schema
-from zope.interface import implements
+from senaite.databox.interfaces import IDataBox
+from zope.interface import implementer
 
 
-class IDataBox(model.Schema):
-    """The DataBox container
-    """
-
-    # N.B. do not name this field `portal_type`
-    query_type = schema.Choice(
-        title=_(u"Query Type"),
-        description=_(u"The type to query"),
-        source="senaite.databox.vocabularies.addable_types",
-        required=True,
-    )
-
-
+@implementer(IDataBox)
 class DataBox(Item):
     """Intelligent Query Folder
     """
-    implements(IDataBox)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layers>
   <layer name="senaite.databox"
-         interface="senaite.databox.interfaces.IDataBoxLayer" />
+         interface="senaite.databox.interfaces.ISenaiteDataBox" />
 </layers>

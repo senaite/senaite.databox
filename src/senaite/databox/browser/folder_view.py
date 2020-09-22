@@ -1,9 +1,29 @@
 # -*- coding: utf-8 -*-
+#
+# This file is part of SENAITE.DATABOX.
+#
+# SENAITE.DATABOX is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation, version 2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51
+# Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Copyright 2018-2020 by it's authors.
+# Some rights reserved, see README and LICENSE.
 
 import collections
 
-from bika.lims import bikaMessageFactory as _
-from senaite.core.listing.view import ListingView
+from bika.lims import api
+from bika.lims import senaiteMessageFactory as _
+from bika.lims.utils import get_link
+from senaite.app.listing.view import ListingView
 
 
 class DataBoxFolderView(ListingView):
@@ -28,36 +48,43 @@ class DataBoxFolderView(ListingView):
                 "icon": "++resource++bika.lims.images/add.png"}
             }
 
-        self.icon = "{}/{}/{}".format(
-            self.portal_url,
-            "/++resource++senaite.databox.static",
-            "images/databoxfolder_icon_64x64.png"
-        )
+        self.icon = "{}/{}".format(
+            self.portal_url, "senaite_theme/icon/databoxfolder")
 
         self.title = self.context.Title()
         self.description = self.context.Description()
-        self.show_select_column = False
+        self.show_select_column = True
         self.pagesize = 25
 
         self.columns = collections.OrderedDict((
             ("Title", {
                 "title": _("Title"),
-                "replace_url": "absolute_url",
                 "index": "sortable_title"}),
             ("Description", {
                 "title": _("Description"),
                 "index": "Description"}),
+            ("query_type", {
+                "title": _("Type"),
+                "index": "query_type"}),
         ))
 
         self.review_states = [
             {
                 "id": "default",
+                "title": _("Active"),
+                "contentFilter": {"is_active": True},
+                "columns": self.columns.keys(),
+            }, {
+                "id": "inactive",
+                "title": _("Inactive"),
+                "contentFilter": {'is_active': False},
+                "columns": self.columns.keys(),
+            }, {
+                "id": "all",
                 "title": _("All"),
                 "contentFilter": {},
-                "transitions": [],
-                "custom_transitions": [],
-                "columns": self.columns.keys()
-            }
+                "columns": self.columns.keys(),
+            },
         ]
 
     def update(self):
@@ -69,5 +96,12 @@ class DataBoxFolderView(ListingView):
         """Before template render hook
         """
         super(DataBoxFolderView, self).before_render()
-        # Don't allow any context actions
-        self.request.set("disable_border", 1)
+
+    def folderitem(self, obj, item, index):
+        obj = api.get_object(obj)
+        url = api.get_url(obj)
+        title = api.get_title(obj)
+        item["replace"]["Title"] = get_link(
+            url, value=title)
+        item["query_type"] = getattr(obj, "query_type", None)
+        return item

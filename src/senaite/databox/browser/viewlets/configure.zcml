@@ -1,0 +1,25 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="senaite.databox">
+
+  <!-- JS Viewlet Manager -->
+  <browser:viewletManager
+      name="senaite.databox.js"
+      provides="senaite.databox.interfaces.IDataBoxJS"
+      permission="zope2.View"
+      class="plone.app.viewletmanager.manager.OrderedViewletManager"
+      layer="senaite.databox.interfaces.ISenaiteDataBox"
+      />
+
+  <!-- Static Resources Viewlet -->
+  <browser:viewlet
+      name="senaite.databox.static"
+      manager="senaite.databox.interfaces.IDataBoxJS"
+      class="senaite.core.browser.viewlets.resources.ResourcesViewlet"
+      permission="zope2.View"
+      template="../static/resources.pt"
+      layer="senaite.databox.interfaces.ISenaiteDataBox"
+      />
+
+</configure>

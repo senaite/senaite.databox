@@ -3,6 +3,6 @@
 
   <!-- Remove Browser Layer -->
   <layer name="senaite.databox"
-         interface="senaite.databox.interfaces.IDataBoxLayer"
+         interface="senaite.databox.interfaces.ISenaiteDataBox"
          remove="True" />
 </layers>

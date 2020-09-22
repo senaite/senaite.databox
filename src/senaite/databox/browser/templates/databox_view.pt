@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="senaite.databox">
+  <body>
+
+    <metal:content-core fill-slot="content-core">
+      <div id="viewlet-senaite-databox-js" tal:content="structure provider:senaite.databox.js" />
+
+      <!-- Databox Controls -->
+      <div tal:replace="structure view/render_databox_controls"/>
+
+      <div id="viewlet-above-listing-table" tal:content="structure provider:senaite.abovelistingtable" />
+      <div id="folderlisting-main-table"
+           tal:content="structure view/contents_table">
+      </div>
+      <div id="viewlet-below-content-table" tal:content="structure provider:senaite.belowlistingtable" />
+    </metal:content-core>
+
+  </body>
+</html>

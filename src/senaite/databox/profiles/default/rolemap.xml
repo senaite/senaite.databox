@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<rolemap>
+
+  <!-- permissions -->
+  <permissions>
+
+    <!-- Edit DataBox -->
+    <permission name="senaite.databox: Manage DataBox" acquire="False">
+      <role name="LabManager"/>
+      <role name="Manager"/>
+    </permission>
+
+    <!-- Export DataBox to CSV/Excel -->
+    <permission name="senaite.databox: Export DataBox" acquire="False">
+      <role name="LabClerk"/>
+      <role name="LabManager"/>
+      <role name="Manager"/>
+    </permission>
+
+  </permissions>
+
+</rolemap>

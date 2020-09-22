@@ -1,19 +1,20 @@
+version: ~> 1.0
 language: python
 sudo: false
 cache:
   pip: true
   directories:
-    - $TRAVIS_BUILD_DIR/buildout-cache
-python:
-  - 2.7
+    - eggs
+matrix:
+  fast_finish: true
+  include:
+    - python: "2.7"
+      env: PLONE_VERSION="5.2"
 before_install:
-  - mkdir -p $TRAVIS_BUILD_DIR/buildout-cache/{eggs,downloads}
-  - echo "[buildout]" > $TRAVIS_BUILD_DIR/default.cfg
-  - echo "download-cache = $TRAVIS_BUILD_DIR/buildout-cache/downloads" >> $TRAVIS_BUILD_DIR/default.cfg
-  - echo "eggs-directory = $TRAVIS_BUILD_DIR/buildout-cache/eggs" >> $TRAVIS_BUILD_DIR/default.cfg
-  - virtualenv .
-  - python bootstrap.py
+  - virtualenv -p `which python` .
+  - bin/pip install -r requirements.txt
+  - bin/buildout -N -t 3 annotate
 install:
-  - bin/buildout -n -t 3 -c travis.cfg
+  - bin/buildout -N -t 3
 script:
-  - bin/test -m senaite.databox
+  - bin/test -s senaite.databox
