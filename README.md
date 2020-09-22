@@ -95,3 +95,11 @@ The info tab shows the generated database query and is mosly for debugging
 purpose.
 
 <img src="static/6_databox_info.png" alt="Databox Info" />
+
+
+## Exporting
+
+Each databox allows through the two icons in the upper right cornder to export
+the results with the configured columns and order to Excel or CSV.
+
+<img src="static/7_databox_excel_export.png" alt="Databox Excel Export" />
