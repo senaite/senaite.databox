@@ -55,7 +55,7 @@ The query configuration in the controls allow to set the order, sort and the
 pagesize of the listed items.
 
 The results can be further narrowed down to a specific date region by choosing a
-"from" and "to** date on one of the displayed date indexes.
+"from" and "to" date on one of the displayed date indexes.
 
 <img src="static/3_databox_query.png" alt="Databox Query" />
 
