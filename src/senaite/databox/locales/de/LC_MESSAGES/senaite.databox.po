@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-07-09 12:29+0000\n"
+"POT-Creation-Date: 2020-09-22 20:02+0000\n"
 "PO-Revision-Date: 2020-07-09 07:13+0000\n"
 "Last-Translator: Ramon Bartl <rb@ridingbytes.com>, 2020\n"
 "Language-Team: German (https://www.transifex.com/senaite/teams/111490/de/)\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Domain: senaite.databox\n"
 "Language: de\n"
 
-#: senaite/databox/browser/templates/databox_controls.pt:202
+#: senaite/databox/browser/templates/databox_controls.pt:206
 msgid "="
 msgstr "="
 
@@ -37,39 +37,39 @@ msgstr "Hinzufügen"
 msgid "Adds databox behavior"
 msgstr "Setzt DataBox Verhalten"
 
-#: senaite/databox/behaviors/databox.py:79
+#: senaite/databox/behaviors/databox.py:84
 #: senaite/databox/browser/templates/databox_controls.pt:27
 msgid "Advanced Query"
 msgstr "Erweiterte Abfrage"
 
 #: senaite/databox/browser/folder_view.py:84
-#: senaite/databox/browser/view.py:74
+#: senaite/databox/browser/view.py:77
 msgid "All"
 msgstr "Alle"
 
-#: senaite/databox/browser/templates/databox_controls.pt:363
+#: senaite/databox/browser/templates/databox_controls.pt:367
 msgid "Catalog"
 msgstr "Katalog"
 
-#: senaite/databox/browser/templates/databox_controls.pt:373
+#: senaite/databox/browser/templates/databox_controls.pt:377
 msgid "Catalog Query"
 msgstr "Katalog Suche"
 
-#: senaite/databox/behaviors/databox.py:67
-#: senaite/databox/browser/templates/databox_controls.pt:241
+#: senaite/databox/behaviors/databox.py:72
+#: senaite/databox/browser/templates/databox_controls.pt:245
 msgid "Column"
 msgstr "Spalte"
 
-#: senaite/databox/behaviors/databox.py:65
+#: senaite/databox/behaviors/databox.py:70
 msgid "Column Config"
 msgstr "Spaltenkonfiguration"
 
-#: senaite/databox/behaviors/databox.py:63
+#: senaite/databox/behaviors/databox.py:68
 #: senaite/databox/browser/templates/databox_controls.pt:37
 msgid "Columns"
 msgstr "Spalten"
 
-#: senaite/databox/browser/templates/databox_controls.pt:300
+#: senaite/databox/browser/templates/databox_controls.pt:304
 msgid "Converter"
 msgstr "Konverter"
 
@@ -85,15 +85,15 @@ msgstr "DataBox"
 msgid "Databoxes"
 msgstr "DataBoxes"
 
-#: senaite/databox/browser/templates/databox_controls.pt:139
+#: senaite/databox/browser/templates/databox_controls.pt:143
 msgid "Date From"
 msgstr "Von"
 
-#: senaite/databox/browser/templates/databox_controls.pt:121
+#: senaite/databox/browser/templates/databox_controls.pt:125
 msgid "Date Index"
 msgstr "Datumsindex"
 
-#: senaite/databox/browser/templates/databox_controls.pt:154
+#: senaite/databox/browser/templates/databox_controls.pt:158
 msgid "Date To"
 msgstr "Bis"
 
@@ -101,24 +101,23 @@ msgstr "Bis"
 msgid "Define basic query options."
 msgstr "Grundlegende Abfrageoptionen definieren."
 
-#: senaite/databox/browser/templates/databox_controls.pt:228
+#: senaite/databox/browser/templates/databox_controls.pt:232
 msgid "Define display columns for the search results."
 msgstr "Anzeigespalten für die Suchresultate definieren."
 
-#: senaite/databox/browser/templates/databox_controls.pt:169
+#: senaite/databox/browser/templates/databox_controls.pt:173
 msgid "Define one or more explicit values for catalog indexes to refine the query."
 msgstr "Eine oder mehrere Werte für Katalog Indizes definieren, um die Abfrage zu verfeindern."
 
-#: senaite/databox/browser/templates/databox_controls.pt:215
+#: senaite/databox/browser/templates/databox_controls.pt:219
 msgid "Delete"
 msgstr "Entfernen"
 
-#: senaite/databox/browser/templates/databox_controls.pt:328
+#: senaite/databox/browser/templates/databox_controls.pt:332
 msgid "Delete column"
 msgstr "Spalte entfernen"
 
 #: senaite/databox/browser/folder_view.py:64
-#: senaite/databox/browser/view.py:242
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -134,7 +133,7 @@ msgstr "Export nach Excel"
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: senaite/databox/browser/templates/databox_controls.pt:183
+#: senaite/databox/browser/templates/databox_controls.pt:187
 msgid "Index"
 msgstr "Index"
 
@@ -146,16 +145,16 @@ msgstr "Info"
 msgid "Installs SENAITE DATABOX"
 msgstr "Installiert SENAITE DATABOX"
 
-#: senaite/databox/behaviors/databox.py:112
+#: senaite/databox/behaviors/databox.py:117
 #: senaite/databox/browser/templates/databox_controls.pt:87
 msgid "Limit"
 msgstr "Limit"
 
-#: senaite/databox/behaviors/databox.py:113
+#: senaite/databox/behaviors/databox.py:118
 msgid "Limit Search Results"
 msgstr "Suchresultate einschränken"
 
-#: senaite/databox/browser/templates/databox_controls.pt:354
+#: senaite/databox/browser/templates/databox_controls.pt:358
 msgid "Portal Type"
 msgstr "Inhaltstyp"
 
@@ -163,35 +162,35 @@ msgstr "Inhaltstyp"
 msgid "Query"
 msgstr "Abfrage"
 
-#: senaite/databox/behaviors/databox.py:81
+#: senaite/databox/behaviors/databox.py:86
 msgid "Query Index"
 msgstr "Abfrageindex"
 
-#: senaite/databox/behaviors/databox.py:54
+#: senaite/databox/behaviors/databox.py:59
 msgid "Query Type"
 msgstr "Abfragetyp"
 
-#: senaite/databox/behaviors/databox.py:83
+#: senaite/databox/behaviors/databox.py:88
 msgid "Query Value"
 msgstr "Abfragewert"
 
-#: senaite/databox/behaviors/databox.py:89
+#: senaite/databox/behaviors/databox.py:94
 msgid "Query date index"
 msgstr "Datumsindex abfragen"
 
-#: senaite/databox/behaviors/databox.py:99
+#: senaite/databox/behaviors/databox.py:104
 msgid "Query from date"
 msgstr "Von"
 
-#: senaite/databox/behaviors/databox.py:106
+#: senaite/databox/behaviors/databox.py:111
 msgid "Query to date"
 msgstr "Bis"
 
-#: senaite/databox/browser/templates/databox_controls.pt:279
+#: senaite/databox/browser/templates/databox_controls.pt:283
 msgid "Reference <span class=\"ref-type text-muted small\"> (${DYNAMIC_CONTENT}) </span>"
 msgstr "Referenz <span class=\"ref-type text-muted small\">(${DYNAMIC_CONTENT}) </span>"
 
-#: senaite/databox/browser/templates/databox_controls.pt:108
+#: senaite/databox/browser/templates/databox_controls.pt:112
 msgid "Reversed order"
 msgstr "Umgekehrte Reihenfolge"
 
@@ -203,25 +202,25 @@ msgstr "SENAITE DATABOX"
 msgid "Sort on"
 msgstr "Sortieren nach"
 
-#: senaite/databox/behaviors/databox.py:122
+#: senaite/databox/behaviors/databox.py:127
 msgid "Sort the databox on this index"
 msgstr "Sortiere die DataBox nach diesem Index"
 
-#: senaite/databox/behaviors/databox.py:129
+#: senaite/databox/behaviors/databox.py:134
 msgid "Sort the results in reversed order"
 msgstr "Ergebnisse in umgekehrter Reihenfolge sortieren"
 
-#: senaite/databox/behaviors/databox.py:90
+#: senaite/databox/behaviors/databox.py:95
 msgid "The date index to query"
 msgstr "Zu suchender Datumsindex"
 
-#: senaite/databox/behaviors/databox.py:55
+#: senaite/databox/behaviors/databox.py:60
 msgid "The type to query"
 msgstr "Zu suchender Inhaltstyp"
 
 #: senaite/databox/browser/folder_view.py:61
-#: senaite/databox/browser/templates/databox_controls.pt:260
-#: senaite/databox/browser/view.py:239
+#: senaite/databox/browser/templates/databox_controls.pt:264
+#: senaite/databox/browser/view.py:248
 msgid "Title"
 msgstr "Titel"
 
@@ -233,17 +232,17 @@ msgstr "Typ"
 msgid "Uninstalls SENAITE DATABOX"
 msgstr "Deinstalliert SENAITE DATABOX"
 
-#: senaite/databox/browser/templates/databox_controls.pt:319
+#: senaite/databox/browser/templates/databox_controls.pt:323
 msgid "add"
 msgstr "Hinzufügen"
 
 #. Default: "Sort on"
-#: senaite/databox/behaviors/databox.py:121
+#: senaite/databox/behaviors/databox.py:126
 msgid "label_sort_on"
 msgstr "Sortieren nach"
 
 #. Default: "Reversed order"
-#: senaite/databox/behaviors/databox.py:128
+#: senaite/databox/behaviors/databox.py:133
 msgid "label_sort_reversed"
 msgstr "Sortierung umkehren"
 
