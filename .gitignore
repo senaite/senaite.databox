@@ -16,3 +16,4 @@ var
 include/
 lib/
 pyvenv.cfg
+*.pyc
