@@ -47,6 +47,7 @@ from zope.component import getUtilitiesFor
 from zope.component import getUtility
 from zope.component import queryUtility
 from zope.interface import alsoProvides
+from zope.schema.interfaces import IField
 from zope.schema.interfaces import IVocabularyFactory
 
 DEFAULT_REF = "title"
@@ -278,6 +279,13 @@ class DataBoxView(ListingView):
         """Checks if the field is a reference field type
         """
         if not field:
+            return False
+        if IField.providedBy(field):
+            # TODO: At the moment we do not have a dexterity based reference
+            #       field. Implement this when we have an interface for this.
+            return False
+        field_type = getattr(field, "type", None)
+        if field_type is None:
             return False
         return field.type in REF_FIELD_TYPES
 
