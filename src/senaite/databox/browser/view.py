@@ -51,7 +51,7 @@ from zope.schema.interfaces import IField
 from zope.schema.interfaces import IVocabularyFactory
 
 DEFAULT_REF = "title"
-REF_FIELD_TYPES = ["reference"]
+REF_FIELD_TYPES = ["reference", "uidreference"]
 
 
 class DataBoxView(ListingView):
