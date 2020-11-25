@@ -356,6 +356,10 @@ class DataBoxView(ListingView):
             ref_type = self.get_reftype(field)
             ref_fields = self.databox.get_fields(portal_type=ref_type)
 
+            # not a reference anymore, break
+            if not ref_type:
+                break
+
             if num == len(refs) - 1:
                 if self.is_reference_field(field):
                     ref_type = self.get_reftype(field)
