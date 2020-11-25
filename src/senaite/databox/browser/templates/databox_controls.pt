@@ -237,12 +237,30 @@
             <li class="column d-flex flex-wrap p-0"
                 tal:define="columns python:view.columns;"
                 tal:repeat="column columns">
+
+              <!-- column title -->
+              <div class="flex-fill mr-2">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-tag"></i>
+                      <span class="ml-1" i18n:translate="">Label</span>
+                    </div>
+                  </div>
+                  <input type="text"
+                         class="form-control"
+                         tal:attributes="value python:columns[column].get('title')"
+                         name="senaite.databox.columns.title:records">
+                </div>
+              </div>
+
               <!-- column -->
               <div class="flex-fill mr-2">
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <span i18n:translate="">Column</span>
+                      <i class="fas fa-database"></i>
+                      <span class="ml-1" i18n:translate="">Field</span>
                     </div>
                   </div>
                   <select class="form-control"
@@ -256,31 +274,16 @@
                 </div>
               </div>
 
-              <!-- column title -->
-              <div class="flex-fill mr-2">
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <span i18n:translate="">Title</span>
-                    </div>
-                  </div>
-                  <input type="text"
-                        class="form-control"
-                        tal:attributes="value python:columns[column].get('title')"
-                        name="senaite.databox.columns.title:records">
-                </div>
-              </div>
-
-              <!-- referenc columns -->
+              <!-- reference columns -->
               <div class="flex-fill mr-2"
                   tal:repeat="ref python:view.get_reference_columns(column)">
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <span i18n:translate="">
-                        Reference
-                        <span class="ref-type text-muted small">
-                            (<span tal:replace ="ref/type"/>)
+                        <span class="ref-type">
+                          <i class="fas fa-arrow-right"></i>
+                          <span tal:content ="ref/type"></span>
                         </span>
                       </span>
                     </div>
@@ -301,7 +304,8 @@
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
-                      <span i18n:translate="">Converter</span>
+                      <i class="fas fa-compress"></i>
+                      <span class="ml-1" i18n:translate="">Converter</span>
                     </div>
                   </div>
                   <select class="form-control"
