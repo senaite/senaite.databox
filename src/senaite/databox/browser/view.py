@@ -298,6 +298,8 @@ class DataBoxView(ListingView):
         allowed_types = getattr(field, "allowed_types", [])
         if not allowed_types:
             return None
+        if not isinstance(allowed_types, (list, tuple)):
+            return allowed_types
         return allowed_types[0]
 
     def get_reference_columns(self, column):
