@@ -22,6 +22,7 @@ import ast
 from copy import copy
 from datetime import datetime
 
+import transaction
 from bika.lims import api
 from DateTime import DateTime
 from dateutil import parser
@@ -233,6 +234,7 @@ class DataBox(object):
         # reduce conflict errors
         portal_factory._p_jar.sync()
         temp_folder.invokeFactory(portal_type, id=portal_type)
+        transaction.commit()
         return temp_folder[portal_type]
 
     def get_query_catalog(self, default="portal_catalog"):
