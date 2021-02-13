@@ -20,12 +20,34 @@
 
 import logging
 
+from bika.lims.api import get_request
+from senaite.databox.interfaces import ISenaiteDataBox
 from zope.i18nmessageid import MessageFactory
 
 # Defining a Message Factory for when this product is internationalized.
 senaiteMessageFactory = _ = MessageFactory("senaite.databox")
 
 logger = logging.getLogger("senaite.databox")
+
+
+def is_installed():
+    """Returns whether the product is installed or not
+    """
+    request = get_request()
+    return ISenaiteDataBox.providedBy(request)
+
+
+def check_installed(default_return):
+    """Decorator to prevent the function to be called if product not installed
+    :param default_return: value to return if not installed
+    """
+    def is_installed_decorator(func):
+        def wrapper(*args, **kwargs):
+            if not is_installed():
+                return default_return
+            return func(*args, **kwargs)
+        return wrapper
+    return is_installed_decorator
 
 
 def initialize(context):

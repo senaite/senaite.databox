@@ -1,0 +1,11 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="senaite.databox">
+
+  <!-- After upgrade step event handler -->
+  <subscriber
+    for="senaite.core.events.upgrade.IAfterUpgradeStepEvent"
+    handler="senaite.databox.subscribers.upgrade.afterUpgradeStepHandler"
+  />
+
+</configure>
