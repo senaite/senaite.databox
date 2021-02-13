@@ -11,6 +11,7 @@ def afterUpgradeStepHandler(event):
     """
     if not is_installed():
         return
-    logger.info("Run databox upgrade handler after senaite.core")
+    logger.info("Run senaite.databox.afterUpgradeStepHandler ...")
     portal = get_portal()
     setup_navigation_types(portal)
+    logger.info("Run senaite.databox.afterUpgradeStepHandler [DONE]")
