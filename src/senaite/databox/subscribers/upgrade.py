@@ -3,6 +3,7 @@
 from bika.lims.api import get_portal
 from senaite.databox import is_installed
 from senaite.databox.setuphandlers import setup_navigation_types
+from senaite.databox import logger
 
 
 def afterUpgradeStepHandler(event):
@@ -10,5 +11,6 @@ def afterUpgradeStepHandler(event):
     """
     if not is_installed():
         return
+    logger.info("Run databox upgrade handler after senaite.core")
     portal = get_portal()
     setup_navigation_types(portal)
