@@ -233,14 +233,14 @@
           Define display columns for the search results.
         </div>
         <div class="form-row">
-          <ul id="columns" class="columns col-auto list-unstyled m-0">
-            <li class="column d-flex flex-wrap p-0"
+          <ul id="columns-list" class="columns col-auto list-unstyled">
+            <li class="column d-flex flex-wrap pt-2 pl-2 mb-2 border border-light rounded bg-light"
                 tal:define="columns python:view.columns;"
                 tal:repeat="column columns">
 
               <!-- column title -->
               <div class="flex-fill mr-2">
-                <div class="input-group mb-2">
+                <div class="input-group input-group-sm mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <i class="fas fa-tag"></i>
@@ -256,7 +256,7 @@
 
               <!-- column -->
               <div class="flex-fill mr-2">
-                <div class="input-group mb-2">
+                <div class="input-group input-group-sm mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <i class="fas fa-database"></i>
@@ -277,7 +277,7 @@
               <!-- reference columns -->
               <div class="flex-fill mr-2"
                   tal:repeat="ref python:view.get_reference_columns(column)">
-                <div class="input-group mb-2">
+                <div class="input-group input-group-sm mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <span i18n:translate="">
@@ -301,7 +301,7 @@
 
               <!-- converter -->
               <div class="flex-fill mr-2">
-                <div class="input-group mb-2">
+                <div class="input-group input-group-sm mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <i class="fas fa-compress"></i>
@@ -322,23 +322,20 @@
                 </div>
               </div>
 
-              <!-- add column button -->
-              <div class="flex mr-2" tal:condition="python:repeat['column'].start">
+              <!-- add/del column button -->
+              <div class="flex mr-2">
                 <button title="add"
                         i18n:attributes="title"
-                        class="add_column btn btn-outline-secondary">
+                        class="add_column btn btn-sm btn-outline-success">
                   <i class="fas fa-plus"/>
                 </button>
-              </div>
-
-              <!-- delete column button -->
-              <div class="flex mr-2" tal:condition="python:not repeat['column'].start">
                 <button title="Delete column"
                         i18n:attributes="title"
-                        class="del_column btn btn-outline-secondary">
+                        class="del_column btn btn-sm btn-outline-danger">
                   <i class="fas fa-minus"/>
                 </button>
               </div>
+
             </li>
           </ul>
         </div>
@@ -393,7 +390,7 @@
 
     <!-- hidden fields -->
     <input type="hidden" name="submitted" value="1" />
-    <input type="hidden" name="hash" value="#query" />
+    <input type="hidden" name="tab" value="query" tal:attributes="value request/tab|string:query" />
     <input tal:replace="structure context/@@authenticator/authenticator"/>
 
     <!-- !TEMPORARY DEACTIVATED!
