@@ -71,7 +71,7 @@
               </div>
               <select class="form-control"
                       name="senaite.databox.sort_on">
-                <tal:indexes repeat="index view/get_catalog_indexes">
+                <tal:indexes repeat="index view/get_catalog_sort_indexes">
                   <option tal:attributes="value index; selected python:context.sort_on == index and 'selected' or ''">
                     <span tal:replace="index"/>
                   </option>

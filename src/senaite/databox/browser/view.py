@@ -217,6 +217,19 @@ class DataBoxView(ListingView):
         return indexes
 
     @view.memoize
+    def get_catalog_sort_indexes(self):
+        indexes = []
+        catalog = self.databox.get_catalog_tool()
+        for key in catalog.indexes():
+            index = catalog.Indexes.get(key)
+            if not hasattr(index, "documentToKeyMap"):
+                continue
+            indexes.append(key)
+        # insert an empty item
+        indexes.insert(0, "")
+        return indexes
+
+    @view.memoize
     def get_catalog_date_indexes(self):
         indexes = self.databox.get_catalog_date_indexes()
         # insert an empty item
