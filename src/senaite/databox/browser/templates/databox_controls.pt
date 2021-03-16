@@ -362,7 +362,7 @@
                 </div>
 
                 <!-- converter -->
-                <div class="flex-fill mr-2">
+                <div class="flex-fill mr-2" style="max-width:225px">
                   <div class="input-group input-group-sm mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
