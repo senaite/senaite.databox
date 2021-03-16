@@ -132,15 +132,11 @@ class DataBoxView(ListingView):
     def get_rows(self, header=True):
         """Extract the rows from the folderitems
         """
-        rows = []
         if header:
-            header = map(lambda v: v.get("title"), self.columns.values())
-            rows = [header]
+            yield map(lambda v: v.get("title"), self.columns.values())
         keys = self.columns.keys()
         for item in self.folderitems():
-            row = map(lambda key: self.to_string(item.get(key)), keys)
-            rows.append(row)
-        return rows
+            yield map(lambda key: self.to_string(item.get(key)), keys)
 
     def to_string(self, value):
         """Convert value to string
