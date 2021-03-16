@@ -1,6 +1,7 @@
 1.1.0 (unreleased)
 ------------------
 
+- #20 Allow to retrieve column value with a Python expression
 - #19 Fix columns and active-tab handling
 - #17 Fix selection of non-sortable indexes
 - #16 Added upgrade step handler
