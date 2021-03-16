@@ -27,6 +27,9 @@ DATE_INDEX_TYPES = ["DateIndex"]
 PARENT_TYPES = {
     "Analysis": "AnalysisRequest",
     "AnalysisRequest": "Client",
+    "Contact": "Client",
+    "ARReport": "AnalysisRequest",
+    "Batch": "AnalysisRequest",
 }
 
 # TODO: Move to registry config

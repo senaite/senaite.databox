@@ -232,108 +232,158 @@
         <div class="form-text text-muted mb-2" i18n:translate="">
           Define display columns for the search results.
         </div>
+        <div class="form-text text-muted" i18n:translate="">
+          Use the code line below to retrieve a value by a Python expression
+          instead using the field.
+        </div>
+        <div class="form-text text-muted" i18n:translate="">
+          Available variables are <code>context</code> (the current column
+          context), <code>model</code> (wrapped senaite.supermodel context),
+          <code>brain</code> (catalog brain of the databox query type),
+          <code>obj</code> (content object of the databox query type),
+          <code>api</code> (the senaite API module).
+        </div>
+        <div class="form-text text-muted" i18n:translate="">
+          <strong>Examples:</strong>
+          <ul>
+            <li>
+              <code>context.aq_parent.Title()</code>
+              <span>Retrieve the title of the parent object</span>
+            </li>
+            <li>
+              <code>api.get_review_status(context)</code>
+              <span>Retrieve the review state of the current context</span>
+            </li>
+          </ul>
+        </div>
+        <div class="form-text text-muted" i18n:translate="">
+          <strong>Caution:</strong> Using the code field executes the Python
+          code without restrictions and can potentially damage data.
+        </div>
         <div class="form-row">
           <ul id="columns-list" class="columns col-auto list-unstyled">
-            <li class="column d-flex flex-wrap pt-2 pl-2 mb-2 border border-light rounded bg-light"
+            <li class="column pt-2 pl-2 mb-2 border border-light rounded bg-light"
                 tal:define="columns python:view.columns;"
                 tal:repeat="column columns">
 
-              <!-- column title -->
-              <div class="flex-fill mr-2">
-                <div class="input-group input-group-sm mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <i class="fas fa-tag"></i>
-                      <span class="ml-1" i18n:translate="">Label</span>
+              <div class="d-flex text-nowrap">
+                <!-- column title -->
+                <div class="flex-fill mr-2">
+                  <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-tag"></i>
+                        <span class="ml-1" i18n:translate="">Label</span>
+                      </div>
                     </div>
+                    <input type="text"
+                          class="form-control"
+                          tal:attributes="value python:columns[column].get('title')"
+                          name="senaite.databox.columns.title:records">
                   </div>
-                  <input type="text"
-                         class="form-control"
-                         tal:attributes="value python:columns[column].get('title')"
-                         name="senaite.databox.columns.title:records">
                 </div>
-              </div>
 
-              <!-- column -->
-              <div class="flex-fill mr-2">
-                <div class="input-group input-group-sm mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <i class="fas fa-database"></i>
-                      <span class="ml-1" i18n:translate="">Field</span>
+                <!-- column -->
+                <div class="flex-fill mr-2">
+                  <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-database"></i>
+                        <span class="ml-1" i18n:translate="">Field</span>
+                      </div>
                     </div>
+                    <select class="form-control"
+                            name="senaite.databox.columns.column:records">
+                      <tal:indexes repeat="field view/get_schema_fields">
+                        <option tal:attributes="value field; selected python:field == columns.get(column).get('column') and 'selected' or ''">
+                          <span tal:replace="field"/>
+                        </option>
+                      </tal:indexes>
+                    </select>
                   </div>
-                  <select class="form-control"
-                          name="senaite.databox.columns.column:records">
-                    <tal:indexes repeat="field view/get_schema_fields">
-                      <option tal:attributes="value field; selected python:field == columns.get(column).get('column') and 'selected' or ''">
-                        <span tal:replace="field"/>
-                      </option>
-                    </tal:indexes>
-                  </select>
                 </div>
-              </div>
 
-              <!-- reference columns -->
-              <div class="flex-fill mr-2"
-                  tal:repeat="ref python:view.get_reference_columns(column)">
-                <div class="input-group input-group-sm mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <span i18n:translate="">
-                        <span class="ref-type">
-                          <i class="fas fa-arrow-right"></i>
-                          <span tal:content ="ref/type"></span>
+                <!-- reference columns -->
+                <div class="flex-fill mr-2"
+                    tal:repeat="ref python:view.get_reference_columns(column)">
+                  <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <span i18n:translate="">
+                          <span class="ref-type">
+                            <i class="fas fa-arrow-right"></i>
+                            <span tal:content ="ref/type"></span>
+                          </span>
                         </span>
-                      </span>
+                      </div>
                     </div>
+                    <select class="form-control"
+                            name="senaite.databox.columns.refs:list:records">
+                      <tal:keys repeat="key ref/fields">
+                        <option tal:attributes="value key; selected python:key == ref.get('key') and 'selected' or ''">
+                          <span tal:replace="key"/>
+                        </option>
+                      </tal:keys>
+                    </select>
                   </div>
-                  <select class="form-control"
-                          name="senaite.databox.columns.refs:list:records">
-                    <tal:keys repeat="key ref/fields">
-                      <option tal:attributes="value key; selected python:key == ref.get('key') and 'selected' or ''">
-                        <span tal:replace="key"/>
-                      </option>
-                    </tal:keys>
-                  </select>
+                </div>
+
+                <!-- add/del column button -->
+                <div class="flex mr-2">
+                  <button title="add"
+                          i18n:attributes="title"
+                          class="add_column btn btn-sm btn-outline-success">
+                    <i class="fas fa-plus"/>
+                  </button>
+                  <button title="Delete column"
+                          i18n:attributes="title"
+                          class="del_column btn btn-sm btn-outline-danger">
+                    <i class="fas fa-minus"/>
+                  </button>
                 </div>
               </div>
 
-              <!-- converter -->
-              <div class="flex-fill mr-2">
-                <div class="input-group input-group-sm mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <i class="fas fa-compress"></i>
-                      <span class="ml-1" i18n:translate="">Converter</span>
-                    </div>
-                  </div>
-                  <select class="form-control"
-                          name="senaite.databox.columns.converter:records">
-                    <tal:indexes repeat="converter view/get_converters">
-                      <option tal:define="name converter/name; description converter/description"
-                              tal:attributes="value name;
-                                              label converter/description;
-                                              selected python:name == columns[column].get('converter') and 'selected' or ''">
-                        <span tal:replace="name"/>
-                      </option>
-                    </tal:indexes>
-                  </select>
-                </div>
-              </div>
 
-              <!-- add/del column button -->
-              <div class="flex mr-2">
-                <button title="add"
-                        i18n:attributes="title"
-                        class="add_column btn btn-sm btn-outline-success">
-                  <i class="fas fa-plus"/>
-                </button>
-                <button title="Delete column"
-                        i18n:attributes="title"
-                        class="del_column btn btn-sm btn-outline-danger">
-                  <i class="fas fa-minus"/>
-                </button>
+              <div class="d-flex text-nowrap">
+                <!-- Code -->
+                <div class="flex-fill mr-2">
+                  <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-code"></i>
+                        <span class="ml-1" i18n:translate="">Code</span>
+                      </div>
+                    </div>
+                    <input type="text"
+                          class="form-control"
+                          tal:attributes="value python:columns[column].get('code')"
+                          name="senaite.databox.columns.code:records">
+                  </div>
+                </div>
+
+                <!-- converter -->
+                <div class="flex-fill mr-2">
+                  <div class="input-group input-group-sm mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-compress"></i>
+                        <span class="ml-1" i18n:translate="">Converter</span>
+                      </div>
+                    </div>
+                    <select class="form-control"
+                            name="senaite.databox.columns.converter:records">
+                      <tal:indexes repeat="converter view/get_converters">
+                        <option tal:define="name converter/name; description converter/description"
+                                tal:attributes="value name;
+                                                label converter/description;
+                                                selected python:name == columns[column].get('converter') and 'selected' or ''">
+                          <span tal:replace="name"/>
+                        </option>
+                      </tal:indexes>
+                    </select>
+                  </div>
+                </div>
+
               </div>
 
             </li>
