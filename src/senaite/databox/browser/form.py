@@ -37,9 +37,9 @@ class FormController(BrowserView):
 
         self.context = context
         self.request = request
-        self.hash = request.form.get("hash", "#query")
-        self.exit_url = "{}{}".format(
-            api.get_url(context), self.hash)
+        self.tab = request.form.get("tab", "query")
+        self.exit_url = "{}?tab={}".format(
+            api.get_url(context), self.tab)
         self.prefix = "senaite.databox"
 
     def __call__(self):
