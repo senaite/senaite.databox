@@ -132,15 +132,11 @@ class DataBoxView(ListingView):
     def get_rows(self, header=True):
         """Extract the rows from the folderitems
         """
-        rows = []
         if header:
-            header = map(lambda v: v.get("title"), self.columns.values())
-            rows = [header]
+            yield map(lambda v: v.get("title"), self.columns.values())
         keys = self.columns.keys()
         for item in self.folderitems():
-            row = map(lambda key: self.to_string(item.get(key)), keys)
-            rows.append(row)
-        return rows
+            yield map(lambda key: self.to_string(item.get(key)), keys)
 
     def to_string(self, value):
         """Convert value to string
@@ -400,6 +396,17 @@ class DataBoxView(ListingView):
                 model = self.resolve_reference_model(value, refs[1:])
         return model
 
+    def execute_code(self, code, **kw):
+        """Executed the code
+        """
+        kw.update({
+            "api": api,
+        })
+        try:
+            return eval(code, kw)
+        except Exception as exc:
+            return repr(exc)
+
     def folderitem(self, obj, item, index):
         """Applies new properties to the item being rendered in the list
 
@@ -412,6 +419,7 @@ class DataBoxView(ListingView):
         :return: the dict representation of the item
         :rtype: dict
         """
+        brain = obj
         obj = api.get_object(obj)
 
         for column, config in self.columns.items():
@@ -438,6 +446,14 @@ class DataBoxView(ListingView):
 
             if callable(value):
                 value = value()
+
+            code = config.get("code")
+            if code:
+                # use the referenced instance as the context
+                context = model.instance
+                # execute the code
+                value = self.execute_code(
+                    code, obj=obj, context=context, model=model, brain=brain)
 
             converter = config.get("converter")
             if converter:
