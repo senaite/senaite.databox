@@ -160,7 +160,9 @@ class DataBoxView(ListingView):
 
         # write the rows as CSV
         for row in self.get_rows():
-            writer.writerow(row)
+            def to_utf8(s):
+                return api.safe_unicode(s).encode("utf8")
+            writer.writerow(map(to_utf8, row))
 
         return csvfile.getvalue()
 
