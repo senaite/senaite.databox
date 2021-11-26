@@ -18,6 +18,8 @@
 # Copyright 2018-2020 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
+from datetime import datetime
+
 import six
 
 from bika.lims import api
@@ -56,9 +58,11 @@ def to_link(obj, key, value, **kw):
 def to_date(obj, key, value, dfmt="%d.%m.%Y"):
     """to date
     """
-    if not isinstance(value, DateTime):
-        return ""
-    return DT2dt(value).strftime(dfmt)
+    if isinstance(value, DateTime):
+        return DT2dt(value).strftime(dfmt)
+    elif isinstance(value, datetime):
+        return value.strftime(dfmt)
+    return value
 
 
 def to_long_date(obj, key, value, dfmt="%d.%m.%Y %H:%M"):
