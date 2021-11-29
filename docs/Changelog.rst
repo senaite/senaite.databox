@@ -1,6 +1,7 @@
 1.1.0 (unreleased)
 ------------------
 
+- #22 Support datetime objects in date converter
 - #21 Fix UnicodeEncodeError when exporting via CSV
 - #20 Allow to retrieve column value with a Python expression
 - #19 Fix columns and active-tab handling
