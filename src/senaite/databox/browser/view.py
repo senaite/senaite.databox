@@ -261,6 +261,9 @@ class DataBoxView(ListingView):
 
         for num, record in enumerate(self.databox.columns):
             key, column = record.items()[0]
+            # databox columns are not sortable by the catalog, even not manual,
+            # because the real values are dereferenced in `folderitem`.
+            column["sortable"] = False
             columns[str(num)] = column
 
         return columns
