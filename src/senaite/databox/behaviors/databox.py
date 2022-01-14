@@ -19,6 +19,7 @@
 # Some rights reserved, see README and LICENSE.
 
 import ast
+from contextlib import contextmanager
 from copy import copy
 from datetime import datetime
 
@@ -218,6 +219,23 @@ class DataBox(object):
         catalog = api.get_tool(self.get_query_catalog())
         return sorted(catalog.schema())
 
+    @contextmanager
+    def temporary_allow_type(self, obj, allowed_type):
+        """Temporary allow content type creation in obj
+        """
+        pt = api.get_tool("portal_types")
+        portal_type = obj.portal_type
+        fti = pt.get(portal_type)
+        # get the current allowed types for the object
+        allowed_types = fti.allowed_content_types
+        # append the allowed type
+        fti.allowed_content_types = allowed_types + [allowed_type, ]
+
+        yield obj
+
+        # reset the allowed content types
+        fti.allowed_content_types = allowed_types
+
     def _create_temporary_object(self, portal_type=None):
         """Create a temporary object to fetch the fields from
 
@@ -233,7 +251,8 @@ class DataBox(object):
             return temp_folder[portal_type]
         # reduce conflict errors
         portal_factory._p_jar.sync()
-        temp_folder.invokeFactory(portal_type, id=portal_type)
+        with self.temporary_allow_type(temp_folder, portal_type):
+            temp_folder.invokeFactory(portal_type, id=portal_type)
         transaction.commit()
         return temp_folder[portal_type]
 
