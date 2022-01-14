@@ -1,7 +1,7 @@
 1.2.0 (unreleased)
 ------------------
 
-- no changes yet
+- #23 Fix traceback for DX types that are not globally allowed
 
 
 1.1.0 (2022-01-05)
