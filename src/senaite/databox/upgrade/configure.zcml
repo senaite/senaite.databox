@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="senaite.impress">
+
+  <genericsetup:upgradeStep
+      title="Upgrade SENAITE DATABOX"
+      description="Upgrade to version 1.2.0"
+      sortkey="1"
+      source="*"
+      destination="1.2.0"
+      handler="senaite.databox.upgrade.handlers.run_all_upgradesteps"
+      profile="senaite.databox:default" />
+
+</configure>
