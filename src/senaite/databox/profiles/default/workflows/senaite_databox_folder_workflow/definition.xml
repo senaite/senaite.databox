@@ -8,15 +8,23 @@
              manager_bypass="False"
              i18n:domain="senaite.core">
 
+  <!-- Plone permissions -->
   <permission>Access contents information</permission>
   <permission>Delete objects</permission>
   <permission>List folder contents</permission>
   <permission>Modify portal content</permission>
   <permission>View</permission>
 
+  <!-- DataBox permissions -->
+  <permission>senaite.databox: Add DataBox</permission>
+
   <!-- State: active -->
   <state state_id="active" title="Active" i18n:attributes="title">
     <exit-transition transition_id="" />
+    <permission-map name="senaite.databox: Add DataBox" acquired="False">
+      <permission-role>LabManager</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
     <permission-map name="Access contents information" acquired="False">
       <permission-role>Analyst</permission-role>
       <permission-role>LabClerk</permission-role>

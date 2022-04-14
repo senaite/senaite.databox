@@ -28,6 +28,7 @@ def update_security_settings(portal):
     for databox in databoxes.objectValues():
         update_rolemappings_for(databox)
     update_rolemappings_for(databoxes)
+    databoxes.reindexObject()
     logger.info("Updating security settings for databoxes [DONE]")
 
 

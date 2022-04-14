@@ -24,6 +24,7 @@ from bika.lims import api
 from bika.lims import senaiteMessageFactory as _
 from bika.lims.utils import get_link
 from senaite.app.listing.view import ListingView
+from senaite.databox.permissions import AddDataBox
 
 
 class DataBoxFolderView(ListingView):
@@ -44,7 +45,7 @@ class DataBoxFolderView(ListingView):
         self.context_actions = {
             _("Add"): {
                 "url": "++add++DataBox",
-                "permission": "cmf.AddPortalContent",
+                "permission": AddDataBox,
                 "icon": "++resource++bika.lims.images/add.png"}
             }
 
