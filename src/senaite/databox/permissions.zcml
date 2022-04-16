@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="senaite.databox">
 
+  <permission id="senaite.databox.permissions.AddDataBox" title="senaite.databox: Add DataBox"/>
   <permission id="senaite.databox.permissions.ManageDataBox" title="senaite.databox: Manage DataBox"/>
   <permission id="senaite.databox.permissions.ExportDataBox" title="senaite.databox: Export DataBox"/>
 

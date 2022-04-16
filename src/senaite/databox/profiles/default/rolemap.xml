@@ -4,6 +4,12 @@
   <!-- permissions -->
   <permissions>
 
+    <!-- Add DataBox -->
+    <permission name="senaite.databox: Add DataBox" acquire="False">
+      <role name="LabManager"/>
+      <role name="Manager"/>
+    </permission>
+
     <!-- Edit DataBox -->
     <permission name="senaite.databox: Manage DataBox" acquire="False">
       <role name="LabManager"/>

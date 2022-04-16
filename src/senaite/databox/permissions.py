@@ -18,5 +18,6 @@
 # Copyright 2018-2022 by it's authors.
 # Some rights reserved, see README and LICENSE.
 
+AddDataBox = "senaite.databox: Add DataBox"
 ManageDataBox = "senaite.databox: Manage DataBox"
 ExportDataBox = "senaite.databox: Export DataBox"

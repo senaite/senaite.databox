@@ -1,6 +1,7 @@
 1.2.0 (unreleased)
 ------------------
 
+- #24 Added custom DataBox workflows
 - #23 Fix traceback for DX types that are not globally allowed
 
 
