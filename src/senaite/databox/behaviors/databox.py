@@ -229,7 +229,10 @@ class DataBox(object):
         # get the current allowed types for the object
         allowed_types = fti.allowed_content_types
         # append the allowed type
-        fti.allowed_content_types = allowed_types + [allowed_type, ]
+        if isinstance(allowed_types, tuple):
+            fti.allowed_content_types = allowed_types + (allowed_type, )
+        else:
+            fti.allowed_content_types = allowed_types + [allowed_type, ]
 
         yield obj
 
