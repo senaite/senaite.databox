@@ -236,29 +236,33 @@
           Use the code line below to retrieve a value by a Python expression
           instead using the field.
         </div>
-        <div class="form-text text-muted" i18n:translate="">
-          Available variables are <code>context</code> (the current column
-          context), <code>model</code> (wrapped senaite.supermodel context),
-          <code>brain</code> (catalog brain of the databox query type),
-          <code>obj</code> (content object of the databox query type),
-          <code>api</code> (the senaite API module).
+        <div class="form-text text-muted">
+          <span i18n:translate="">Available variables are </span>
+          <code>context</code> <span i18n:translate="">(the current column context),</span>
+          <code>model</code> <span i18n:translate="">(wrapped senaite.supermodel context),</span>
+          <code>brain</code> <span i18n:translate="">(catalog brain of the databox query type),</span>
+          <code>obj</code> <span i18n:translate="">(content object of the databox query type),</span>
+          <code>api</code> <span i18n:translate="">(the senaite API module).</span>
         </div>
-        <div class="form-text text-muted" i18n:translate="">
-          <strong>Examples:</strong>
+        <div class="form-text text-muted">
+          <strong i18n:translate="">Examples:</strong>
           <ul>
             <li>
               <code>context.aq_parent.Title()</code>
-              <span>Retrieve the title of the parent object</span>
+              <span i18n:translate="">Retrieve the title of the parent object</span>
             </li>
             <li>
               <code>api.get_review_status(context)</code>
-              <span>Retrieve the review state of the current context</span>
+              <span i18n:translate="">Retrieve the review state of the current context</span>
             </li>
           </ul>
         </div>
-        <div class="form-text text-muted" i18n:translate="">
-          <strong>Caution:</strong> Using the code field executes the Python
-          code without restrictions and can potentially damage data.
+        <div class="form-text text-muted">
+          <strong i18n:translate="">Caution:</strong>
+          <span i18n:translate="">
+            Using the code field executes the Python
+            code without restrictions and can potentially damage data.
+          </span>
         </div>
         <div class="form-row">
           <ul id="columns-list" class="columns col-auto list-unstyled">
@@ -309,7 +313,7 @@
                   <div class="input-group input-group-sm mb-2">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
-                        <span i18n:translate="">
+                        <span>
                           <span class="ref-type">
                             <i class="fas fa-arrow-right"></i>
                             <span tal:content ="ref/type"></span>

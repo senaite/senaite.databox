@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-09-22 20:02+0000\n"
+"POT-Creation-Date: 2022-06-10 20:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,15 +14,40 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: senaite/databox/browser/templates/databox_controls.pt:243
+msgid "(catalog brain of the databox query type),"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:244
+msgid "(content object of the databox query type),"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:241
+msgid "(the current column context),"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:245
+msgid "(the senaite API module)."
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:242
+msgid "(wrapped senaite.supermodel context),"
+msgstr ""
+
 #: senaite/databox/browser/templates/databox_controls.pt:206
 msgid "="
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:74
+#: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
+msgid "Activate"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:75
+#: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Active"
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:45
+#: senaite/databox/browser/folder_view.py:46
 msgid "Add"
 msgstr ""
 
@@ -30,39 +55,50 @@ msgstr ""
 msgid "Adds databox behavior"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:84
+#: senaite/databox/behaviors/databox.py:86
 #: senaite/databox/browser/templates/databox_controls.pt:27
 msgid "Advanced Query"
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:84
-#: senaite/databox/browser/view.py:77
+#: senaite/databox/browser/folder_view.py:85
+#: senaite/databox/browser/view.py:78
 msgid "All"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:367
+#: senaite/databox/browser/templates/databox_controls.pt:240
+msgid "Available variables are"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:422
 msgid "Catalog"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:377
+#: senaite/databox/browser/templates/databox_controls.pt:432
 msgid "Catalog Query"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:72
-#: senaite/databox/browser/templates/databox_controls.pt:245
+#: senaite/databox/browser/templates/databox_controls.pt:261
+msgid "Caution:"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:358
+msgid "Code"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:74
 msgid "Column"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:70
+#: senaite/databox/behaviors/databox.py:72
 msgid "Column Config"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:68
+#: senaite/databox/behaviors/databox.py:70
 #: senaite/databox/browser/templates/databox_controls.pt:37
 msgid "Columns"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:304
+#: senaite/databox/browser/templates/databox_controls.pt:374
 msgid "Converter"
 msgstr ""
 
@@ -90,6 +126,10 @@ msgstr ""
 msgid "Date To"
 msgstr ""
 
+#: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
+msgid "Deactivate"
+msgstr ""
+
 #: senaite/databox/browser/templates/databox_controls.pt:60
 msgid "Define basic query options."
 msgstr ""
@@ -106,12 +146,16 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:332
+#: senaite/databox/browser/templates/databox_controls.pt:342
 msgid "Delete column"
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:64
+#: senaite/databox/browser/folder_view.py:65
 msgid "Description"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:248
+msgid "Examples:"
 msgstr ""
 
 #: senaite/databox/profiles/default/types/DataBox.xml
@@ -122,7 +166,12 @@ msgstr ""
 msgid "Export Excel"
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:79
+#: senaite/databox/browser/templates/databox_controls.pt:296
+msgid "Field"
+msgstr ""
+
+#: senaite/databox/browser/folder_view.py:80
+#: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Inactive"
 msgstr ""
 
@@ -134,20 +183,24 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: senaite/databox/configure.zcml:71
+#: senaite/databox/configure.zcml:73
 msgid "Installs SENAITE DATABOX"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:117
+#: senaite/databox/browser/templates/databox_controls.pt:280
+msgid "Label"
+msgstr ""
+
+#: senaite/databox/behaviors/databox.py:119
 #: senaite/databox/browser/templates/databox_controls.pt:87
 msgid "Limit"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:118
+#: senaite/databox/behaviors/databox.py:120
 msgid "Limit Search Results"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:358
+#: senaite/databox/browser/templates/databox_controls.pt:413
 msgid "Portal Type"
 msgstr ""
 
@@ -155,39 +208,43 @@ msgstr ""
 msgid "Query"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:86
+#: senaite/databox/behaviors/databox.py:88
 msgid "Query Index"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:59
+#: senaite/databox/behaviors/databox.py:61
 msgid "Query Type"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:88
+#: senaite/databox/behaviors/databox.py:90
 msgid "Query Value"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:94
+#: senaite/databox/behaviors/databox.py:96
 msgid "Query date index"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:104
+#: senaite/databox/behaviors/databox.py:106
 msgid "Query from date"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:111
+#: senaite/databox/behaviors/databox.py:113
 msgid "Query to date"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:283
-msgid "Reference <span class=\"ref-type text-muted small\"> (${DYNAMIC_CONTENT}) </span>"
+#: senaite/databox/browser/templates/databox_controls.pt:256
+msgid "Retrieve the review state of the current context"
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:252
+msgid "Retrieve the title of the parent object"
 msgstr ""
 
 #: senaite/databox/browser/templates/databox_controls.pt:112
 msgid "Reversed order"
 msgstr ""
 
-#: senaite/databox/configure.zcml:71
+#: senaite/databox/configure.zcml:73
 msgid "SENAITE DATABOX"
 msgstr ""
 
@@ -195,47 +252,54 @@ msgstr ""
 msgid "Sort on"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:127
+#: senaite/databox/behaviors/databox.py:129
 msgid "Sort the databox on this index"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:134
+#: senaite/databox/behaviors/databox.py:136
 msgid "Sort the results in reversed order"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:95
+#: senaite/databox/behaviors/databox.py:97
 msgid "The date index to query"
 msgstr ""
 
-#: senaite/databox/behaviors/databox.py:60
+#: senaite/databox/behaviors/databox.py:62
 msgid "The type to query"
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:61
-#: senaite/databox/browser/templates/databox_controls.pt:264
-#: senaite/databox/browser/view.py:248
+#: senaite/databox/browser/folder_view.py:62
+#: senaite/databox/browser/view.py:260
 msgid "Title"
 msgstr ""
 
-#: senaite/databox/browser/folder_view.py:67
+#: senaite/databox/browser/folder_view.py:68
 msgid "Type"
 msgstr ""
 
-#: senaite/databox/configure.zcml:81
+#: senaite/databox/configure.zcml:83
 msgid "Uninstalls SENAITE DATABOX"
 msgstr ""
 
-#: senaite/databox/browser/templates/databox_controls.pt:323
+#: senaite/databox/browser/templates/databox_controls.pt:235
+msgid "Use the code line below to retrieve a value by a Python expression instead using the field."
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:262
+msgid "Using the code field executes the Python code without restrictions and can potentially damage data."
+msgstr ""
+
+#: senaite/databox/browser/templates/databox_controls.pt:337
 msgid "add"
 msgstr ""
 
 #. Default: "Sort on"
-#: senaite/databox/behaviors/databox.py:126
+#: senaite/databox/behaviors/databox.py:128
 msgid "label_sort_on"
 msgstr ""
 
 #. Default: "Reversed order"
-#: senaite/databox/behaviors/databox.py:133
+#: senaite/databox/behaviors/databox.py:135
 msgid "label_sort_reversed"
 msgstr ""
 
