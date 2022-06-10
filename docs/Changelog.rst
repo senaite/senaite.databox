@@ -1,4 +1,4 @@
-1.2.0 (unreleased)
+1.2.0 (2022-06-10)
 ------------------
 
 - #25 Fix TypeError when setting allowed types
