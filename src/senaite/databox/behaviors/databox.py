@@ -61,7 +61,7 @@ class IDataBoxBehavior(model.Schema):
         title=_(u"Query Type"),
         description=_(u"The type to query"),
         source="senaite.databox.vocabularies.query_types",
-        required=False,
+        required=True,
     )
 
     # directives.widget("columns", multiFieldWidgetFactory, klass=u"datagrid")
