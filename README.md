@@ -103,3 +103,18 @@ Each databox allows through the two icons in the upper right cornder to export
 the results with the configured columns and order to Excel or CSV.
 
 <img src="static/7_databox_excel_export.png" alt="Databox Excel Export" />
+
+
+## License
+
+**SENAITE.DATABOX** Copyright (C) RIDING BYTES & NARALABS
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the [GNU General Public License version
+2](https://github.com/senaite/senaite.databox/blob/master/LICENSE)
+as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
