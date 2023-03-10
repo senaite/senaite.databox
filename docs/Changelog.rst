@@ -1,4 +1,4 @@
-1.3.0 (unreleased)
+1.3.0 (2023-03-10)
 ------------------
 
 - #26 Remove dependency to Products.TextIndexNG3 (test layer)
