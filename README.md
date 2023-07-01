@@ -92,15 +92,15 @@ that holds the current object. For example an `Analysis` is contained in a
 ## Info
 
 The info tab shows the generated database query and is mosly for debugging
-purpose.
+purposes.
 
 <img src="static/6_databox_info.png" alt="Databox Info" />
 
 
 ## Exporting
 
-Each databox allows through the two icons in the upper right cornder to export
-the results with the configured columns and order to Excel or CSV.
+Each databox allows export of the results with the configured columns and order 
+to Excel or CSV through the two icons in the upper right corner.
 
 <img src="static/7_databox_excel_export.png" alt="Databox Excel Export" />
 
