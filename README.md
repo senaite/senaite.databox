@@ -99,7 +99,7 @@ purpose.
 
 ## Exporting
 
-Each databox allows through the two icons in the upper right cornder to export
+Each databox allows through the two icons in the upper right corner to export
 the results with the configured columns and order to Excel or CSV.
 
 <img src="static/7_databox_excel_export.png" alt="Databox Excel Export" />
