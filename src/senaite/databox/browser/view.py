@@ -171,7 +171,7 @@ class DataBoxView(ListingView):
         """
         workbook = Workbook()
         first_sheet = workbook.get_active_sheet()
-        first_sheet.title = self.context.Title().decode('utf-8')
+        first_sheet.title = api.safe_unicode(self.context.Title())
         for row in self.get_rows():
             first_sheet.append(row)
         return save_virtual_workbook(workbook)
