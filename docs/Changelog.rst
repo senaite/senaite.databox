@@ -1,7 +1,7 @@
 1.4.0 (unreleased)
 ------------------
 
-- no changes yet
+- #29 Fix title encoding error when generating XLS worksheets
 
 
 1.3.0 (2023-03-10)
