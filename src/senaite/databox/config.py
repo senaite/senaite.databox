@@ -24,6 +24,8 @@ TMP_FOLDER_KEY = "senaite.databox.tmp"
 
 DATE_INDEX_TYPES = ["DateIndex"]
 
+UID_CATALOG = "uid_catalog"
+
 PARENT_TYPES = {
     "Analysis": "AnalysisRequest",
     "AnalysisRequest": "Client",
