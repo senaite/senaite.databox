@@ -1,6 +1,7 @@
 1.4.0 (unreleased)
 ------------------
 
+- #30 Fix catalog lookup for DX types
 - #29 Fix title encoding error when generating XLS worksheets
 
 

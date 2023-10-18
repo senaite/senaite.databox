@@ -31,6 +31,7 @@ from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.interfaces import IDexterityContent
+from plone.dexterity.utils import resolveDottedName
 from plone.supermodel import model
 from senaite.databox import _
 from senaite.databox import logger
@@ -39,6 +40,7 @@ from senaite.databox.config import IGNORE_CATALOG_IDS
 from senaite.databox.config import IGNORE_FIELDS
 from senaite.databox.config import PARENT_TYPES
 from senaite.databox.config import TMP_FOLDER_KEY
+from senaite.databox.config import UID_CATALOG
 from z3c.form.interfaces import IAddForm
 from zope import schema
 from zope.component import adapter
@@ -259,20 +261,37 @@ class DataBox(object):
         transaction.commit()
         return temp_folder[portal_type]
 
-    def get_query_catalog(self, default="portal_catalog"):
+    def get_query_catalog(self, default=UID_CATALOG):
         """Returns the primary catalog for the selected query type
 
         :returns: catalog ID
         """
-        archetype_tool = api.get_tool("archetype_tool")
+        catalog = default
         portal_type = self.query_type
-        catalogs = archetype_tool.getCatalogsByType(portal_type)
-        catalog_ids = filter(
-            lambda cid: cid not in IGNORE_CATALOG_IDS,
-            map(lambda cat: cat.getId(), catalogs))
-        if len(catalog_ids) == 0:
-            return default
-        return catalog_ids[0]
+        types_tool = api.get_tool("portal_types")
+        fti = types_tool.getTypeInfo(portal_type)
+
+        if fti.product:
+            # AT content type
+            # => Looup via archetype_tool
+            archetype_tool = api.get_tool("archetype_tool")
+            catalogs = archetype_tool.getCatalogsByType(portal_type)
+            catalog_ids = filter(
+                lambda cid: cid not in IGNORE_CATALOG_IDS,
+                map(lambda cat: cat.getId(), catalogs))
+            if len(catalog_ids) > 0:
+                catalog = catalog_ids[0]
+        else:
+            # DX content type
+            # => resolve the `_catalogs` attribute from the class
+            klass = resolveDottedName(fti.klass)
+            # XXX: Refactor multi-catalog behavior to not rely
+            #      on this hidden `_catalogs` attribute!
+            catalogs = getattr(klass, "_catalogs", [])
+            if catalogs:
+                catalog = catalogs[0]
+
+        return catalog
 
     def get_catalog_tool(self):
         """Returns the primary catalog tool for the selected query type
