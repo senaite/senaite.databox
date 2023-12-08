@@ -136,7 +136,9 @@ class DataBoxView(ListingView):
             yield map(lambda v: v.get("title"), self.columns.values())
         keys = self.columns.keys()
         for item in self.folderitems():
-            yield map(lambda key: self.to_string(item.get(key)), keys)
+            def get_field_value(key):
+                return self.to_string(item["replace"].get(key, item.get(key)))
+            yield map(lambda key: get_field_value(key), keys)
 
     def to_string(self, value):
         """Convert value to string
