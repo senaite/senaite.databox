@@ -1,4 +1,4 @@
-1.4.0 (unreleased)
+1.4.0 (2024-01-03)
 ------------------
 
 - #30 Fix catalog lookup for DX types

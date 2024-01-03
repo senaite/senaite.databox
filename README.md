@@ -10,8 +10,8 @@
     <a href="https://pypi.python.org/pypi/senaite.databox">
       <img src="https://img.shields.io/pypi/v/senaite.databox.svg?style=flat-square" alt="pypi-version" />
     </a>
-    <a href="https://travis-ci.org/senaite/senaite.databox">
-      <img src="https://img.shields.io/travis/senaite/senaite.databox.svg?style=flat-square" alt="travis-ci" />
+    <a href="https://github.com/senaite/senaite.core/actions/workflows/build-and-test.yml?query=branch:master">
+      <img src="https://img.shields.io/github/actions/workflow/status/senaite/senaite.databox/build-and-test.yml?branch=master" alt="build status" />
     </a>
     <a href="https://github.com/senaite/senaite.databox/pulls">
       <img src="https://img.shields.io/github/issues-pr/senaite/senaite.databox.svg?style=flat-square" alt="open PRs" />
@@ -107,7 +107,7 @@ to Excel or CSV through the two icons in the upper right corner.
 
 ## License
 
-**SENAITE.DATABOX** Copyright (C) RIDING BYTES & NARALABS
+**SENAITE.DATABOX** Copyright (C) [RIDING BYTES](https://ridingbytes.com) & [NARALABS](https://naralabs.com)
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the [GNU General Public License version

@@ -40,7 +40,7 @@ setup(
     zip_safe=False,
     install_requires=[
         "plone.app.dexterity",
-        "senaite.lims>=2.0.0",
+        "senaite.lims",
         "setuptools",
     ],
     extras_require={
