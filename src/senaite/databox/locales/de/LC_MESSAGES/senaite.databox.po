@@ -1,16 +1,14 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 # Translators:
-# Ramon Bartl <rb@ridingbytes.com>, 2020
+# Ramon Bartl <rb@ridingbytes.com>, 2024
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-01-03 20:58+0000\n"
+"POT-Creation-Date: 2024-01-03 21:02+0000\n"
 "PO-Revision-Date: 2020-07-09 07:13+0000\n"
-"Last-Translator: Ramon Bartl <rb@ridingbytes.com>, 2020\n"
-"Language-Team: German (https://www.transifex.com/senaite/teams/111490/de/)\n"
+"Last-Translator: Ramon Bartl <rb@ridingbytes.com>, 2024\n"
+"Language-Team: German (https://app.transifex.com/senaite/teams/111490/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,7 +16,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: senaite.databox\n"
+"Domain: DOMAIN\n"
 "Language: de\n"
 
 #: senaite/databox/browser/templates/databox_controls.pt:243
@@ -47,7 +45,7 @@ msgstr "="
 
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Activate"
-msgstr ""
+msgstr "Aktivieren"
 
 #: senaite/databox/browser/folder_view.py:75
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
@@ -74,7 +72,7 @@ msgstr "Alle"
 
 #: senaite/databox/browser/templates/databox_controls.pt:240
 msgid "Available variables are"
-msgstr ""
+msgstr "Verfügbare Variablen sind"
 
 #: senaite/databox/browser/templates/databox_controls.pt:422
 msgid "Catalog"
@@ -86,11 +84,11 @@ msgstr "Katalog Suche"
 
 #: senaite/databox/browser/templates/databox_controls.pt:261
 msgid "Caution:"
-msgstr ""
+msgstr "Achtung:"
 
 #: senaite/databox/browser/templates/databox_controls.pt:358
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: senaite/databox/behaviors/databox.py:76
 msgid "Column"
@@ -135,7 +133,7 @@ msgstr "Bis"
 
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Deactivate"
-msgstr ""
+msgstr "Deaktivieren"
 
 #: senaite/databox/browser/templates/databox_controls.pt:60
 msgid "Define basic query options."
@@ -163,7 +161,7 @@ msgstr "Beschreibung"
 
 #: senaite/databox/browser/templates/databox_controls.pt:248
 msgid "Examples:"
-msgstr ""
+msgstr "Beispiele:"
 
 #: senaite/databox/profiles/default/types/DataBox.xml
 msgid "Export CSV"
@@ -175,7 +173,7 @@ msgstr "Export nach Excel"
 
 #: senaite/databox/browser/templates/databox_controls.pt:296
 msgid "Field"
-msgstr ""
+msgstr "Feld"
 
 #: senaite/databox/browser/folder_view.py:80
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
@@ -196,7 +194,7 @@ msgstr "Installiert SENAITE DATABOX"
 
 #: senaite/databox/browser/templates/databox_controls.pt:280
 msgid "Label"
-msgstr ""
+msgstr "Bezeichnung"
 
 #: senaite/databox/behaviors/databox.py:121
 #: senaite/databox/browser/templates/databox_controls.pt:87
@@ -241,11 +239,11 @@ msgstr "Bis"
 
 #: senaite/databox/browser/templates/databox_controls.pt:256
 msgid "Retrieve the review state of the current context"
-msgstr ""
+msgstr "Rufen Sie den Überprüfungsstatus des aktuellen Kontexts ab"
 
 #: senaite/databox/browser/templates/databox_controls.pt:252
 msgid "Retrieve the title of the parent object"
-msgstr ""
+msgstr "Rufen Sie den Titel des übergeordneten Objekts ab"
 
 #: senaite/databox/browser/templates/databox_controls.pt:112
 msgid "Reversed order"
@@ -290,11 +288,11 @@ msgstr "Deinstalliert SENAITE DATABOX"
 
 #: senaite/databox/browser/templates/databox_controls.pt:235
 msgid "Use the code line below to retrieve a value by a Python expression instead using the field."
-msgstr ""
+msgstr "Verwenden Sie die folgende Codezeile, um einen Wert mithilfe eines Python-Ausdrucks abzurufen, anstatt das Feld zu verwenden."
 
 #: senaite/databox/browser/templates/databox_controls.pt:262
 msgid "Using the code field executes the Python code without restrictions and can potentially damage data."
-msgstr ""
+msgstr "Die Verwendung des Codefelds führt den Python-Code ohne Einschränkungen aus und kann möglicherweise Daten beschädigen."
 
 #: senaite/databox/browser/templates/databox_controls.pt:337
 msgid "add"

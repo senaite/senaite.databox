@@ -1,21 +1,23 @@
-#--- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-#SOME DESCRIPTIVE TITLE.
-#FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Jiří Podhorecký, 2023
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2024-01-03 21:02+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2020-07-09 07:13+0000\n"
+"Last-Translator: Jiří Podhorecký, 2023\n"
+"Language-Team: Czech (https://app.transifex.com/senaite/teams/111490/cs/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: senaite.databox\n"
+"Domain: DOMAIN\n"
+"Language: cs\n"
 
 #: senaite/databox/browser/templates/databox_controls.pt:243
 msgid "(catalog brain of the databox query type),"
@@ -39,87 +41,87 @@ msgstr ""
 
 #: senaite/databox/browser/templates/databox_controls.pt:206
 msgid "="
-msgstr ""
+msgstr "="
 
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Activate"
-msgstr ""
+msgstr "Aktivovat"
 
 #: senaite/databox/browser/folder_view.py:75
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Active"
-msgstr ""
+msgstr "Aktivní"
 
 #: senaite/databox/browser/folder_view.py:46
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: senaite/databox/behaviors/configure.zcml:18
 msgid "Adds databox behavior"
-msgstr ""
+msgstr "Přidává chování databoxu"
 
 #: senaite/databox/behaviors/databox.py:88
 #: senaite/databox/browser/templates/databox_controls.pt:27
 msgid "Advanced Query"
-msgstr ""
+msgstr "Pokročilý dotaz"
 
 #: senaite/databox/browser/folder_view.py:85
 #: senaite/databox/browser/view.py:78
 msgid "All"
-msgstr ""
+msgstr "Vše"
 
 #: senaite/databox/browser/templates/databox_controls.pt:240
 msgid "Available variables are"
-msgstr ""
+msgstr "Dostupné proměnné jsou"
 
 #: senaite/databox/browser/templates/databox_controls.pt:422
 msgid "Catalog"
-msgstr ""
+msgstr "Katalog"
 
 #: senaite/databox/browser/templates/databox_controls.pt:432
 msgid "Catalog Query"
-msgstr ""
+msgstr "Katalogový dotaz"
 
 #: senaite/databox/browser/templates/databox_controls.pt:261
 msgid "Caution:"
-msgstr ""
+msgstr "Upozornění:"
 
 #: senaite/databox/browser/templates/databox_controls.pt:358
 msgid "Code"
-msgstr ""
+msgstr "Kód"
 
 #: senaite/databox/behaviors/databox.py:76
 msgid "Column"
-msgstr ""
+msgstr "Sloupec"
 
 #: senaite/databox/behaviors/databox.py:74
 msgid "Column Config"
-msgstr ""
+msgstr "Konfigurace sloupce"
 
 #: senaite/databox/behaviors/databox.py:72
 #: senaite/databox/browser/templates/databox_controls.pt:37
 msgid "Columns"
-msgstr ""
+msgstr "Sloupce"
 
 #: senaite/databox/browser/templates/databox_controls.pt:374
 msgid "Converter"
-msgstr ""
+msgstr "Převodník"
 
 #: senaite/databox/behaviors/configure.zcml:18
 msgid "DataBox"
-msgstr ""
+msgstr "DataBox"
 
 #: senaite/databox/profiles/default/types/DataBox.xml
 msgid "Databox"
-msgstr ""
+msgstr "Databox"
 
 #: senaite/databox/profiles/default/types/DataBoxFolder.xml
 msgid "Databoxes"
-msgstr ""
+msgstr "Databoxy"
 
 #: senaite/databox/browser/templates/databox_controls.pt:143
 msgid "Date From"
-msgstr ""
+msgstr "Datum Od"
 
 #: senaite/databox/browser/templates/databox_controls.pt:125
 msgid "Date Index"
@@ -131,7 +133,7 @@ msgstr ""
 
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Deactivate"
-msgstr ""
+msgstr "Deaktivovat"
 
 #: senaite/databox/browser/templates/databox_controls.pt:60
 msgid "Define basic query options."
@@ -143,56 +145,56 @@ msgstr ""
 
 #: senaite/databox/browser/templates/databox_controls.pt:173
 msgid "Define one or more explicit values for catalog indexes to refine the query."
-msgstr ""
+msgstr "Definujte jednu nebo více explicitních hodnot pro indexy katalogu k upřesnění dotazu."
 
 #: senaite/databox/browser/templates/databox_controls.pt:219
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 #: senaite/databox/browser/templates/databox_controls.pt:342
 msgid "Delete column"
-msgstr ""
+msgstr "Smazat sloupec"
 
 #: senaite/databox/browser/folder_view.py:65
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: senaite/databox/browser/templates/databox_controls.pt:248
 msgid "Examples:"
-msgstr ""
+msgstr "Příklady:"
 
 #: senaite/databox/profiles/default/types/DataBox.xml
 msgid "Export CSV"
-msgstr ""
+msgstr "Export CSV"
 
 #: senaite/databox/profiles/default/types/DataBox.xml
 msgid "Export Excel"
-msgstr ""
+msgstr "Export Excel"
 
 #: senaite/databox/browser/templates/databox_controls.pt:296
 msgid "Field"
-msgstr ""
+msgstr "Pole"
 
 #: senaite/databox/browser/folder_view.py:80
 #: senaite/databox/profiles/default/workflows/senaite_databox_workflow/definition.xml
 msgid "Inactive"
-msgstr ""
+msgstr "Neaktivní"
 
 #: senaite/databox/browser/templates/databox_controls.pt:187
 msgid "Index"
-msgstr ""
+msgstr "Index"
 
 #: senaite/databox/browser/templates/databox_controls.pt:47
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: senaite/databox/configure.zcml:73
 msgid "Installs SENAITE DATABOX"
-msgstr ""
+msgstr "Instaluje SENAITE DATABOX"
 
 #: senaite/databox/browser/templates/databox_controls.pt:280
 msgid "Label"
-msgstr ""
+msgstr "Štítek"
 
 #: senaite/databox/behaviors/databox.py:121
 #: senaite/databox/browser/templates/databox_controls.pt:87
@@ -205,7 +207,7 @@ msgstr ""
 
 #: senaite/databox/browser/templates/databox_controls.pt:413
 msgid "Portal Type"
-msgstr ""
+msgstr "Typ portálu"
 
 #: senaite/databox/browser/templates/databox_controls.pt:17
 msgid "Query"
@@ -245,15 +247,15 @@ msgstr ""
 
 #: senaite/databox/browser/templates/databox_controls.pt:112
 msgid "Reversed order"
-msgstr ""
+msgstr "Obrácené pořadí"
 
 #: senaite/databox/configure.zcml:73
 msgid "SENAITE DATABOX"
-msgstr ""
+msgstr "SENAITE DATABOX"
 
 #: senaite/databox/browser/templates/databox_controls.pt:69
 msgid "Sort on"
-msgstr ""
+msgstr "Seřaďte podle"
 
 #: senaite/databox/behaviors/databox.py:131
 msgid "Sort the databox on this index"
@@ -278,35 +280,35 @@ msgstr ""
 
 #: senaite/databox/browser/folder_view.py:68
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: senaite/databox/configure.zcml:83
 msgid "Uninstalls SENAITE DATABOX"
-msgstr ""
+msgstr "Odinstaluje SENAITE DATABOX"
 
 #: senaite/databox/browser/templates/databox_controls.pt:235
 msgid "Use the code line below to retrieve a value by a Python expression instead using the field."
-msgstr ""
+msgstr "Použijte následující kódovou řádku k získání hodnoty pomocí Pythonového výrazu místo použití pole."
 
 #: senaite/databox/browser/templates/databox_controls.pt:262
 msgid "Using the code field executes the Python code without restrictions and can potentially damage data."
-msgstr ""
+msgstr "Použití pole kódu provádí Python kód bez omezení a může potenciálně poškodit data."
 
 #: senaite/databox/browser/templates/databox_controls.pt:337
 msgid "add"
-msgstr ""
+msgstr "přidat"
 
 #. Default: "Sort on"
 #: senaite/databox/behaviors/databox.py:130
 msgid "label_sort_on"
-msgstr ""
+msgstr "label_sort_on"
 
 #. Default: "Reversed order"
 #: senaite/databox/behaviors/databox.py:137
 msgid "label_sort_reversed"
-msgstr ""
+msgstr "label_sort_reversed"
 
 #. Default: "Required"
 #: senaite/databox/browser/templates/databox_edit.pt:39
 msgid "title_required"
-msgstr ""
+msgstr "title_required"
