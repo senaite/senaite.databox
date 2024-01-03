@@ -9,6 +9,9 @@
 .. image:: https://img.shields.io/pypi/v/senaite.databox.svg?style=flat-square
    :target: https://pypi.python.org/pypi/senaite.databox
 
+.. image:: https://img.shields.io/github/actions/workflow/status/senaite/senaite.databox/build-and-test.yml?branch=master
+    :target: https://github.com/senaite/senaite.databox/actions/workflows/build-and-test.yml?query=branch:master
+
 .. image:: https://img.shields.io/github/issues-pr/senaite/senaite.databox.svg?style=flat-square
    :target: https://github.com/senaite/senaite.databox/pulls
 
