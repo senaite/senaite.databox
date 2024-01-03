@@ -33,3 +33,19 @@ When viewing the contents of a databox, the database query is executed and the
 results are shown in a table listing with the configured columns.
 
 Each databox can be directly exported as CSV or Excel.
+
+
+License
+=======
+
+**SENAITE.LIMS** Copyright (C) `RIDING BYTES <https://ridingbytes.com>`_ & `NARALABS <https://naralabs.com>`_
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the `GNU General Public License version 2
+<https://github.com/senaite/senaite.queue/blob/master/LICENSE>`_ as published
+by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
