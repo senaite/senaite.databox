@@ -57,6 +57,7 @@ REF_FIELD_TYPES = ["reference", "uidreference"]
 class DataBoxView(ListingView):
     """The default DataBox view
     """
+    from senaite.core.api import dtime
     template = ViewPageTemplateFile("templates/databox_view.pt")
 
     def __init__(self, context, request):
