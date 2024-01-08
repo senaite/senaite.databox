@@ -164,7 +164,7 @@ class DataBox(object):
 
         if self.date_index:
             date_from = DateTime(self.date_from or "2000-01-01")
-            date_to = DateTime(self.date_to) if self.date_to else DateTime() 
+            date_to = DateTime(self.date_to) if self.date_to else DateTime()
             # always make the to_date inclusive
             query[self.date_index] = {
                 "query": (date_from, date_to + 1 if date_from <= date_to else date_from),
