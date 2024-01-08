@@ -1,7 +1,7 @@
 1.5.0 (unreleased)
 ------------------
 
-- no changes yet
+- #33 Fix date issues when user inputs: date out of bound or date_to earlier then date_from
 
 
 1.4.1 (2024-01-03)
