@@ -207,7 +207,7 @@ class DataBoxView(ListingView):
     
     @property
     def date_to(self):
-        if not self.context.date_to or dtime.to_DT(self.context.date_to) > DateTime():
+        if not self.context.date_to or self.context.date_to < self.context.date_from:
             return ""
         return dtime.date_to_string(self.context.date_to)
         
