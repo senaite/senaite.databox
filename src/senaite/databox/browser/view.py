@@ -35,6 +35,7 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.app.listing.view import ListingView
 from senaite.app.supermodel.model import SuperModel
+from senaite.core.api import dtime
 from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
@@ -57,7 +58,6 @@ REF_FIELD_TYPES = ["reference", "uidreference"]
 class DataBoxView(ListingView):
     """The default DataBox view
     """
-    from senaite.core.api import dtime
     template = ViewPageTemplateFile("templates/databox_view.pt")
 
     def __init__(self, context, request):
@@ -199,6 +199,18 @@ class DataBoxView(ListingView):
     def catalog(self):
         return self.databox.get_query_catalog()
 
+    @property
+    def date_from(self):
+        if not self.context.date_from:
+            return ""
+        return dtime.date_to_string(self.context.date_from)    
+    
+    @property
+    def date_to(self):
+        if not self.context.date_to or dtime.to_DT(self.context.date_to) > DateTime():
+            return ""
+        return dtime.date_to_string(self.context.date_to)
+        
     @view.memoize
     def get_query_types(self):
         """Returns the `query_types` list of the context as JSON
