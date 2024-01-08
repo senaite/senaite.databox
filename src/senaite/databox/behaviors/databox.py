@@ -167,7 +167,7 @@ class DataBox(object):
             date_to = DateTime(self.date_to) if self.date_to else DateTime()
             # always make the to_date inclusive
             query[self.date_index] = {
-                "query": (date_from, date_to + 1 if date_from <= date_to else date_from),
+                "query": (date_from, (date_to if date_from <= date_to else date_from) + 1),
                 "range": "minmax"
             }
 
