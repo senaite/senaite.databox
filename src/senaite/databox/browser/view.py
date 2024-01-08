@@ -207,8 +207,10 @@ class DataBoxView(ListingView):
     
     @property
     def date_to(self):
-        if not self.context.date_to or self.context.date_to < self.context.date_from:
+        if not self.context.date_to:
             return ""
+        if self.context.date_to < self.context.date_from:
+            return dtime.date_to_string(self.context.date_from)
         return dtime.date_to_string(self.context.date_to)
         
     @view.memoize
