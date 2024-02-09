@@ -145,8 +145,7 @@
               </div>
               <input type="date"
                      class="form-control"
-                     tal:define="date_from here/date_from"
-                     tal:attributes="value python:date_from and date_from.strftime('%Y-%m-%d')"
+                     tal:attributes="value python:view.date_from"
                      name="senaite.databox.date_from">
             </div>
           </div>
@@ -161,7 +160,7 @@
               <input type="date"
                      class="form-control"
                      tal:define="date_to here/date_to"
-                     tal:attributes="value python:date_to and date_to.strftime('%Y-%m-%d')"
+                     tal:attributes="value python:view.date_to"
                      name="senaite.databox.date_to">
             </div>
           </div>

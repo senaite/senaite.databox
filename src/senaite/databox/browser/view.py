@@ -35,6 +35,7 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from senaite.app.listing.view import ListingView
 from senaite.app.supermodel.model import SuperModel
+from senaite.core.api import dtime
 from senaite.databox import logger
 from senaite.databox.behaviors.databox import IDataBoxBehavior
 from senaite.databox.interfaces import IFieldConverter
@@ -197,6 +198,20 @@ class DataBoxView(ListingView):
     @view.memoize
     def catalog(self):
         return self.databox.get_query_catalog()
+
+    @property
+    def date_from(self):
+        if not self.context.date_from:
+            return ""
+        return dtime.date_to_string(self.context.date_from)
+
+    @property
+    def date_to(self):
+        if not self.context.date_to:
+            return ""
+        if self.context.date_from and self.context.date_to < self.context.date_from:
+            return dtime.date_to_string(self.context.date_from)
+        return dtime.date_to_string(self.context.date_to)
 
     @view.memoize
     def get_query_types(self):

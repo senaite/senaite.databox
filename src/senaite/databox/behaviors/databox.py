@@ -163,11 +163,11 @@ class DataBox(object):
             query["sort_order"] = self.sort_order
 
         if self.date_index:
-            date_from = self.date_from or DateTime("2000-01-01")
-            date_to = self.date_to or DateTime()
+            date_from = DateTime(self.date_from or "2000-01-01")
+            date_to = DateTime(self.date_to) if self.date_to else DateTime()
             # always make the to_date inclusive
             query[self.date_index] = {
-                "query": (DateTime(date_from), DateTime(date_to) + 1),
+                "query": (date_from, (date_to if date_from <= date_to else date_from) + 1),
                 "range": "minmax"
             }
 
