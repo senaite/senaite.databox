@@ -86,7 +86,7 @@ NON_QUERYABLE_TYPES = [
     # "AttachmentType",
     "AttachmentTypes",
     "AuditLog",
-    "AutoImportLog",
+    # "AutoImportLog",
     # "Batch",
     "BatchFolder",
     # "BatchLabel",

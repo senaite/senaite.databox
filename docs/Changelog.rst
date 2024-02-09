@@ -1,7 +1,7 @@
 1.5.0 (unreleased)
 ------------------
 
-- no changes yet
+- #35 Allow to query Auto Import Log type
 
 
 1.4.1 (2024-01-03)
