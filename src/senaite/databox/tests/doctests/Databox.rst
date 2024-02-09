@@ -34,13 +34,14 @@ Setup the testing environment:
 
     >>> portal = self.portal
     >>> request = self.request
-    >>> setup = portal.bika_setup
+    >>> setup = portal.setup
+    >>> bikasetup = portal.bika_setup
     >>> user = api.get_current_user()
     >>> date_now = DateTime().strftime("%Y-%m-%d")
     >>> date_future = (DateTime() + 5).strftime("%Y-%m-%d")
-    >>> analysisservices = setup.bika_analysisservices
-    >>> labcontacts = setup.bika_labcontacts
-    >>> analysiscategories = setup.bika_analysiscategories
+    >>> analysisservices = bikasetup.bika_analysisservices
+    >>> labcontacts = bikasetup.bika_labcontacts
+    >>> analysiscategories = bikasetup.bika_analysiscategories
 
 Functional Helpers:
 
@@ -79,7 +80,7 @@ LIMS Setup
 
 Setup the Lab for testing:
 
-    >>> setup.setSelfVerificationEnabled(True)
+    >>> bikasetup.setSelfVerificationEnabled(True)
 
     >>> client1 = api.create(portal.clients, "Client", Name="Happy Hills", ClientID="HH")
     >>> client2 = api.create(portal.clients, "Client", Name="Sunny Side", ClientID="SS")
@@ -90,11 +91,11 @@ Setup the Lab for testing:
     >>> labcontact1 = api.create(labcontacts, "LabContact", Firstname="Lab", Lastname="Contact 1")
     >>> labcontact2 = api.create(labcontacts, "LabContact", Firstname="Lab", Lastname="Contact 2")
 
-    >>> sampletype1 = api.create(setup.bika_sampletypes, "SampleType", title="Metals", Prefix="Metals")
-    >>> sampletype2 = api.create(setup.bika_sampletypes, "SampleType", title="Water", Prefix="Water")
+    >>> sampletype1 = api.create(bikasetup.bika_sampletypes, "SampleType", title="Metals", Prefix="Metals")
+    >>> sampletype2 = api.create(bikasetup.bika_sampletypes, "SampleType", title="Water", Prefix="Water")
 
-    >>> department1 = api.create(setup.bika_departments, "Department", title="Chemistry", Manager=labcontact1)
-    >>> department2 = api.create(setup.bika_departments, "Department", title="Microbiology", Manager=labcontact2)
+    >>> department1 = api.create(setup.departments, "Department", title="Chemistry", Manager=labcontact1)
+    >>> department2 = api.create(setup.departments, "Department", title="Microbiology", Manager=labcontact2)
     
     >>> category1 = api.create(analysiscategories, "AnalysisCategory", title="Metals", Department=department1)
     >>> category2 = api.create(analysiscategories, "AnalysisCategory", title="Microbiology", Department=department2)

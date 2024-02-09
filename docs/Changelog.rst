@@ -2,6 +2,7 @@
 ------------------
 
 - #33 Fix date issues when user inputs: date out of bound or date_to earlier than date_from
+- #35 Allow to query Auto Import Log type
 
 
 1.4.1 (2024-01-03)
