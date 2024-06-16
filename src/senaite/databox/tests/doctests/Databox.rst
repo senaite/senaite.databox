@@ -41,7 +41,7 @@ Setup the testing environment:
     >>> date_future = (DateTime() + 5).strftime("%Y-%m-%d")
     >>> analysisservices = bikasetup.bika_analysisservices
     >>> labcontacts = bikasetup.bika_labcontacts
-    >>> analysiscategories = bikasetup.bika_analysiscategories
+    >>> analysiscategories = setup.analysiscategories
 
 Functional Helpers:
 
