@@ -1,6 +1,7 @@
 1.5.0 (unreleased)
 ------------------
 
+- #37 Compatibility with core#2584 (SampleType to DX)
 - #36 Compatibility with core#2567 (AnalysisCategory to DX)
 - #33 Fix date issues when user inputs: date out of bound or date_to earlier than date_from
 - #35 Allow to query Auto Import Log type
