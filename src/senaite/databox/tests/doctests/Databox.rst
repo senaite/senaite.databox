@@ -91,8 +91,8 @@ Setup the Lab for testing:
     >>> labcontact1 = api.create(labcontacts, "LabContact", Firstname="Lab", Lastname="Contact 1")
     >>> labcontact2 = api.create(labcontacts, "LabContact", Firstname="Lab", Lastname="Contact 2")
 
-    >>> sampletype1 = api.create(bikasetup.bika_sampletypes, "SampleType", title="Metals", Prefix="Metals")
-    >>> sampletype2 = api.create(bikasetup.bika_sampletypes, "SampleType", title="Water", Prefix="Water")
+    >>> sampletype1 = api.create(setup.sampletypes, "SampleType", title="Metals", Prefix="Metals")
+    >>> sampletype2 = api.create(setup.sampletypes, "SampleType", title="Water", Prefix="Water")
 
     >>> department1 = api.create(setup.departments, "Department", title="Chemistry", Manager=labcontact1)
     >>> department2 = api.create(setup.departments, "Department", title="Microbiology", Manager=labcontact2)
