@@ -1,4 +1,4 @@
-1.5.0 (unreleased)
+1.5.0 (2025-04-04)
 ------------------
 
 - #37 Compatibility with core#2584 (SampleType to DX)
