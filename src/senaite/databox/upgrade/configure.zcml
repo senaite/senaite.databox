@@ -5,6 +5,14 @@
 
   <genericsetup:upgradeStep
       title="Upgrade SENAITE DATABOX"
+      description="Upgrade to version 1.6.0"
+      source="1500"
+      destination="1600"
+      handler="senaite.databox.upgrade.handlers.run_all_upgradesteps"
+      profile="senaite.databox:default" />
+
+  <genericsetup:upgradeStep
+      title="Upgrade SENAITE DATABOX"
       description="Upgrade to version 1.5.0"
       source="1400"
       destination="1500"
