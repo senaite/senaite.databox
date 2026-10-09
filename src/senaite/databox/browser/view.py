@@ -276,11 +276,15 @@ class DataBoxView(ListingView):
             for node in ast.walk(tree):
                 if (isinstance(node, ast.Name) and node.id == "parameters"):
                     _name_counter += 1
-                if (isinstance(node, ast.Subscript) and hasattr(node, "value") and \
-                        (hasattr(node.value, 'id') and node.value.id == "parameters")):
+                if (isinstance(node, ast.Subscript)
+                        and hasattr(node, "value")
+                        and hasattr(node.value, "id")
+                        and node.value.id == "parameters"):
                     keys.append(node.slice.value.s)
-                if (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and \
-                        node.func.attr == "get" and node.func.value.id == "parameters"):
+                if (isinstance(node, ast.Call)
+                        and isinstance(node.func, ast.Attribute)
+                        and node.func.attr == "get"
+                        and node.func.value.id == "parameters"):
                     keys.append(node.args[0].s)
 
             if _name_counter != len(keys):
@@ -343,7 +347,7 @@ class DataBoxView(ListingView):
                 if p.get("error"):
                     self.parameters[p["name"]] = p["error"]
                     continue
-                
+
                 # TODO check if allowed methods called only. Check it in p["p_code"].co_names before eval
                 try:
                     locals = {
@@ -354,7 +358,7 @@ class DataBoxView(ListingView):
                 except Exception as exc:
                     value = RuntimeError(
                         "{} eval failed: {}".format(p["name"], repr(exc)))
-                
+
                 self.parameters[p["name"]] = value
 
     @property
