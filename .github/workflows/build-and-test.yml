@@ -6,13 +6,18 @@ env:
   PLONE_VERSION: "5.2"
 jobs:
   build-and-test:
-    runs-on: 'ubuntu-20.04'
+    # ubuntu-20.04 was retired by GitHub, and a job asking for
+    # a label nobody provides does not fail: it waits for a
+    # runner until the 24 hour timeout cancels it. Python 2.7
+    # comes from the container below, so the host image is free
+    # to move.
+    runs-on: ubuntu-latest
     container:
       image: python:2.7.18-buster
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: cache eggs
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: eggs-cache-${{ hashFiles('buildout.cfg', 'requirements.txt') }}
           path: |

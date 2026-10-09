@@ -1,6 +1,7 @@
 1.6.0 (unreleased)
 ------------------
 
+- #40 Build and test on a runner image that still exists
 - #38 Introduce Parameters and Other Minor Improvements
 
 
