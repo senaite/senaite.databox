@@ -1,6 +1,7 @@
 1.6.0 (unreleased)
 ------------------
 
+- #39 Compatibility with core#2962 (Remove RegulatoryInspector)
 - #38 Introduce Parameters and Other Minor Improvements
 
 
