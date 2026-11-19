@@ -113,7 +113,9 @@ class DataBoxView(ListingView):
     def __init__(self, context, request):
         super(DataBoxView, self).__init__(context, request)
         self.contentFilter = self.databox.query
-        self.pagesize = self.databox.limit
+        # an empty limit falls back to the default page size of the
+        # listing, the rest of the results is loaded with "Show more"
+        self.pagesize = self.databox.limit or self.pagesize
         self.context_actions = {}
         self.title = self.context.Title()
         self.description = self.context.Description()

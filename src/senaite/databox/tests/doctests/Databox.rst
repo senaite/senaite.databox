@@ -113,3 +113,30 @@ Create some samples:
     >>> ar21 = new_ar(client2, contact2, sampletype1, [Cu, Fe, Au])
     >>> ar22 = new_ar(client2, contact2, sampletype1, [Cu, Fe])
     >>> ar23 = new_ar(client2, contact2, sampletype1, [Cu])
+
+
+Empty limit
+-----------
+
+The limit of a databox is optional. An empty limit must not break the view,
+it falls back to the default page size of the listing:
+
+    >>> from senaite.databox.browser.view import DataBoxView
+    >>> databox = api.create(portal.databoxes, "DataBox", title="All Samples")
+    >>> databox.query_type = "AnalysisRequest"
+    >>> databox.limit = None
+
+    >>> view = DataBoxView(databox, request)
+    >>> view.pagesize
+    50
+
+    >>> view.update()
+    >>> view.before_render()
+    >>> len(view.folderitems()) > 0
+    True
+
+A limit that is set is used as the page size:
+
+    >>> databox.limit = 2
+    >>> DataBoxView(databox, request).pagesize
+    2
